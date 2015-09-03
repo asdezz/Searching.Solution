@@ -10,7 +10,7 @@ namespace Searching.DAL.Main
 {
    public class Profile
     {
-        //Класс, в котором функции связанные с пользователем
+        //Класс, в котором функции связанны с пользователем
         public static DataTable GetUser(int User_id)
         {
             string connectString = SqlAccess.GetConnectionString();
