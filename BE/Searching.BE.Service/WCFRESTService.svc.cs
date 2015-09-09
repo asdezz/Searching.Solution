@@ -18,11 +18,11 @@ namespace Searching.BE.Service
         {
             
             DataTable table = JsonConvert.DeserializeObject<DataTable>(json);
-            int country = table.Country_id;
-            int city = table.City_id;
-            int areas = table.Areas_id;
-            char Gender_user = table.Gender_user;
-            int Date_Bearthday = table.Date_Bearthday;
+            //int country = table.Country_id;
+            //int city = table.City_id;
+            //int areas = table.Areas_id;
+            //char Gender_user = table.Gender_user;
+            //int Date_Bearthday = table.Date_Bearthday;
             table = AnnouncingFilter.GetAnnouncingFilter(table);
             throw new NotImplementedException();
         }
@@ -48,13 +48,13 @@ namespace Searching.BE.Service
             return json;
         }
 
-        public string GetCityAll()
-        {
-            DataTable table = SqlAccess.GetCityAll();
-            string json = JsonConvert.SerializeObject(table);
-            return json;
+        //public string GetCityAll()
+        //{
+        //    DataTable table = SqlAccess.GetCityAll();
+        //    string json = JsonConvert.SerializeObject(table);
+        //    return json;
 
-        }
+        //}
 
         public string GetCityForCountry(int Country_id)
         {
@@ -100,11 +100,11 @@ namespace Searching.BE.Service
             return json;
         }
         //
-        public string UpdateUserInfo(int User_id,char? Mail = null, char? FIO = null, int? Phone = null, char? Gender_user = null, int? Date_Bearthday = null, char? pass = null, string info = null, int? Country_id = null, int? type_login = null, int? City_id = null)
-        {
-            DataTable table = SqlAccess.GetCountryList();
-            string json = JsonConvert.SerializeObject(table);
-            return json;
-        }
+        //public string UpdateUserInfo(int User_id,char? Mail = null, char? FIO = null, int? Phone = null, char? Gender_user = null, int? Date_Bearthday = null, char? pass = null, string info = null, int? Country_id = null, int? type_login = null, int? City_id = null)
+        //{
+        //    DataTable table = SqlAccess.GetCountryList();
+        //    string json = JsonConvert.SerializeObject(table);
+        //    return json;
+        //}
     }
 }

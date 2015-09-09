@@ -40,13 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Logics\AnnouncingFilter.cs" />
-    <Compile Include="Logics\AnnouncingFunction.cs" />
-    <Compile Include="Logics\FavoriteAnnouncingFunction.cs" />
-    <Compile Include="Logics\FollowersFunction.cs" />
-    <Compile Include="Logics\Location.cs" />
-    <Compile Include="Logics\Profile.cs" />
-    <Compile Include="Logics\SelectedAnnouncingFunction.cs" />
+    <Compile Include="Logics.BD\AnnouncingFilter.cs" />
+    <Compile Include="Logics.BD\AnnouncingFunction.cs" />
+    <Compile Include="Logics.BD\FavoriteAnnouncingFunction.cs" />
+    <Compile Include="Logics.BD\FollowersFunction.cs" />
+    <Compile Include="Logics.BD\Location.cs" />
+    <Compile Include="Logics.BD\Profile.cs" />
+    <Compile Include="Logics.BD\SelectedAnnouncingFunction.cs" />
+    <Compile Include="Logics.Client\AccessService.cs" />
+    <Compile Include="Logics.Client\QueryList.cs" />
     <Compile Include="SqlAccess\SqlQueary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlAccess\SqlAccess.cs" />
