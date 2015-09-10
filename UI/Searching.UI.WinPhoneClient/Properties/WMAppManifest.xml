@@ -2,7 +2,7 @@
 
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
     <DefaultLanguage xmlns="" code="ru-RU"/>
-    <App xmlns="" ProductID="{aba0d678-567c-4f48-9697-fece4927f7b1}" Title="Searching.UI.WinPhoneClient" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="Searching.UI.WinPhoneClient author" Description="Sample description" Publisher="Searching.UI.WinPhoneClient" PublisherID="{5a31b997-1432-43f5-a76c-53aab885d39d}">
+    <App xmlns="" ProductID="{2296b63a-ce8d-4f4c-8bb2-792d63a7d3e0}" Title="Searching.UI.WinPhoneClient" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="Searching.UI.WinPhoneClient author" Description="Sample description" Publisher="Searching.UI.WinPhoneClient" PublisherID="{2c8c4577-fc6c-4297-a304-3429db9e4796}">
         <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
         <Capabilities>
             <Capability Name="ID_CAP_NETWORKING"/>

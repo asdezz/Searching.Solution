@@ -1,0 +1,837 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SearchingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Announcing">
+          <Key>
+            <PropertyRef Name="Announcing_id" />
+          </Key>
+          <Property Name="Announcing_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_Announcing" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="Phone_Announcing" Type="int" />
+          <Property Name="Date_Announcing" Type="date" Nullable="false" />
+          <Property Name="Info_Announcing" Type="varchar(max)" Nullable="false" />
+          <Property Name="Categories_id" Type="int" Nullable="false" />
+          <Property Name="User_id" Type="int" Nullable="false" />
+          <Property Name="City_id" Type="int" Nullable="false" />
+          <Property Name="Areas_id" Type="int" />
+        </EntityType>
+        <EntityType Name="AreasOfCity">
+          <Key>
+            <PropertyRef Name="Areas_id" />
+          </Key>
+          <Property Name="Areas_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Areas_name" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="City_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="Categories_id" />
+          </Key>
+          <Property Name="Categories_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_Category" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="Info_Category" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="City_id" />
+          </Key>
+          <Property Name="City_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="City_name" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="Country_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Country_id" />
+          </Key>
+          <Property Name="Country_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_country" Type="varchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Favorite_Announcing">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Announcing_id" Type="int" Nullable="false" />
+          <Property Name="User_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Selected_Announcing">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Announcing_id" Type="int" Nullable="false" />
+          <Property Name="User_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Selected_User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_id" Type="int" Nullable="false" />
+          <Property Name="Selected_user" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="UserList">
+          <Key>
+            <PropertyRef Name="User_id" />
+          </Key>
+          <Property Name="User_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Mail" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="FIO" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="Phone" Type="tinyint" Nullable="false" />
+          <Property Name="Gender_user" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Date_Bearthday" Type="date" Nullable="false" />
+          <Property Name="Password" Type="varchar(max)" />
+          <Property Name="Info" Type="varchar(max)" />
+          <Property Name="Country_id" Type="int" />
+          <Property Name="Type_login" Type="tinyint" Nullable="false" />
+          <Property Name="City_id" Type="int" />
+        </EntityType>
+        <Association Name="FK__Announcin__Areas__208CD6FA">
+          <End Role="AreasOfCity" Type="Self.AreasOfCity" Multiplicity="0..1" />
+          <End Role="Announcing" Type="Self.Announcing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AreasOfCity">
+              <PropertyRef Name="Areas_id" />
+            </Principal>
+            <Dependent Role="Announcing">
+              <PropertyRef Name="Areas_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Announcin__Categ__1DB06A4F">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="Announcing" Type="Self.Announcing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Categories_id" />
+            </Principal>
+            <Dependent Role="Announcing">
+              <PropertyRef Name="Categories_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Announcin__City___1F98B2C1">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="1" />
+          <End Role="Announcing" Type="Self.Announcing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="City_id" />
+            </Principal>
+            <Dependent Role="Announcing">
+              <PropertyRef Name="City_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Announcin__User___1EA48E88">
+          <End Role="UserList" Type="Self.UserList" Multiplicity="1" />
+          <End Role="Announcing" Type="Self.Announcing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserList">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Announcing">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AreasOfCi__City___2180FB33">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="1" />
+          <End Role="AreasOfCity" Type="Self.AreasOfCity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="City_id" />
+            </Principal>
+            <Dependent Role="AreasOfCity">
+              <PropertyRef Name="City_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cities__Country___22751F6C">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Cities" Type="Self.Cities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Country_id" />
+            </Principal>
+            <Dependent Role="Cities">
+              <PropertyRef Name="Country_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Favorite___Annou__236943A5">
+          <End Role="Announcing" Type="Self.Announcing" Multiplicity="1" />
+          <End Role="Favorite_Announcing" Type="Self.Favorite_Announcing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Announcing">
+              <PropertyRef Name="Announcing_id" />
+            </Principal>
+            <Dependent Role="Favorite_Announcing">
+              <PropertyRef Name="Announcing_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Favorite___User___245D67DE">
+          <End Role="UserList" Type="Self.UserList" Multiplicity="1" />
+          <End Role="Favorite_Announcing" Type="Self.Favorite_Announcing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserList">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Favorite_Announcing">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Selected___Annou__25518C17">
+          <End Role="Announcing" Type="Self.Announcing" Multiplicity="1" />
+          <End Role="Selected_Announcing" Type="Self.Selected_Announcing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Announcing">
+              <PropertyRef Name="Announcing_id" />
+            </Principal>
+            <Dependent Role="Selected_Announcing">
+              <PropertyRef Name="Announcing_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Selected___Selec__282DF8C2">
+          <End Role="UserList" Type="Self.UserList" Multiplicity="1" />
+          <End Role="Selected_User" Type="Self.Selected_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserList">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Selected_User">
+              <PropertyRef Name="Selected_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Selected___User___2645B050">
+          <End Role="UserList" Type="Self.UserList" Multiplicity="1" />
+          <End Role="Selected_Announcing" Type="Self.Selected_Announcing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserList">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Selected_Announcing">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Selected___User___2739D489">
+          <End Role="UserList" Type="Self.UserList" Multiplicity="1" />
+          <End Role="Selected_User" Type="Self.Selected_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserList">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Selected_User">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserList__City_i__2A164134">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="0..1" />
+          <End Role="UserList" Type="Self.UserList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="City_id" />
+            </Principal>
+            <Dependent Role="UserList">
+              <PropertyRef Name="City_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserList__Countr__29221CFB">
+          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+          <End Role="UserList" Type="Self.UserList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Country_id" />
+            </Principal>
+            <Dependent Role="UserList">
+              <PropertyRef Name="Country_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SearchingModelStoreContainer">
+          <EntitySet Name="Announcing" EntityType="Self.Announcing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AreasOfCity" EntityType="Self.AreasOfCity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Favorite_Announcing" EntityType="Self.Favorite_Announcing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Selected_Announcing" EntityType="Self.Selected_Announcing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Selected_User" EntityType="Self.Selected_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserList" EntityType="Self.UserList" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Announcin__Areas__208CD6FA" Association="Self.FK__Announcin__Areas__208CD6FA">
+            <End Role="AreasOfCity" EntitySet="AreasOfCity" />
+            <End Role="Announcing" EntitySet="Announcing" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Announcin__Categ__1DB06A4F" Association="Self.FK__Announcin__Categ__1DB06A4F">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Announcing" EntitySet="Announcing" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Announcin__City___1F98B2C1" Association="Self.FK__Announcin__City___1F98B2C1">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Announcing" EntitySet="Announcing" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Announcin__User___1EA48E88" Association="Self.FK__Announcin__User___1EA48E88">
+            <End Role="UserList" EntitySet="UserList" />
+            <End Role="Announcing" EntitySet="Announcing" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AreasOfCi__City___2180FB33" Association="Self.FK__AreasOfCi__City___2180FB33">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="AreasOfCity" EntitySet="AreasOfCity" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cities__Country___22751F6C" Association="Self.FK__Cities__Country___22751F6C">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Cities" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Favorite___Annou__236943A5" Association="Self.FK__Favorite___Annou__236943A5">
+            <End Role="Announcing" EntitySet="Announcing" />
+            <End Role="Favorite_Announcing" EntitySet="Favorite_Announcing" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Favorite___User___245D67DE" Association="Self.FK__Favorite___User___245D67DE">
+            <End Role="UserList" EntitySet="UserList" />
+            <End Role="Favorite_Announcing" EntitySet="Favorite_Announcing" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Selected___Annou__25518C17" Association="Self.FK__Selected___Annou__25518C17">
+            <End Role="Announcing" EntitySet="Announcing" />
+            <End Role="Selected_Announcing" EntitySet="Selected_Announcing" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Selected___Selec__282DF8C2" Association="Self.FK__Selected___Selec__282DF8C2">
+            <End Role="UserList" EntitySet="UserList" />
+            <End Role="Selected_User" EntitySet="Selected_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Selected___User___2645B050" Association="Self.FK__Selected___User___2645B050">
+            <End Role="UserList" EntitySet="UserList" />
+            <End Role="Selected_Announcing" EntitySet="Selected_Announcing" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Selected___User___2739D489" Association="Self.FK__Selected___User___2739D489">
+            <End Role="UserList" EntitySet="UserList" />
+            <End Role="Selected_User" EntitySet="Selected_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserList__City_i__2A164134" Association="Self.FK__UserList__City_i__2A164134">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="UserList" EntitySet="UserList" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserList__Countr__29221CFB" Association="Self.FK__UserList__Countr__29221CFB">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="UserList" EntitySet="UserList" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SearchingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Announcing">
+          <Key>
+            <PropertyRef Name="Announcing_id" />
+          </Key>
+          <Property Name="Announcing_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_Announcing" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone_Announcing" Type="Int32" />
+          <Property Name="Date_Announcing" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Info_Announcing" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Categories_id" Type="Int32" Nullable="false" />
+          <Property Name="User_id" Type="Int32" Nullable="false" />
+          <Property Name="City_id" Type="Int32" Nullable="false" />
+          <Property Name="Areas_id" Type="Int32" />
+          <NavigationProperty Name="AreasOfCity" Relationship="Self.FK__Announcin__Areas__208CD6FA" FromRole="Announcing" ToRole="AreasOfCity" />
+          <NavigationProperty Name="Categories" Relationship="Self.FK__Announcin__Categ__1DB06A4F" FromRole="Announcing" ToRole="Categories" />
+          <NavigationProperty Name="Cities" Relationship="Self.FK__Announcin__City___1F98B2C1" FromRole="Announcing" ToRole="Cities" />
+          <NavigationProperty Name="UserList" Relationship="Self.FK__Announcin__User___1EA48E88" FromRole="Announcing" ToRole="UserList" />
+          <NavigationProperty Name="Favorite_Announcing" Relationship="Self.FK__Favorite___Annou__236943A5" FromRole="Announcing" ToRole="Favorite_Announcing" />
+          <NavigationProperty Name="Selected_Announcing" Relationship="Self.FK__Selected___Annou__25518C17" FromRole="Announcing" ToRole="Selected_Announcing" />
+        </EntityType>
+        <EntityType Name="AreasOfCity">
+          <Key>
+            <PropertyRef Name="Areas_id" />
+          </Key>
+          <Property Name="Areas_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Areas_name" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="City_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Announcing" Relationship="Self.FK__Announcin__Areas__208CD6FA" FromRole="AreasOfCity" ToRole="Announcing" />
+          <NavigationProperty Name="Cities" Relationship="Self.FK__AreasOfCi__City___2180FB33" FromRole="AreasOfCity" ToRole="Cities" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="Categories_id" />
+          </Key>
+          <Property Name="Categories_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_Category" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Info_Category" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Announcing" Relationship="Self.FK__Announcin__Categ__1DB06A4F" FromRole="Categories" ToRole="Announcing" />
+        </EntityType>
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="City_id" />
+          </Key>
+          <Property Name="City_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="City_name" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Country_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Announcing" Relationship="Self.FK__Announcin__City___1F98B2C1" FromRole="Cities" ToRole="Announcing" />
+          <NavigationProperty Name="AreasOfCity" Relationship="Self.FK__AreasOfCi__City___2180FB33" FromRole="Cities" ToRole="AreasOfCity" />
+          <NavigationProperty Name="Country" Relationship="Self.FK__Cities__Country___22751F6C" FromRole="Cities" ToRole="Country" />
+          <NavigationProperty Name="UserList" Relationship="Self.FK__UserList__City_i__2A164134" FromRole="Cities" ToRole="UserList" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Country_id" />
+          </Key>
+          <Property Name="Country_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_country" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Cities" Relationship="Self.FK__Cities__Country___22751F6C" FromRole="Country" ToRole="Cities" />
+          <NavigationProperty Name="UserList" Relationship="Self.FK__UserList__Countr__29221CFB" FromRole="Country" ToRole="UserList" />
+        </EntityType>
+        <EntityType Name="Favorite_Announcing">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Announcing_id" Type="Int32" Nullable="false" />
+          <Property Name="User_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Announcing" Relationship="Self.FK__Favorite___Annou__236943A5" FromRole="Favorite_Announcing" ToRole="Announcing" />
+          <NavigationProperty Name="UserList" Relationship="Self.FK__Favorite___User___245D67DE" FromRole="Favorite_Announcing" ToRole="UserList" />
+        </EntityType>
+        <EntityType Name="Selected_Announcing">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Announcing_id" Type="Int32" Nullable="false" />
+          <Property Name="User_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Announcing" Relationship="Self.FK__Selected___Annou__25518C17" FromRole="Selected_Announcing" ToRole="Announcing" />
+          <NavigationProperty Name="UserList" Relationship="Self.FK__Selected___User___2645B050" FromRole="Selected_Announcing" ToRole="UserList" />
+        </EntityType>
+        <EntityType Name="Selected_User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_id" Type="Int32" Nullable="false" />
+          <Property Name="Selected_user1" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserList" Relationship="Self.FK__Selected___Selec__282DF8C2" FromRole="Selected_User" ToRole="UserList" />
+          <NavigationProperty Name="UserList1" Relationship="Self.FK__Selected___User___2739D489" FromRole="Selected_User" ToRole="UserList" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="UserList">
+          <Key>
+            <PropertyRef Name="User_id" />
+          </Key>
+          <Property Name="User_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Mail" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FIO" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="Byte" Nullable="false" />
+          <Property Name="Gender_user" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Date_Bearthday" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Info" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Country_id" Type="Int32" />
+          <Property Name="Type_login" Type="Byte" Nullable="false" />
+          <Property Name="City_id" Type="Int32" />
+          <NavigationProperty Name="Announcing" Relationship="Self.FK__Announcin__User___1EA48E88" FromRole="UserList" ToRole="Announcing" />
+          <NavigationProperty Name="Cities" Relationship="Self.FK__UserList__City_i__2A164134" FromRole="UserList" ToRole="Cities" />
+          <NavigationProperty Name="Country" Relationship="Self.FK__UserList__Countr__29221CFB" FromRole="UserList" ToRole="Country" />
+          <NavigationProperty Name="Favorite_Announcing" Relationship="Self.FK__Favorite___User___245D67DE" FromRole="UserList" ToRole="Favorite_Announcing" />
+          <NavigationProperty Name="Selected_Announcing" Relationship="Self.FK__Selected___User___2645B050" FromRole="UserList" ToRole="Selected_Announcing" />
+          <NavigationProperty Name="Selected_User" Relationship="Self.FK__Selected___Selec__282DF8C2" FromRole="UserList" ToRole="Selected_User" />
+          <NavigationProperty Name="Selected_User1" Relationship="Self.FK__Selected___User___2739D489" FromRole="UserList" ToRole="Selected_User" />
+        </EntityType>
+        <Association Name="FK__Announcin__Areas__208CD6FA">
+          <End Role="AreasOfCity" Type="Self.AreasOfCity" Multiplicity="0..1" />
+          <End Role="Announcing" Type="Self.Announcing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AreasOfCity">
+              <PropertyRef Name="Areas_id" />
+            </Principal>
+            <Dependent Role="Announcing">
+              <PropertyRef Name="Areas_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Announcin__Categ__1DB06A4F">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="Announcing" Type="Self.Announcing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Categories_id" />
+            </Principal>
+            <Dependent Role="Announcing">
+              <PropertyRef Name="Categories_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Announcin__City___1F98B2C1">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="1" />
+          <End Role="Announcing" Type="Self.Announcing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="City_id" />
+            </Principal>
+            <Dependent Role="Announcing">
+              <PropertyRef Name="City_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Announcin__User___1EA48E88">
+          <End Role="UserList" Type="Self.UserList" Multiplicity="1" />
+          <End Role="Announcing" Type="Self.Announcing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserList">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Announcing">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Favorite___Annou__236943A5">
+          <End Role="Announcing" Type="Self.Announcing" Multiplicity="1" />
+          <End Role="Favorite_Announcing" Type="Self.Favorite_Announcing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Announcing">
+              <PropertyRef Name="Announcing_id" />
+            </Principal>
+            <Dependent Role="Favorite_Announcing">
+              <PropertyRef Name="Announcing_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Selected___Annou__25518C17">
+          <End Role="Announcing" Type="Self.Announcing" Multiplicity="1" />
+          <End Role="Selected_Announcing" Type="Self.Selected_Announcing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Announcing">
+              <PropertyRef Name="Announcing_id" />
+            </Principal>
+            <Dependent Role="Selected_Announcing">
+              <PropertyRef Name="Announcing_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AreasOfCi__City___2180FB33">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="1" />
+          <End Role="AreasOfCity" Type="Self.AreasOfCity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="City_id" />
+            </Principal>
+            <Dependent Role="AreasOfCity">
+              <PropertyRef Name="City_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cities__Country___22751F6C">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Cities" Type="Self.Cities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Country_id" />
+            </Principal>
+            <Dependent Role="Cities">
+              <PropertyRef Name="Country_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserList__City_i__2A164134">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="0..1" />
+          <End Role="UserList" Type="Self.UserList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="City_id" />
+            </Principal>
+            <Dependent Role="UserList">
+              <PropertyRef Name="City_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserList__Countr__29221CFB">
+          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+          <End Role="UserList" Type="Self.UserList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Country_id" />
+            </Principal>
+            <Dependent Role="UserList">
+              <PropertyRef Name="Country_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Favorite___User___245D67DE">
+          <End Role="UserList" Type="Self.UserList" Multiplicity="1" />
+          <End Role="Favorite_Announcing" Type="Self.Favorite_Announcing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserList">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Favorite_Announcing">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Selected___User___2645B050">
+          <End Role="UserList" Type="Self.UserList" Multiplicity="1" />
+          <End Role="Selected_Announcing" Type="Self.Selected_Announcing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserList">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Selected_Announcing">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Selected___Selec__282DF8C2">
+          <End Role="UserList" Type="Self.UserList" Multiplicity="1" />
+          <End Role="Selected_User" Type="Self.Selected_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserList">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Selected_User">
+              <PropertyRef Name="Selected_user1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Selected___User___2739D489">
+          <End Role="UserList" Type="Self.UserList" Multiplicity="1" />
+          <End Role="Selected_User" Type="Self.Selected_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserList">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Selected_User">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SearchingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Announcing" EntityType="Self.Announcing" />
+          <EntitySet Name="AreasOfCity" EntityType="Self.AreasOfCity" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" />
+          <EntitySet Name="Cities" EntityType="Self.Cities" />
+          <EntitySet Name="Country" EntityType="Self.Country" />
+          <EntitySet Name="Favorite_Announcing" EntityType="Self.Favorite_Announcing" />
+          <EntitySet Name="Selected_Announcing" EntityType="Self.Selected_Announcing" />
+          <EntitySet Name="Selected_User" EntityType="Self.Selected_User" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="UserList" EntityType="Self.UserList" />
+          <AssociationSet Name="FK__Announcin__Areas__208CD6FA" Association="Self.FK__Announcin__Areas__208CD6FA">
+            <End Role="AreasOfCity" EntitySet="AreasOfCity" />
+            <End Role="Announcing" EntitySet="Announcing" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Announcin__Categ__1DB06A4F" Association="Self.FK__Announcin__Categ__1DB06A4F">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Announcing" EntitySet="Announcing" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Announcin__City___1F98B2C1" Association="Self.FK__Announcin__City___1F98B2C1">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Announcing" EntitySet="Announcing" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Announcin__User___1EA48E88" Association="Self.FK__Announcin__User___1EA48E88">
+            <End Role="UserList" EntitySet="UserList" />
+            <End Role="Announcing" EntitySet="Announcing" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Favorite___Annou__236943A5" Association="Self.FK__Favorite___Annou__236943A5">
+            <End Role="Announcing" EntitySet="Announcing" />
+            <End Role="Favorite_Announcing" EntitySet="Favorite_Announcing" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Selected___Annou__25518C17" Association="Self.FK__Selected___Annou__25518C17">
+            <End Role="Announcing" EntitySet="Announcing" />
+            <End Role="Selected_Announcing" EntitySet="Selected_Announcing" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AreasOfCi__City___2180FB33" Association="Self.FK__AreasOfCi__City___2180FB33">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="AreasOfCity" EntitySet="AreasOfCity" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cities__Country___22751F6C" Association="Self.FK__Cities__Country___22751F6C">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Cities" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserList__City_i__2A164134" Association="Self.FK__UserList__City_i__2A164134">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="UserList" EntitySet="UserList" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserList__Countr__29221CFB" Association="Self.FK__UserList__Countr__29221CFB">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="UserList" EntitySet="UserList" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Favorite___User___245D67DE" Association="Self.FK__Favorite___User___245D67DE">
+            <End Role="UserList" EntitySet="UserList" />
+            <End Role="Favorite_Announcing" EntitySet="Favorite_Announcing" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Selected___User___2645B050" Association="Self.FK__Selected___User___2645B050">
+            <End Role="UserList" EntitySet="UserList" />
+            <End Role="Selected_Announcing" EntitySet="Selected_Announcing" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Selected___Selec__282DF8C2" Association="Self.FK__Selected___Selec__282DF8C2">
+            <End Role="UserList" EntitySet="UserList" />
+            <End Role="Selected_User" EntitySet="Selected_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Selected___User___2739D489" Association="Self.FK__Selected___User___2739D489">
+            <End Role="UserList" EntitySet="UserList" />
+            <End Role="Selected_User" EntitySet="Selected_User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SearchingModelStoreContainer" CdmEntityContainer="SearchingEntities">
+          <EntitySetMapping Name="Announcing">
+            <EntityTypeMapping TypeName="SearchingModel.Announcing">
+              <MappingFragment StoreEntitySet="Announcing">
+                <ScalarProperty Name="Announcing_id" ColumnName="Announcing_id" />
+                <ScalarProperty Name="Name_Announcing" ColumnName="Name_Announcing" />
+                <ScalarProperty Name="Phone_Announcing" ColumnName="Phone_Announcing" />
+                <ScalarProperty Name="Date_Announcing" ColumnName="Date_Announcing" />
+                <ScalarProperty Name="Info_Announcing" ColumnName="Info_Announcing" />
+                <ScalarProperty Name="Categories_id" ColumnName="Categories_id" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="City_id" ColumnName="City_id" />
+                <ScalarProperty Name="Areas_id" ColumnName="Areas_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AreasOfCity">
+            <EntityTypeMapping TypeName="SearchingModel.AreasOfCity">
+              <MappingFragment StoreEntitySet="AreasOfCity">
+                <ScalarProperty Name="Areas_id" ColumnName="Areas_id" />
+                <ScalarProperty Name="Areas_name" ColumnName="Areas_name" />
+                <ScalarProperty Name="City_id" ColumnName="City_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="SearchingModel.Categories">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="Categories_id" ColumnName="Categories_id" />
+                <ScalarProperty Name="Name_Category" ColumnName="Name_Category" />
+                <ScalarProperty Name="Info_Category" ColumnName="Info_Category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="SearchingModel.Cities">
+              <MappingFragment StoreEntitySet="Cities">
+                <ScalarProperty Name="City_id" ColumnName="City_id" />
+                <ScalarProperty Name="City_name" ColumnName="City_name" />
+                <ScalarProperty Name="Country_id" ColumnName="Country_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Country">
+            <EntityTypeMapping TypeName="SearchingModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="Country_id" ColumnName="Country_id" />
+                <ScalarProperty Name="Name_country" ColumnName="Name_country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Favorite_Announcing">
+            <EntityTypeMapping TypeName="SearchingModel.Favorite_Announcing">
+              <MappingFragment StoreEntitySet="Favorite_Announcing">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Announcing_id" ColumnName="Announcing_id" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Selected_Announcing">
+            <EntityTypeMapping TypeName="SearchingModel.Selected_Announcing">
+              <MappingFragment StoreEntitySet="Selected_Announcing">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Announcing_id" ColumnName="Announcing_id" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Selected_User">
+            <EntityTypeMapping TypeName="SearchingModel.Selected_User">
+              <MappingFragment StoreEntitySet="Selected_User">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="Selected_user1" ColumnName="Selected_user" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SearchingModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserList">
+            <EntityTypeMapping TypeName="SearchingModel.UserList">
+              <MappingFragment StoreEntitySet="UserList">
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Gender_user" ColumnName="Gender_user" />
+                <ScalarProperty Name="Date_Bearthday" ColumnName="Date_Bearthday" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="Country_id" ColumnName="Country_id" />
+                <ScalarProperty Name="Type_login" ColumnName="Type_login" />
+                <ScalarProperty Name="City_id" ColumnName="City_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

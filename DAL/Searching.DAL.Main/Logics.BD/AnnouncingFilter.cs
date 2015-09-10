@@ -22,23 +22,24 @@ namespace Searching.DAL.Main
         {
             string connectionString = SqlAccess.GetConnectionString();
             SqlConnection connect = new SqlConnection(connectionString);
-            string query = "";
-            SqlCommand command = new SqlCommand(query, connect);
-            if (table.Select("Country_id") !=null)
-             {
-                query = "SELECT fa.Announcing_id, fa.Name_Announcing, fa.Phone_Announcing,fa.Date_Announcing, fa.Info_Announcing, fa.[User_id], fa.Areas_id,fa.City_id, fa.Categories_id, c.Name_country, c2.City_name,aoc.Areas_name FROM  Announcing fa JOIN[Searching].[dbo].[User] a JOIN Country c ON c.Country_id = @Country_id";
-                
-                command.Parameters.Add("@Country_id",SqlDbType.Int);
-                command.Parameters["@Country_id"].Value = table.Select("Country_id");
-             }
-            if (table.Select("City_id") !=null)
-             {
-                query = "SELECT fa.Announcing_id, fa.Name_Announcing, fa.Phone_Announcing,fa.Date_Announcing, fa.Info_Announcing, fa.[User_id], fa.Areas_id,fa.City_id, fa.Categories_id, c.Name_country, c2.City_name,aoc.Areas_name FROM  Announcing fa JOIN[Searching].[dbo].[User] a JOIN Country c ON c.Country_id = @Country_id,fa.City_id=@City_id";
-                command.Parameters.Add("@City_id",SqlDbType.Int);
-                command.Parameters["@City_id"].Value = table.Select("City_id");
-             }
-
-            
+            string query = "SELECT a.Announcing_id, a.Name_Announcing, c.City_name FROM Announcing a JOIN Cities c ON c.City_id = a.City_id JOIN[UserList] u ON  u.[User_id] = a.[User_id] WHERE a.Categories_id = @Categories_id AND a.City_id = ISNULL(@City_id, a.City_id) AND a.Areas_id = ISNULL(@Areas_id, a.Areas_id) AND u.Gender_user = ISNULL(@Gender_user, u.Gender_user) AND u.Date_Bearthday BETWEEN ISNULL(@MinDateBearthday, u.Date_Bearthday) AND ISNULL(@MaxDateBearthday, u.Date_Bearthday) AND a.Date_Announcing >= ISNULL(@DateAnnouncing, a.Date_Announcing)";
+             SqlCommand command = new SqlCommand(query, connect);
+            command.Parameters.Add("@Categories_id",SqlDbType.Int);
+            command.Parameters.Add("@City_id",SqlDbType.Int);
+            command.Parameters.Add("@Areas_id",SqlDbType.Int);
+            command.Parameters.Add("@Gender_user", SqlDbType.Char);
+            command.Parameters.Add("@MinDate_Bearthday",SqlDbType.Date);
+            command.Parameters.Add("@MaxDate_Bearthday", SqlDbType.Date);
+            command.Parameters.Add("@Date_Announcing", SqlDbType.Date);
+            command.Parameters["@Categories_id"].Value =table.Select("Categories_id");
+            command.Parameters["@City_id"].Value =table.Select("City_id");
+            command.Parameters["@Areas_id"].Value = table.Select("Areas_id");
+            command.Parameters["@Gender_user"].Value = table.Select("Gender_user");
+            command.Parameters["@MinDateBearthday"].Value = table.Select("MinDateBearthday");
+            command.Parameters["@MaxDateNearthday"].Value = table.Select("MaxDateBearthday");
+            command.Parameters["@DateAnnouncing"].Value = table.Select("DateAnnouncing");
+            command.ExecuteNonQuery();
+            table = SqlAccess.CreateQuery(command,"GetAnnouncingWithFilter");
             return table;
         }
 

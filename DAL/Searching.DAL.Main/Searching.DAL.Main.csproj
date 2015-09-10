@@ -47,9 +47,6 @@
     <Compile Include="Logics.BD\Location.cs" />
     <Compile Include="Logics.BD\Profile.cs" />
     <Compile Include="Logics.BD\SelectedAnnouncingFunction.cs" />
-    <Compile Include="Logics.Client\AccessService.cs" />
-    <Compile Include="Logics.Client\QueryList.cs" />
-    <Compile Include="SqlAccess\SqlQueary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlAccess\SqlAccess.cs" />
   </ItemGroup>

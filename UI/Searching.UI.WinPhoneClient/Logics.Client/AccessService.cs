@@ -4,15 +4,14 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Searching.UI.Client.Logics;
 
-namespace Searching.UI.Client.Logics
+namespace Searching.UI.WinPhoneClient.Logics.Client
 {
-    public class AccessService
+   public class AccessService
     {
         public static async Task<string> ServiceCalled(string MethodRequestType, string MethodName, string BodyParam = "")
         {
-            string ServiceURI =GetServiceHost() +MethodName;
+            string ServiceURI = GetServiceHost() + MethodName;
             HttpClient client = new HttpClient();
             HttpRequestMessage request = new HttpRequestMessage(MethodRequestType == "GET" ? HttpMethod.Get : HttpMethod.Post, ServiceURI);
             if (!string.IsNullOrEmpty(BodyParam))
@@ -24,8 +23,8 @@ namespace Searching.UI.Client.Logics
             return returnValue;
         }
         private static string GetServiceHost()
-            {
-               return "http://192.168.1.101:1703/WCFRESTService.svc/";
-            }
+        {
+            return "http://192.168.1.101:1703/WCFRESTService.svc/";
+        }
     }
 }

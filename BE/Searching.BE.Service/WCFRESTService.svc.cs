@@ -18,13 +18,9 @@ namespace Searching.BE.Service
         {
             
             DataTable table = JsonConvert.DeserializeObject<DataTable>(json);
-            //int country = table.Country_id;
-            //int city = table.City_id;
-            //int areas = table.Areas_id;
-            //char Gender_user = table.Gender_user;
-            //int Date_Bearthday = table.Date_Bearthday;
             table = AnnouncingFilter.GetAnnouncingFilter(table);
-            throw new NotImplementedException();
+            json = JsonConvert.SerializeObject(table);
+            return json;
         }
 
         public string GetAnnouncing()
