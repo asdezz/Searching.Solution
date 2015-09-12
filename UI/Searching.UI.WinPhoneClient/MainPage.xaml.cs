@@ -10,18 +10,28 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
+using Searching.UI.WinPhoneClient.ViewModels;
+using Newtonsoft.Json;
+using System.IO.IsolatedStorage;
+using System.IO;
+using Searching.UI.WinPhoneClient.Models;
+using Searching.UI.WinPhoneClient.Logics.Client;
+using System.Threading.Tasks;
 
 namespace Searching.UI.WinPhoneClient
 {
     public partial class MainPage : PhoneApplicationPage
     {
+        private MainViewModel _vm = new MainViewModel();
+
         // Constructor
         public MainPage()
         {
+
             InitializeComponent();
 
             // Set the data context of the listbox control to the sample data
-            DataContext = App.ViewModel;
+            DataContext = _vm;
             this.Loaded += new RoutedEventHandler(MainPage_Loaded);
 
             //Shows the rate reminder message, according to the settings of the RateReminder.
@@ -30,26 +40,31 @@ namespace Searching.UI.WinPhoneClient
 
         void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            if (!App.ViewModel.IsDataLoaded)
-            {
-                App.ViewModel.LoadData();
-            }        
+            
         }
 
-        /// <summary>
-        /// Navigates to about page.
-        /// </summary>
-        private void GoToAbout(object sender, GestureEventArgs e)
+        private void CategoriesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            this.NavigationService.Navigate(new Uri("/About.xaml", UriKind.RelativeOrAbsolute));
+
         }
 
-        /// <summary>
-        /// Navigates to template page.
-        /// </summary>
-        private void GoToHowTo(object sender, GestureEventArgs e)
+        protected override async void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
-            this.NavigationService.Navigate(new Uri("/HowTo.xaml", UriKind.RelativeOrAbsolute));
+            //IsolatedStorageFile myIsolatedStorage = IsolatedStorageFile.GetUserStoreForApplication();
+            //IsolatedStorageFileStream fileStream2 = myIsolatedStorage.OpenFile("mycontacts.json", FileMode.Open, FileAccess.ReadWrite);
+
+
+
+            var json = await QueryList.GetCategories();
+            Categories c = new Categories();
+            
+            
+                // c = JsonConvert.DeserializeObject<Categories>(json);
+            
+                       
+           // c.Name_Category = category.Name_Category;
+           // _vm.Category = category;
+
         }
     }
 }

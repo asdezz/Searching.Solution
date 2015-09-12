@@ -61,6 +61,24 @@ namespace Searching.UI.WinPhoneClient.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to add.
+        /// </summary>
+        public static string AppBarButtonText {
+            get {
+                return ResourceManager.GetString("AppBarButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Menu Item.
+        /// </summary>
+        public static string AppBarMenuItemText {
+            get {
+                return ResourceManager.GetString("AppBarMenuItemText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to MY APPLICATION.
         /// </summary>
         public static string ApplicationTitle {
