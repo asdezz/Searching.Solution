@@ -9,6 +9,7 @@ using Newtonsoft;
 using System.Diagnostics;
 using Searching.DAL.Main;
 using System.Data;
+using System.Web.Script.Serialization;
 
 namespace Searching.BE.Service
 {
@@ -39,8 +40,12 @@ namespace Searching.BE.Service
 
         public string GetCategories()
         {
+            Category c = new Category();
+            c.Category_id = 12;
+            c.NameCategory = "Спорт";
+            c.Info_Category="Категория для любителей спорта";
             DataTable table = AnnouncingFilter.GetCategories();
-            string json = JsonConvert.SerializeObject(table);
+            string json= JsonConvert.SerializeObject(c);
             return json;
         }
 
@@ -93,6 +98,14 @@ namespace Searching.BE.Service
             table = JsonConvert.DeserializeObject<DataTable>(json);
             table = Profile.PostRegistration(table);
             json = JsonConvert.SerializeObject(table);
+            return json;
+        }
+
+        public string GetStringValue()
+        {
+            var jss = new JavaScriptSerializer();
+            string test = "Hello, Mofuka";
+            var json = jss.Serialize(test);
             return json;
         }
         //

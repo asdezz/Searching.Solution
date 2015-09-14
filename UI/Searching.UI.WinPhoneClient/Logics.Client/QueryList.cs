@@ -14,5 +14,11 @@ namespace Searching.UI.WinPhoneClient.Logics.Client
             var result = await AccessService.ServiceCalled("GET", "GetCategories","");
             return result;
         }
+
+        public static async Task<string> GetStringValue()
+        {
+            var result = await AccessService.ServiceCalled("GET","GetStringValue","");
+            return result;
+        }
     }
 }

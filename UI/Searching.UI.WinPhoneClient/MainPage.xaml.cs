@@ -50,20 +50,16 @@ namespace Searching.UI.WinPhoneClient
 
         protected override async void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
-            //IsolatedStorageFile myIsolatedStorage = IsolatedStorageFile.GetUserStoreForApplication();
-            //IsolatedStorageFileStream fileStream2 = myIsolatedStorage.OpenFile("mycontacts.json", FileMode.Open, FileAccess.ReadWrite);
-
-
-
-            var json = await QueryList.GetCategories();
-            Categories c = new Categories();
+            string test = await QueryList.GetStringValue();
+            string json1 = "{'Categories_id': '1', 'Name_Category': 'Спорт','Info_Category': 'Категория для любителей спорта'}";
+            Categories categories = JsonConvert.DeserializeObject<Categories>(json1);
+            string acc = JsonConvert.SerializeObject(categories);
+            string error = "{\"Categories_id\":1,\"Name_Category\":\"Спорт\",\"Info_Category\":\"Категория для любителей спорта\"}";
+            string json2 = await QueryList.GetCategories();
+           var obj = JsonConvert.DeserializeObject(json2).ToString();
+           // Categories account2 = JsonConvert.DeserializeObject<Categories>(obj);
+            Categories accs = JsonConvert.DeserializeObject<Categories>(obj);
             
-            
-                // c = JsonConvert.DeserializeObject<Categories>(json);
-            
-                       
-           // c.Name_Category = category.Name_Category;
-           // _vm.Category = category;
 
         }
     }

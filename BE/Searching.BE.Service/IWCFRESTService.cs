@@ -20,7 +20,7 @@ namespace Searching.BE.Service
         [WebGet(RequestFormat =WebMessageFormat.Json,ResponseFormat =WebMessageFormat.Json)]
         string GetCountryList();
         [OperationContract]
-        [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [WebGet(RequestFormat =WebMessageFormat.Json,ResponseFormat =WebMessageFormat.Json)]
         string GetCategories();
         [OperationContract]
         [WebInvoke(Method="POST",RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
@@ -51,6 +51,9 @@ namespace Searching.BE.Service
         [OperationContract]
         [WebInvoke(Method="POST",RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         string PostRegistration(string json);
+        [OperationContract]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+        string GetStringValue();
 
         
 
