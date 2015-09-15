@@ -14,10 +14,10 @@ namespace Searching.UI.WinPhoneClient.Logics.Client
             string ServiceURI = GetServiceHost() + MethodName;
             HttpClient client = new HttpClient();
             HttpRequestMessage request = new HttpRequestMessage(MethodRequestType == "GET" ? HttpMethod.Get : HttpMethod.Post, ServiceURI);
-            //if (!string.IsNullOrEmpty(BodyParam))
-            //{
-            //    request.Content = new StringContent(BodyParam, Encoding.UTF8, "application/json");
-            //}
+            if (!string.IsNullOrEmpty(BodyParam))
+            {
+                request.Content = new StringContent(BodyParam, Encoding.UTF8, "application/json");
+            }
             HttpResponseMessage response = await client.SendAsync(request);
             string returnValue = await response.Content.ReadAsStringAsync();
             return returnValue;

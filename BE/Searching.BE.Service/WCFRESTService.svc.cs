@@ -10,6 +10,7 @@ using System.Diagnostics;
 using Searching.DAL.Main;
 using System.Data;
 using System.Web.Script.Serialization;
+using SearchingLibrary;
 
 namespace Searching.BE.Service
 {
@@ -40,11 +41,18 @@ namespace Searching.BE.Service
 
         public string GetCategories()
         {
-            Category c = new Category();
-            c.Category_id = 12;
-            c.NameCategory = "Спорт";
-            c.Info_Category="Категория для любителей спорта";
+            int i = 1;
             DataTable table = AnnouncingFilter.GetCategories();
+            List<Categories> ListCategories = new List<Categories>();
+            Categories c = new Categories();
+
+            foreach (DataRow row in table.Rows)
+            {
+                c.Name_Category = row["Name_Category"].ToString();
+                c.Categories_id = int.Parse(row["Categories_id"].ToString());
+                 c.Info_Category= row["Info_Category"].ToString();
+                ListCategories.Add(c);
+            }
             string json= JsonConvert.SerializeObject(c);
             return json;
         }

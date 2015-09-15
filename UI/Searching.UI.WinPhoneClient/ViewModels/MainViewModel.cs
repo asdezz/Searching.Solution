@@ -12,36 +12,36 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
-using Searching.UI.WinPhoneClient.Models;
+
 
 namespace Searching.UI.WinPhoneClient.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        private List<Categories> category;
+        //private List<Categories> category;
 
         public MainViewModel()
         {
-            category = new List<Categories>();
+           // category = new List<Categories>();
         }
-        public List<Categories> Category
-        {
-            get
-            {
-                return category;
-            }
-            set
-            {
-                category = value;
-                NotifyPropertyChanged("Category");
-            }
+        //public List<Categories> Category
+        //{
+        //    get
+        //    {
+        //        return category;
+        //    }
+        //    set
+        //    {
+        //        category = value;
+        //        NotifyPropertyChanged("Category");
+        //    }
 
-        }
+       // }
 
         /// <summary>
         /// A collection for ItemViewModel objects.
         /// </summary>
-        public ObservableCollection<ItemViewModel> Items { get; private set; }
+       // public ObservableCollection<ItemViewModel> Items { get; private set; }
 
         private string _sampleProperty = "Sample Runtime Property Value";
         /// <summary>
