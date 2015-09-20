@@ -17,6 +17,7 @@ using System.IO;
 using Searching.UI.WinPhoneClient.Logics.Client;
 using System.Threading.Tasks;
 using SearchingLibrary;
+using Newtonsoft.Json.Linq;
 
 namespace Searching.UI.WinPhoneClient
 {
@@ -50,22 +51,10 @@ namespace Searching.UI.WinPhoneClient
 
         protected override async void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
-            string json = "";
-               // string test = await QueryList.GetStringValue();
-               // string json1 = "{'Categories_id': '1', 'Name_Category': 'Спорт','Info_Category': 'Категория для любителей спорта'}";
-               // Categories categories = JsonConvert.DeserializeObject<Categories>(json1);
-               // string acc = JsonConvert.SerializeObject(categories);
-               // string error = "{\"Categories_id\":1,\"Name_Category\":\"Спорт\",\"Info_Category\":\"Категория для любителей спорта\"}";
-               // string json2 = await QueryList.GetCategories();
-               //var obj = JsonConvert.DeserializeObject(json2).ToString();
-               //Categories account2 = JsonConvert.DeserializeObject<Categories>(obj);
-               //Categories accs = JsonConvert.DeserializeObject<Categories>(obj);
-               json = await QueryList.GetCategories();
-            Categories ca = new Categories();
-            List<Categories> c = new List<Categories>();
-            ca = JsonConvert.DeserializeObject<Categories>(json);
-            
-
+            string json = "{\"Categories_id\":1,\"Name_Category\":\"Спорт\",\"Info_Category\":\"Категория для любител" +
+    "ей спорта\",\"Announcing\":[]}";
+            Categories c = JsonConvert.DeserializeObject<Categories>(json);
+            json = await QueryList.GetCategories();
         }
     }
 }

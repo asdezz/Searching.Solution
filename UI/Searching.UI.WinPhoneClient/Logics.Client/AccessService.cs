@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using SearchingLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -11,8 +14,9 @@ namespace Searching.UI.WinPhoneClient.Logics.Client
     {
         public static async Task<string> ServiceCalled(string MethodRequestType, string MethodName, string BodyParam = "")
         {
-            string ServiceURI = GetServiceHost() + MethodName;
+            string ServiceURI = GetServiceHost() +MethodName;
             HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
             HttpRequestMessage request = new HttpRequestMessage(MethodRequestType == "GET" ? HttpMethod.Get : HttpMethod.Post, ServiceURI);
             if (!string.IsNullOrEmpty(BodyParam))
             {
@@ -20,6 +24,12 @@ namespace Searching.UI.WinPhoneClient.Logics.Client
             }
             HttpResponseMessage response = await client.SendAsync(request);
             string returnValue = await response.Content.ReadAsStringAsync();
+             
+            JObject jobj = JsonConvert.DeserializeObject(returnValue) as JObject;
+
+            List<Categories> result = jobj.GetValue("GetCategoriesResult")
+                                         .ToObject<JArray>()
+                                         .ToObject<List<Categories>>();
             return returnValue;
         }
         private static string GetServiceHost()

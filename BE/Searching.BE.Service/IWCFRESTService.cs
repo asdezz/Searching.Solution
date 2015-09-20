@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SearchingLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -20,7 +21,7 @@ namespace Searching.BE.Service
         [WebGet(RequestFormat =WebMessageFormat.Json,ResponseFormat =WebMessageFormat.Json)]
         string GetCountryList();
         [OperationContract]
-        [WebGet(RequestFormat =WebMessageFormat.Json,ResponseFormat =WebMessageFormat.Json)]
+        [WebGet(RequestFormat =WebMessageFormat.Json,ResponseFormat =WebMessageFormat.Json,BodyStyle =WebMessageBodyStyle.Wrapped)]
         string GetCategories();
         [OperationContract]
         [WebInvoke(Method="POST",RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
@@ -62,5 +63,5 @@ namespace Searching.BE.Service
 
 
     }
-
+    
 }
