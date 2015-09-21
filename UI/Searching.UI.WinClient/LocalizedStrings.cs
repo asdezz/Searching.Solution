@@ -1,6 +1,6 @@
-﻿using Searching.UI.WinPhoneClient.Resources;
+﻿using Searching.UI.WinClient.Resources;
 
-namespace Searching.UI.WinPhoneClient
+namespace Searching.UI.WinClient
 {
     /// <summary>
     /// Provides access to string resources.

@@ -12,6 +12,8 @@ using System.Data;
 using System.Web.Script.Serialization;
 using SearchingLibrary;
 
+
+
 namespace Searching.BE.Service
 {
     public class WCFRESTService : IWCFRESTService
@@ -39,22 +41,20 @@ namespace Searching.BE.Service
             return json;
         }
 
-        public string GetCategories()
+        public List<Categories> GetCategories()
         {
-            int i = 1;
             DataTable table = AnnouncingFilter.GetCategories();
             List<Categories> ListCategories = new List<Categories>();
             Categories c = new Categories();
-
             foreach (DataRow row in table.Rows)
             {
                 c.Name_Category = row["Name_Category"].ToString();
                 c.Categories_id = int.Parse(row["Categories_id"].ToString());
-                 c.Info_Category= row["Info_Category"].ToString();
-                ListCategories.Add(c);
+                 c.Info_Category = row["Info_Category"].ToString();
+                ListCategories.Add(new Categories() { Name_Category = c.Name_Category, Categories_id = c.Categories_id, Info_Category = c.Info_Category });
             }
-            string json= JsonConvert.SerializeObject(c);
-            return json;
+                string json= JsonConvert.SerializeObject(ListCategories);
+            return ListCategories;
         }
 
         //public string GetCityAll()

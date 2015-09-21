@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SearchingLibrary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,16 +10,12 @@ namespace Searching.UI.WinPhoneClient.Logics.Client
 {
   public  class QueryList
     {
-        public static async Task<string> GetCategories()
+        public static async void GetCategories()
         {
             var result = await AccessService.ServiceCalled("GET", "GetCategories","");
-            return result;
+            List<Categories> categories=JsonConvert.DeserializeObject<List<Categories>>(result);
+            
         }
 
-        public static async Task<string> GetStringValue()
-        {
-            var result = await AccessService.ServiceCalled("GET","GetStringValue","");
-            return result;
-        }
     }
 }

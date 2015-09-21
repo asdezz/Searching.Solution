@@ -6,11 +6,11 @@ using System.Resources;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Searching.UI.WinPhoneClient")]
+[assembly: AssemblyTitle("Searching.UI.WinClient")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Searching.UI.WinPhoneClient")]
+[assembly: AssemblyProduct("Searching.UI.WinClient")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -21,7 +21,7 @@ using System.Resources;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("c2ad867f-1cc6-4296-93d0-5207521791b4")]
+[assembly: Guid("b79f629f-fb8c-4a79-ba27-07d2d047498f")]
 
 // Version information for an assembly consists of the following four values:
 //

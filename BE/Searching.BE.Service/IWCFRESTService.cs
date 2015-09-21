@@ -21,8 +21,8 @@ namespace Searching.BE.Service
         [WebGet(RequestFormat =WebMessageFormat.Json,ResponseFormat =WebMessageFormat.Json)]
         string GetCountryList();
         [OperationContract]
-        [WebGet(RequestFormat =WebMessageFormat.Json,ResponseFormat =WebMessageFormat.Json,BodyStyle =WebMessageBodyStyle.Wrapped)]
-        string GetCategories();
+        [WebGet(UriTemplate ="GetCategories",ResponseFormat =WebMessageFormat.Json)]
+        List<Categories> GetCategories();
         [OperationContract]
         [WebInvoke(Method="POST",RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         string GetAnnouncingFilter(string json);

@@ -13,35 +13,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 
-
-namespace Searching.UI.WinPhoneClient.ViewModels
+namespace Searching.UI.WinClient.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        //private List<Categories> category;
-
         public MainViewModel()
         {
-           // category = new List<Categories>();
+            
         }
-        //public List<Categories> Category
-        //{
-        //    get
-        //    {
-        //        return category;
-        //    }
-        //    set
-        //    {
-        //        category = value;
-        //        NotifyPropertyChanged("Category");
-        //    }
-
-       // }
 
         /// <summary>
         /// A collection for ItemViewModel objects.
         /// </summary>
-       // public ObservableCollection<ItemViewModel> Items { get; private set; }
+        
 
         private string _sampleProperty = "Sample Runtime Property Value";
         /// <summary>
@@ -64,15 +48,6 @@ namespace Searching.UI.WinPhoneClient.ViewModels
             }
         }
 
-        public bool IsDataLoaded
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Creates and adds a few ItemViewModel objects into the Items collection.
-        /// </summary>
         
 
         public event PropertyChangedEventHandler PropertyChanged;
