@@ -115,6 +115,11 @@ namespace Searching.BE.Service
             DataTable table = AnnouncingFilter.GetAnnouncingForCategory(cat_id);
             return table;
         }
+
+        public string TestFunction()
+        {
+            return "Test Functrion is Sucssed!";
+        }
         //
         //public string UpdateUserInfo(int User_id,char? Mail = null, char? FIO = null, int? Phone = null, char? Gender_user = null, int? Date_Bearthday = null, char? pass = null, string info = null, int? Country_id = null, int? type_login = null, int? City_id = null)
         //{

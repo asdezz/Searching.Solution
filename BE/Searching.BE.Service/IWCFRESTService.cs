@@ -22,7 +22,7 @@ namespace Searching.BE.Service
         [WebGet(RequestFormat =WebMessageFormat.Json,ResponseFormat =WebMessageFormat.Json)]
         string GetCountryList();
         [OperationContract]
-        [WebGet(UriTemplate ="GetCategories",ResponseFormat =WebMessageFormat.Json)]
+        [WebGet(ResponseFormat =WebMessageFormat.Json,RequestFormat =WebMessageFormat.Json)]
         List<Categories> GetCategories();
         [OperationContract]
         [WebInvoke(Method="POST",RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
@@ -57,8 +57,9 @@ namespace Searching.BE.Service
         [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
         DataTable GetAnnouncingForCategory(string category_id);
-
-
+        [OperationContract]
+        [WebGet(ResponseFormat =WebMessageFormat.Json,RequestFormat =WebMessageFormat.Json)]
+        string TestFunction();
 
 
 

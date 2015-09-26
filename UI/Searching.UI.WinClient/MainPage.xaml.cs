@@ -48,6 +48,11 @@ namespace Searching.UI.WinClient
              vm.returnCategories = DataBoundListBox1.SelectedItem as Categories;
             
         }
+
+        private void RadDataBoundListBox_IsCheckModeActiveChanged(object sender, Telerik.Windows.Controls.IsCheckModeActiveChangedEventArgs e)
+        {
+
+        }
     }
 }
 

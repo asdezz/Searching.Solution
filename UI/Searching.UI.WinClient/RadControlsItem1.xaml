@@ -1,41 +1,25 @@
-﻿<phone:PhoneApplicationPage
+﻿<phone:PhoneApplicationPage 
+    x:Class="Searching.UI.WinClient.RadControlsItem1"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:phoneControls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
-    x:Class="Searching.UI.WinClient.MainPage"
-    mc:Ignorable="d"
-
+    xmlns:viewModels="clr-namespace:Searching.UI.WinClient.ViewModels" 
+    d:DataContext="{d:DesignData SampleData/MainDataViewModelSampleData.xaml}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="728" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="False">
 
-    <!--LayoutRoot is the root grid where all page content is placed-->
-
-    <!-- LOCALIZATION NOTE:
-            To localize the displayed strings copy their values to appropriately named
-            keys in the app's neutral language resource file (AppResources.resx) then
-            replace the hard-coded text value between the attributes' quotation marks
-            with the binding clause whose path points to that string name.
-
-            For example:
-
-                Text="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}"
-
-            This binding points to the template's string resource named "ApplicationTitle".
-
-            Adding supported languages in the Project Properties tab will create a
-            new resx file per language that can carry the translated values of your
-            UI strings. The binding in these examples will cause the value of the
-            attributes to be drawn from the .resx file that matches the
-            CurrentUICulture of the app at run time.
-         -->
-
+    <UserControl.DataContext>
+        <viewModels:MainDataViewModel/>
+    </UserControl.DataContext>
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.Resources>
@@ -50,8 +34,8 @@
                     </Grid.ColumnDefinitions>
                     <Image Width="99" Height="99" Source="{Binding ImageThumbnailSource}"/>
                     <StackPanel Margin="12,-14,0,0" Grid.Column="1">
-                        <TextBlock FontSize="{StaticResource PhoneFontSizeExtraLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Text="{Binding Name_Category}" TextWrapping="Wrap"/>
-                        <TextBlock FontSize="{StaticResource PhoneFontSizeNormal}" Text="{Binding Info_Category}" TextWrapping="Wrap"/>
+                        <TextBlock FontSize="{StaticResource PhoneFontSizeExtraLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Text="{Binding Title}" TextWrapping="Wrap"/>
+                        <TextBlock FontSize="{StaticResource PhoneFontSizeNormal}" Text="{Binding Information}" TextWrapping="Wrap"/>
                     </StackPanel>
                 </Grid>
             </DataTemplate>
@@ -61,20 +45,20 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock x:Name="ApplicationTitle" Margin="24,17,0,0" Text="Searching" Style="{StaticResource PhoneTextNormalStyle}"/>
+        <TextBlock x:Name="ApplicationTitle" Margin="24,17,0,0" Text="APP TITLE" Style="{StaticResource PhoneTextNormalStyle}"/>
 
         <Grid Grid.Row="1">
             <phone:Pivot x:Name="MainPivot" Margin="0,-12,0,0">
-                <phone:PivotItem Header="Категории">
+                <phone:PivotItem Header="pivot1">
                     <telerikPrimitives:RadDataBoundListBox Margin="-12,6,12,0"
                                                         x:Name="DataBoundListBox1"
-                                                        ItemsSource="{Binding listCategories}"
+                                                        ItemsSource="{Binding Items}"
                                                         IsCheckModeEnabled="True"
                                                         IsCheckModeActiveChanged="RadDataBoundListBox_IsCheckModeActiveChanged"
                                                         CheckBoxStyle="{StaticResource DataBoundListBoxCheckBoxStyle}"
                                                         ItemTemplate="{StaticResource DataBoundListBoxItemTemplate}"/>
                 </phone:PivotItem>
-                <phone:PivotItem Header="Профиль">
+                <phone:PivotItem Header="pivot2">
                     <telerikPrimitives:RadDataBoundListBox 
                                                         x:Name="DataBoundListBox2"
                                                         Margin="-12,6,12,0"
@@ -85,7 +69,20 @@
                                                         ItemTemplate="{StaticResource DataBoundListBoxItemTemplate}"/>
                 </phone:PivotItem>
             </phone:Pivot>
-
         </Grid>
     </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Images/Select.png" Click="ApplicationBarIconButton_Click" Text="Button 1"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button3.png" Text="Button 3"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button4.png" Text="Button 4"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
+                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
 </phone:PhoneApplicationPage>
