@@ -1,6 +1,7 @@
 ﻿using SearchingLibrary;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -52,14 +53,13 @@ namespace Searching.BE.Service
         [OperationContract]
         [WebInvoke(Method="POST",RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         string PostRegistration(string json);
+
         [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-        string GetStringValue();
+        DataTable GetAnnouncingForCategory(string category_id);
 
-        
 
-       
-         
+
 
 
     }

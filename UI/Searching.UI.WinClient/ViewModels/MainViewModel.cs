@@ -12,44 +12,40 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using SearchingLibrary;
 
 namespace Searching.UI.WinClient.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+        
+        private List<Categories> categories;
+     
         public MainViewModel()
         {
-            
+            categories = new List<Categories>();
         }
-
+       
+        public List<Categories> listCategories
+        {
+            get
+            {
+                return categories;
+            }
+            set
+            {
+                categories = value;
+                NotifyPropertyChanged("Categories");
+            }
+        }
+        public Categories returnCategories
+        {
+            get; set;
+        }
         /// <summary>
         /// A collection for ItemViewModel objects.
         /// </summary>
         
-
-        private string _sampleProperty = "Sample Runtime Property Value";
-        /// <summary>
-        /// Sample ViewModel property; this property is used in the view to display its value using a Binding
-        /// </summary>
-        /// <returns></returns>
-        public string SampleProperty
-        {
-            get
-            {
-                return _sampleProperty;
-            }
-            set
-            {
-                if (value != _sampleProperty)
-                {
-                    _sampleProperty = value;
-                    NotifyPropertyChanged("SampleProperty");
-                }
-            }
-        }
-
-        
-
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)
         {

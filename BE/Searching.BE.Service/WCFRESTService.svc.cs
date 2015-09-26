@@ -109,12 +109,11 @@ namespace Searching.BE.Service
             return json;
         }
 
-        public string GetStringValue()
+        public DataTable GetAnnouncingForCategory(string category_id)
         {
-            var jss = new JavaScriptSerializer();
-            string test = "Hello, Mofuka";
-            var json = jss.Serialize(test);
-            return json;
+            int cat_id = int.Parse(category_id);
+            DataTable table = AnnouncingFilter.GetAnnouncingForCategory(cat_id);
+            return table;
         }
         //
         //public string UpdateUserInfo(int User_id,char? Mail = null, char? FIO = null, int? Phone = null, char? Gender_user = null, int? Date_Bearthday = null, char? pass = null, string info = null, int? Country_id = null, int? type_login = null, int? City_id = null)

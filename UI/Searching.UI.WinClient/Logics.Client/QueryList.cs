@@ -10,11 +10,11 @@ namespace Searching.UI.WinPhoneClient.Logics.Client
 {
   public  class QueryList
     {
-        public static async void GetCategories()
+        public static async Task<List<Categories>> GetCategories()
         {
             var result = await AccessService.ServiceCalled("GET", "GetCategories","");
             List<Categories> categories=JsonConvert.DeserializeObject<List<Categories>>(result);
-            
+            return categories;
         }
 
     }
