@@ -37,6 +37,15 @@ namespace Searching.UI.WinClient
             }
         }
 
+        /// <summary>
+        /// Component used to handle unhandle exceptions, to collect runtime info and to send email to developer.
+        /// </summary>
+        public RadDiagnostics diagnostics;
+        /// <summary>
+        /// Component used to raise a notification to the end users to rate the application on the marketplace.
+        /// </summary>
+        public RadRateApplicationReminder rateReminder;
+
         
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
@@ -78,7 +87,20 @@ namespace Searching.UI.WinClient
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
 
+            //Creates an instance of the Diagnostics component.
+            diagnostics = new RadDiagnostics();
+
+            //Defines the default email where the diagnostics info will be send.
+            diagnostics.EmailTo = "Me@MyCompany.com";
+
+            //Initializes this instance.
+            diagnostics.Init();
         
+              //Creates a new instance of the RadRateApplicationReminder component.
+            rateReminder = new RadRateApplicationReminder();
+
+            //Sets how often the rate reminder is displayed.
+            rateReminder.RecurrencePerUsageCount = 2;
     
         }
 
@@ -86,6 +108,8 @@ namespace Searching.UI.WinClient
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            //Before using any of the ApplicationBuildingBlocks, this class should be initialized with the version of the application.
+            ApplicationUsageHelper.Init("1.0");
         
         }
 
@@ -93,9 +117,15 @@ namespace Searching.UI.WinClient
         // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
+            if (!e.IsApplicationInstancePreserved)
+            {
+                //This will ensure that the ApplicationUsageHelper is initialized again if the application has been in Tombstoned state.
+                ApplicationUsageHelper.OnApplicationActivated();
+            } 
  
     
-            
+            // Ensure that application state is restored appropriately
+           
         }
 
         // Code to execute when the application is deactivated (sent to background)

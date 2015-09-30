@@ -67,13 +67,27 @@ namespace Searching.DAL.Main
 
         public static DataTable GetAnnouncingForCategory(int Category_id)
         {
+            
             string connectString = SqlAccess.GetConnectionString();
-            string queryString = "SELECT FROM Announcing WHERE Categories_id=@Category_id";
+            string queryString = @"SELECT * FROM Announcing WHERE Categories_id = @Category_id";
             SqlConnection connect = new SqlConnection(connectString);
             SqlCommand command = new SqlCommand(queryString, connect);
             command.Parameters.Add("@Category_id", SqlDbType.Int);
             command.Parameters["@Category_id"].Value = Category_id;
-            command.ExecuteNonQuery();
+            try
+            {
+                connect.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+            finally
+            {
+                connect.Close();
+            }
+            
             DataTable table = SqlAccess.CreateQuery(command, "AnnouncingForCategory");
             return table;
         }

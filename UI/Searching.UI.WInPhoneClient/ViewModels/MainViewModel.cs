@@ -14,7 +14,7 @@ using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using SearchingLibrary;
 
-namespace Searching.UI.WinClient.ViewModels
+namespace Searching.UI.WInPhoneClient.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
@@ -39,12 +39,12 @@ namespace Searching.UI.WinClient.ViewModels
         {
             get; set;
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         /// <summary>
         /// A collection for ItemViewModel objects.
         /// </summary>
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
@@ -53,5 +53,6 @@ namespace Searching.UI.WinClient.ViewModels
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
     }
 }

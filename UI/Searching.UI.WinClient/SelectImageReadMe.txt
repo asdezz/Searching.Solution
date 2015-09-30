@@ -1,1 +1,0 @@
-﻿You must set the Build Action property to “Content” for the Select.png file. Using the default value “Resource” will not allow the image to be accessed or displayed.

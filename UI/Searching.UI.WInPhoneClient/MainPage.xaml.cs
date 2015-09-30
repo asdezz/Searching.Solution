@@ -10,12 +10,12 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
-using Searching.UI.WinClient.ViewModels;
-using Newtonsoft.Json;
+using Searching.UI.WInPhoneClient.ViewModels;
 using Searching.UI.WinPhoneClient.Logics.Client;
+using Newtonsoft.Json;
 using SearchingLibrary;
 
-namespace Searching.UI.WinClient
+namespace Searching.UI.WInPhoneClient
 {
     public partial class MainPage : PhoneApplicationPage
     {
@@ -25,31 +25,22 @@ namespace Searching.UI.WinClient
         public MainPage()
         {
             InitializeComponent();
-
-            // Set the data context of the listbox control to the sample data
-
-
-            //Shows the rate reminder message, according to the settings of the RateReminder.
-
         }
 
-       
-
-        private async void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            vm.listCategories = await QueryList.GetCategories();
-            CategoriesListBox.ItemsSource = vm.listCategories;
-            LoadIndicator.IsRunning = false;
-        }
 
         private async void DataBoundListBox1_ItemTap(object sender, Telerik.Windows.Controls.ListBoxItemTapEventArgs e)
         {
-            vm.returnCategories = CategoriesListBox.SelectedItem as Categories;
+            vm.returnCategories = DataBoundListBox1.SelectedItem as Categories;
             categories_id = JsonConvert.SerializeObject(vm.returnCategories.Categories_id);
             var Announcing = await QueryList.GetAnnouncingForCategory(categories_id);
             
         }
 
-        
+        private async void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            vm.listCategories = await QueryList.GetCategories();
+            DataBoundListBox1.ItemsSource = vm.listCategories;
+           
+        }
     }
 }

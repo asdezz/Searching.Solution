@@ -53,7 +53,7 @@ namespace Searching.BE.Service
                  c.Info_Category = row["Info_Category"].ToString();
                 ListCategories.Add(new Categories() { Name_Category = c.Name_Category, Categories_id = c.Categories_id, Info_Category = c.Info_Category });
             }
-                string json= JsonConvert.SerializeObject(ListCategories);
+                
             return ListCategories;
         }
 
@@ -109,16 +109,35 @@ namespace Searching.BE.Service
             return json;
         }
 
-        public DataTable GetAnnouncingForCategory(string category_id)
+        public List<Announcing> GetAnnouncingForCategory(string category_id)
         {
+            List<Announcing> listAnnonc =new List<Announcing>();
+            Announcing annonc = new Announcing();
             int cat_id = int.Parse(category_id);
             DataTable table = AnnouncingFilter.GetAnnouncingForCategory(cat_id);
-            return table;
+            foreach(DataRow row in table.Rows)
+                {
+                annonc.Announcing_id = int.Parse(row["Announcing_id"].ToString());
+                annonc.Name_Announcing = row["Name_Announcing"].ToString();
+                annonc.Phone_Announcing = int.Parse(row["Phone_Announcing"].ToString());
+                annonc.Date_Announcing =DateTime.Parse( row["Date_Announcing"].ToString());
+                annonc.Info_Announcing = row["info_Announcing"].ToString();
+                annonc.Categories_id =  int.Parse(row["Categories_id"].ToString());
+                annonc.User_id =int.Parse(row["User_id"].ToString());
+                annonc.City_id = int.Parse(row["City_id"].ToString());
+                annonc.Areas_id = int.Parse(row["Areas_id"].ToString());
+                listAnnonc.Add(new Announcing() { Name_Announcing = annonc.Name_Announcing, Announcing_id = annonc.Announcing_id, Phone_Announcing = annonc.Phone_Announcing, Date_Announcing = annonc.Date_Announcing, Info_Announcing = annonc.Info_Announcing, Categories_id = annonc.Categories_id, User_id = annonc.User_id, City_id = annonc.City_id, Areas_id = annonc.Areas_id });
+                }
+               
+                
+            return listAnnonc;
+                
+            
         }
 
-        public string TestFunction()
+        public string TestFunction(string ids)
         {
-            return "Test Functrion is Sucssed!";
+            return "Test Functrion is Sucssed {ids}!"+ids;
         }
         //
         //public string UpdateUserInfo(int User_id,char? Mail = null, char? FIO = null, int? Phone = null, char? Gender_user = null, int? Date_Bearthday = null, char? pass = null, string info = null, int? Country_id = null, int? type_login = null, int? City_id = null)

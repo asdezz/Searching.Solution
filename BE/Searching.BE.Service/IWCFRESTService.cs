@@ -55,11 +55,11 @@ namespace Searching.BE.Service
         string PostRegistration(string json);
 
         [OperationContract]
-        [WebGet(ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-        DataTable GetAnnouncingForCategory(string category_id);
+        [WebInvoke(Method="POST",ResponseFormat = WebMessageFormat.Json,RequestFormat =WebMessageFormat.Json)]
+        List<Announcing> GetAnnouncingForCategory(string category_id);
         [OperationContract]
-        [WebGet(ResponseFormat =WebMessageFormat.Json,RequestFormat =WebMessageFormat.Json)]
-        string TestFunction();
+        [WebInvoke(Method="GET",UriTemplate ="TestFunction/{ids}",ResponseFormat = WebMessageFormat.Json,RequestFormat =WebMessageFormat.Json)]
+        string TestFunction(string ids);
 
 
 
