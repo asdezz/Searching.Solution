@@ -133,7 +133,7 @@
           <IISUrl>http://localhost/Searching.BE.Service</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>http://192.168.100.101:1703/</CustomServerUrl>
+          <CustomServerUrl>http://192.168.100.101/Searching</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

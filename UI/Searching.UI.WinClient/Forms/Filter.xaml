@@ -1,0 +1,48 @@
+﻿<phone:PhoneApplicationPage
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:telerikInput="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input"
+    xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
+    x:Class="Searching.UI.WinClient.Forms.Filter"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <!--Pivot Control-->
+        <phone:Pivot Title="MY APPLICATION">
+            <phone:PivotItem Header="Фильтр" Margin="0,10,24,18">
+                <StackPanel>
+                    <Grid Height="620">
+                        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,34,0,0" TextWrapping="Wrap" Text="Локация" VerticalAlignment="Top"/>
+                        <telerikInput:RadListPicker Height="58" Margin="14,61,10,0"/>
+                        <telerikInput:RadListPicker HorizontalAlignment="Left" Margin="14,148,0,0" VerticalAlignment="Top" Width="432"/>
+                        <telerikInput:RadListPicker HorizontalAlignment="Left" Margin="14,235,0,0" VerticalAlignment="Top" Width="432"/>
+                        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="14,322,0,0" TextWrapping="Wrap" Text="Пол автора объявления" VerticalAlignment="Top"/>
+                        <telerikInput:RadListPicker HorizontalAlignment="Left" Margin="14,354,0,0" VerticalAlignment="Top" Width="432"/>
+                        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="14,442,0,0" TextWrapping="Wrap" Text="Возвраст автора объявления" VerticalAlignment="Top"/>
+                        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="37,504,0,0" TextWrapping="Wrap" Text="от:" VerticalAlignment="Top"/>
+
+                        <telerikPrimitives:RadTextBox x:Name="radTextBox" HorizontalAlignment="Left" Margin="61,492,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="74" RenderTransformOrigin="0.463,0.353" Height="57"/>
+                        <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="140,509,0,0" TextWrapping="Wrap" Text="до:" VerticalAlignment="Top"/>
+                        <telerikPrimitives:RadTextBox x:Name="radTextBox1" HorizontalAlignment="Left" Margin="172,492,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="57" Width="69" RenderTransformOrigin="0.474,0.43"/>
+
+                    </Grid>
+                </StackPanel>
+            </phone:PivotItem>
+
+            <phone:PivotItem Header="Сортировка">
+                <Grid/>
+            </phone:PivotItem>
+        </phone:Pivot>
+    </Grid>
+
+</phone:PhoneApplicationPage>

@@ -46,8 +46,8 @@ namespace Searching.UI.WinClient
         {
             vm.returnCategories = CategoriesListBox.SelectedItem as Categories;
             categories_id = JsonConvert.SerializeObject(vm.returnCategories.Categories_id);
-            var Announcing = await QueryList.GetAnnouncingForCategory(categories_id);
-            
+            var Announcing = await QueryList.GetAnnouncingFilter(categories_id);
+           
         }
 
         

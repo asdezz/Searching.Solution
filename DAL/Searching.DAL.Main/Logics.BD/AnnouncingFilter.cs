@@ -22,7 +22,7 @@ namespace Searching.DAL.Main
         {
             string connectionString = SqlAccess.GetConnectionString();
             SqlConnection connect = new SqlConnection(connectionString);
-            string query = "SELECT a.Announcing_id, a.Name_Announcing, c.City_name FROM Announcing a JOIN Cities c ON c.City_id = a.City_id JOIN[UserList] u ON  u.[User_id] = a.[User_id] WHERE  a.City_id = ISNULL(@City_id, a.City_id) AND a.Areas_id = ISNULL(@Areas_id, a.Areas_id) AND u.Gender_user = ISNULL(@Gender_user, u.Gender_user) AND u.Date_Bearthday BETWEEN ISNULL(@MinDateBearthday, u.Date_Bearthday) AND ISNULL(@MaxDateBearthday, u.Date_Bearthday) AND a.Date_Announcing >= ISNULL(@DateAnnouncing, a.Date_Announcing)";
+            string query = "SELECT a.Announcing_id, a.Name_Announcing, c.City_name FROM Announcing a JOIN Cities c ON c.City_id = a.City_id JOIN[UserList] u ON  u.[User_id] = a.[User_id] WHERE  a.City_id = ISNULL(@City_id, a.City_id) AND a.Areas_id = ISNULL(@Areas_id, a.Areas_id) AND a.Categories_id = ISNULL(@Categories_id, a.Categories_id) AND u.Gender_user = ISNULL(@Gender_user, u.Gender_user) AND u.Date_Bearthday BETWEEN ISNULL(@MinDateBearthday, u.Date_Bearthday) AND ISNULL(@MaxDateBearthday, u.Date_Bearthday) AND a.Date_Announcing >= ISNULL(@DateAnnouncing, a.Date_Announcing)";
              SqlCommand command = new SqlCommand(query, connect);
             command.Parameters.Add("@City_id",SqlDbType.Int);
             command.Parameters.Add("@Areas_id",SqlDbType.Int);
@@ -30,13 +30,25 @@ namespace Searching.DAL.Main
             command.Parameters.Add("@MinDate_Bearthday",SqlDbType.Date);
             command.Parameters.Add("@MaxDate_Bearthday", SqlDbType.Date);
             command.Parameters.Add("@Date_Announcing", SqlDbType.Date);
-            command.Parameters["@City_id"].Value =table.Select("City_id");
-            command.Parameters["@Areas_id"].Value = table.Select("Areas_id");
-            command.Parameters["@Gender_user"].Value = table.Select("Gender_user");
-            command.Parameters["@MinDateBearthday"].Value = table.Select("MinDateBearthday");
-            command.Parameters["@MaxDateNearthday"].Value = table.Select("MaxDateBearthday");
-            command.Parameters["@DateAnnouncing"].Value = table.Select("DateAnnouncing");
-            command.ExecuteNonQuery();
+            foreach(DataRow row in table.Rows)
+            {
+                command.Parameters.Add("@Category_id", SqlDbType.Int);
+                command.Parameters["@Category_id"].Value =int.Parse(row["Category_id"].ToString());
+                command.Parameters["@City_id"].Value = int.Parse(row["City_id"].ToString());
+                command.Parameters["@Areas_id"].Value = int.Parse(row["Areas_id"].ToString());
+                command.Parameters["@Gender_user"].Value = row["Gender_user"].ToString();
+                command.Parameters["@MinDateBearthday"].Value = DateTime.Parse(row["MinDateBearthday"].ToString());
+                command.Parameters["@MaxDateNearthday"].Value = DateTime.Parse(row["MaxDateBearthday"].ToString());
+                command.Parameters["@DateAnnouncing"].Value = DateTime.Parse(row["DateAnnouncing"].ToString());
+            }
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
             table = SqlAccess.CreateQuery(command,"GetAnnouncingWithFilter");
             return table;
         }
@@ -72,8 +84,7 @@ namespace Searching.DAL.Main
             string queryString = @"SELECT * FROM Announcing WHERE Categories_id = @Category_id";
             SqlConnection connect = new SqlConnection(connectString);
             SqlCommand command = new SqlCommand(queryString, connect);
-            command.Parameters.Add("@Category_id", SqlDbType.Int);
-            command.Parameters["@Category_id"].Value = Category_id;
+            
             try
             {
                 connect.Open();

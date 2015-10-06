@@ -11,13 +11,14 @@ using Searching.DAL.Main;
 using System.Data;
 using System.Web.Script.Serialization;
 using SearchingLibrary;
-
-
+using System.IO;
+using System.ServiceModel.Web;
 
 namespace Searching.BE.Service
 {
     public class WCFRESTService : IWCFRESTService
     {
+        
         public string GetAnnouncingFilter(string json)
         {
             

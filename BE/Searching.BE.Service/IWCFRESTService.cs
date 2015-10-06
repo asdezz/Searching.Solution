@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -61,7 +62,8 @@ namespace Searching.BE.Service
         [WebInvoke(Method="GET",UriTemplate ="TestFunction/{ids}",ResponseFormat = WebMessageFormat.Json,RequestFormat =WebMessageFormat.Json)]
         string TestFunction(string ids);
 
-
+        
+        
 
     }
     
