@@ -64,7 +64,7 @@
                     <StackPanel x:Name="CategoriesPanel" Tag="1" Visibility="Visible">
                         <Grid Height="97">
                             <telerikPrimitives:RadTextBox x:Name="radTextBox1" HorizontalAlignment="Left" Margin="0,-4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="329" Height="72"/>
-                            <Button x:Name="button1" Content="Filter" HorizontalAlignment="Left" Margin="329,-4,0,29" VerticalAlignment="Bottom" Width="117" RenderTransformOrigin="0.421,0.5" BorderBrush="{StaticResource PhoneBackgroundBrush}">
+                            <Button x:Name="button1" Content="Фильтр" HorizontalAlignment="Left" Margin="329,-4,0,29" VerticalAlignment="Bottom" Width="127" RenderTransformOrigin="0.421,0.5" BorderBrush="{StaticResource PhoneBackgroundBrush}">
                                 <Button.Background>
                                     <SolidColorBrush Color="#FF0F89DE"/>
                                 </Button.Background>
@@ -91,7 +91,7 @@
                     			ItemTemplate="{StaticResource DataBoundListBoxItemTemplate}" ItemTap="DataBoundListBox1_ItemTap" EmptyContent="" Margin="-63,0,10,10" Grid.ColumnSpan="2"/>
                         </Grid>
                     </StackPanel>
-                    
+
                 </phone:PivotItem>
 
                 <!--Pivot item two-->
@@ -106,6 +106,14 @@
                             <Button x:Name="button" Content="Войти" HorizontalAlignment="Left" Margin="0,210,0,0" VerticalAlignment="Top" Width="446" FontWeight="Bold" Background="#FF01B3E8" Foreground="White" BorderBrush="{StaticResource PhoneBackgroundBrush}" Height="80"/>
                             <HyperlinkButton Content="Забыли пароль?" HorizontalAlignment="Left" Margin="125,295,0,0" VerticalAlignment="Top" Foreground="#FF0476A0" FontStretch="UltraCondensed"/>
                             <HyperlinkButton Content="Зарегистрируйтесь" HorizontalAlignment="Left" Margin="115,345,0,0" VerticalAlignment="Top" Foreground="#FF0476A0" FontStretch="UltraCondensed"/>
+
+                        </Grid>
+                    </StackPanel>
+                </phone:PivotItem>
+                <phone:PivotItem Header="Лента">
+                    <StackPanel>
+                        <Grid Height="531">
+                            <telerikPrimitives:RadDataBoundListBox HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="531" Width="446"/>
 
                         </Grid>
                     </StackPanel>

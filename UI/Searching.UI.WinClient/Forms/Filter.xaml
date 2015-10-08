@@ -18,29 +18,46 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
-        <phone:Pivot Title="MY APPLICATION">
-            <phone:PivotItem Header="Фильтр" Margin="0,10,24,18">
+        <phone:Pivot>
+            <phone:PivotItem Header="Фильтр" Margin="0,10,24,-95">
                 <StackPanel>
-                    <Grid Height="620">
+                    <Grid Height="719">
                         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,34,0,0" TextWrapping="Wrap" Text="Локация" VerticalAlignment="Top"/>
                         <telerikInput:RadListPicker Height="58" Margin="14,61,10,0"/>
                         <telerikInput:RadListPicker HorizontalAlignment="Left" Margin="14,148,0,0" VerticalAlignment="Top" Width="432"/>
                         <telerikInput:RadListPicker HorizontalAlignment="Left" Margin="14,235,0,0" VerticalAlignment="Top" Width="432"/>
                         <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="14,322,0,0" TextWrapping="Wrap" Text="Пол автора объявления" VerticalAlignment="Top"/>
                         <telerikInput:RadListPicker HorizontalAlignment="Left" Margin="14,354,0,0" VerticalAlignment="Top" Width="432"/>
-                        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="14,442,0,0" TextWrapping="Wrap" Text="Возвраст автора объявления" VerticalAlignment="Top"/>
-                        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="37,504,0,0" TextWrapping="Wrap" Text="от:" VerticalAlignment="Top"/>
+                        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="14,430,0,0" TextWrapping="Wrap" Text="Возвраст автора объявления" VerticalAlignment="Top"/>
+                        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="37,474,0,0" TextWrapping="Wrap" Text="от:" VerticalAlignment="Top"/>
 
-                        <telerikPrimitives:RadTextBox x:Name="radTextBox" HorizontalAlignment="Left" Margin="61,492,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="74" RenderTransformOrigin="0.463,0.353" Height="57"/>
-                        <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="140,509,0,0" TextWrapping="Wrap" Text="до:" VerticalAlignment="Top"/>
-                        <telerikPrimitives:RadTextBox x:Name="radTextBox1" HorizontalAlignment="Left" Margin="172,492,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="57" Width="69" RenderTransformOrigin="0.474,0.43"/>
+                        <telerikPrimitives:RadTextBox x:Name="radTextBox" HorizontalAlignment="Left" Margin="61,457,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="74" RenderTransformOrigin="0.463,0.353" Height="57"/>
+                        <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="140,474,0,0" TextWrapping="Wrap" Text="до:" VerticalAlignment="Top" RenderTransformOrigin="0.384,0.377"/>
+                        <telerikPrimitives:RadTextBox x:Name="radTextBox1" HorizontalAlignment="Left" Margin="167,457,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="57" Width="66" RenderTransformOrigin="0.474,0.43"/>
+                        <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Дата объявления:" VerticalAlignment="Top" Margin="14,519,0,0"/>
+                        <telerikInput:RadListPicker HorizontalAlignment="Left" Margin="14,551,0,0" VerticalAlignment="Top" Width="432"/>
+                        <Button x:Name="button" Content="Ok" HorizontalAlignment="Left" Margin="329,637,0,0" VerticalAlignment="Top"/>
 
                     </Grid>
+
                 </StackPanel>
             </phone:PivotItem>
 
             <phone:PivotItem Header="Сортировка">
-                <Grid/>
+                <Grid Margin="-10,0,10,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="109*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="textBlock6" HorizontalAlignment="Left" Margin="27.776,67,0,0" TextWrapping="Wrap" Text="По популярности" VerticalAlignment="Top" Grid.Column="1"/>
+                    <TextBlock x:Name="textBlock7" HorizontalAlignment="Left" Margin="27.776,249,0,0" TextWrapping="Wrap" Text="По дате добавления" VerticalAlignment="Top" Grid.Column="1"/>
+                    <telerikInput:RadListPicker HorizontalAlignment="Left" Margin="35,105,0,0" VerticalAlignment="Top" Grid.Column="1" RenderTransformOrigin="0.5,0.5" Width="332">
+
+                    </telerikInput:RadListPicker>
+                    <telerikInput:RadListPicker Grid.Column="1" HorizontalAlignment="Left" Margin="35,281,0,0" VerticalAlignment="Top" Width="332"/>
+                    <Button x:Name="button1" Content="Ok" Grid.Column="1" HorizontalAlignment="Left" Margin="249,477,0,0" VerticalAlignment="Top" Width="118" Height="93"/>
+
+                </Grid>
             </phone:PivotItem>
         </phone:Pivot>
     </Grid>

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SearchingLibrary
+namespace EntityLibrary
 {
     using System;
     using System.Data.Entity;

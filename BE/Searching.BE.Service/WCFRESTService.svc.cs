@@ -140,13 +140,7 @@ namespace Searching.BE.Service
         {
             return "Test Functrion is Sucssed {ids}!"+ids;
         }
-        //
-        //public string UpdateUserInfo(int User_id,char? Mail = null, char? FIO = null, int? Phone = null, char? Gender_user = null, int? Date_Bearthday = null, char? pass = null, string info = null, int? Country_id = null, int? type_login = null, int? City_id = null)
-        //{
-        //    DataTable table = SqlAccess.GetCountryList();
-        //    string json = JsonConvert.SerializeObject(table);
-        //    return json;
-        //}
+       
        
     }
     

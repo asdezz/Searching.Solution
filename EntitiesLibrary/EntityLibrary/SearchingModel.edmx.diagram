@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="befd6fb344fe494b8c9dcb17e71acb8f" Name="Diagram1">
+      <Diagram DiagramId="befd6fb344fe494b8c9dcb17e71acb8f" Name="Diagram1" ZoomLevel="47">
         <EntityTypeShape EntityType="SearchingModel.Announcing" Width="1.5" PointX="7.5" PointY="8.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SearchingModel.AreasOfCity" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
         <EntityTypeShape EntityType="SearchingModel.Categories" Width="1.5" PointX="5.25" PointY="15.125" IsExpanded="true" />
