@@ -1,29 +1,22 @@
-﻿using System;
-using System.ComponentModel;
+﻿using SearchingLibrary;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.ComponentModel;
+using System.Linq;
 using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Collections.ObjectModel;
-using SearchingLibrary;
+using System.Threading.Tasks;
 
-namespace Searching.UI.WinClient.ViewModels
+namespace Searching.UI.WinClient.Models
 {
-    public class MainViewModel : INotifyPropertyChanged
+   public class CategoriesModel:INotifyPropertyChanged
     {
         private List<Categories> categories;
-        public MainViewModel()
+        private Categories returnCategories;
+       public CategoriesModel()
         {
             categories = new List<Categories>();
         }
-        public List<Categories> listCategories
+        public List<Categories> ListCategories
         {
             get
             {
@@ -35,14 +28,18 @@ namespace Searching.UI.WinClient.ViewModels
                 NotifyPropertyChanged("Categories");
             }
         }
-        public Categories returnCategories
+        public Categories ReturnCategories
         {
-            get; set;
+            get
+            {
+                return returnCategories;
+            }
+            set
+            {
+                returnCategories = value;
+                NotifyPropertyChanged("returnCategories");
+            }
         }
-        /// <summary>
-        /// A collection for ItemViewModel objects.
-        /// </summary>
-
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)

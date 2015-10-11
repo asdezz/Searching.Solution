@@ -13,26 +13,25 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Telerik.Windows.Controls;
-using Searching.UI.WinClient.ViewModels;
-using Searching.UI.WinClient.Models;
+using TelerikWindowsPhoneApp1.ViewModels;
 
-namespace Searching.UI.WinClient
+namespace TelerikWindowsPhoneApp1
 {
     public partial class App : Application
     {
-        private static CategoriesModel viewModel = null;
+        private static MainViewModel viewModel = null;
 
         /// <summary>
         /// A static ViewModel used by the views to bind against.
         /// </summary>
         /// <returns>The MainViewModel object.</returns>
-        public static CategoriesModel ViewModel
+        public static MainViewModel ViewModel
         {
             get
             {
                 // Delay creation of the view model until necessary
                 if (viewModel == null)
-                    viewModel = new CategoriesModel();
+                    viewModel = new MainViewModel();
 
                 return viewModel;
             }
@@ -126,7 +125,10 @@ namespace Searching.UI.WinClient
  
     
             // Ensure that application state is restored appropriately
-           
+            if (!App.ViewModel.IsDataLoaded)
+            {
+                App.ViewModel.LoadData();
+            }
         }
 
         // Code to execute when the application is deactivated (sent to background)
