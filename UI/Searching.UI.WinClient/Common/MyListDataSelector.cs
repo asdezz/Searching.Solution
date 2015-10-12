@@ -10,7 +10,7 @@ namespace Searching.UI.WinClient.Common
 {
    public class MyListDataSelector: DataTemplateSelector
     {
-        public DataTemplate ListTemplate { get; set; }
+        public DataTemplate CategoriesTemplate { get; set; }
         public DataTemplate FormTemplate { get; set; }
 
 

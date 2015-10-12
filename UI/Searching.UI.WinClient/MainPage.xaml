@@ -5,7 +5,9 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
     xmlns:local="clr-namespace:Searching.UI.WinClient.Common"
+    xmlns:common="clr-namespace:Searching.UI.WinClient"
     xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
     x:Class="Searching.UI.WinClient.MainPage"
     mc:Ignorable="d"
@@ -16,9 +18,7 @@
     shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
     
     <phone:PhoneApplicationPage.Resources>
-        <local:MyListDataSelector x:Key="selector">
-            
-        </local:MyListDataSelector>
+        <local:MyListDataSelector x:Key="selector"/>
     </phone:PhoneApplicationPage.Resources>
    
     <!--Sample code showing usage of ApplicationBar-->
@@ -122,6 +122,7 @@
                 </phone:PivotItem>
                 <phone:PivotItem Header="Лента">
                     <StackPanel>
+                        
                         <Grid Height="531">
                             <telerikPrimitives:RadDataBoundListBox HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="531" Width="446"/>
 

@@ -8,12 +8,12 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Telerik.Windows.Controls;
 
 namespace Searching.UI.WinClient.ViewModels
 {
    public class CategoriesViewModel:INotifyPropertyChanged
-    {
-
+    { 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)
         {
