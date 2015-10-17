@@ -14,14 +14,14 @@ using Searching.UI.WinClient.ViewModels;
 using Newtonsoft.Json;
 using Searching.UI.WinPhoneClient.Logics.Client;
 using SearchingLibrary;
-using Searching.UI.WinClient.Models;
+
 
 namespace Searching.UI.WinClient
 {
     public partial class MainPage : PhoneApplicationPage
     {
         public string categories_id;
-        CategoriesModel _Categories = new CategoriesModel();
+        CategoriesViewModel _Categories = new CategoriesViewModel();
         // Constructor
         public MainPage()
         {
@@ -38,9 +38,12 @@ namespace Searching.UI.WinClient
         
         private async void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
+            
             _Categories.ListCategories = await QueryList.GetCategories();
             CategoriesListBox.ItemsSource = _Categories.ListCategories;
+            
             LoadIndicator.IsRunning = false;
+            
         }
 
         private async void DataBoundListBox1_ItemTap(object sender, Telerik.Windows.Controls.ListBoxItemTapEventArgs e)
@@ -51,6 +54,9 @@ namespace Searching.UI.WinClient
            
         }
 
-        
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Forms/Filter.xaml", UriKind.Relative));
+        }
     }
 }

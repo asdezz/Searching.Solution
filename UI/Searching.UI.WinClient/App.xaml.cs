@@ -14,25 +14,24 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Telerik.Windows.Controls;
 using Searching.UI.WinClient.ViewModels;
-using Searching.UI.WinClient.Models;
 
 namespace Searching.UI.WinClient
 {
     public partial class App : Application
     {
-        private static CategoriesModel viewModel = null;
+        private static CategoriesViewModel viewModel = null;
 
         /// <summary>
         /// A static ViewModel used by the views to bind against.
         /// </summary>
         /// <returns>The MainViewModel object.</returns>
-        public static CategoriesModel ViewModel
+        public static CategoriesViewModel ViewModel
         {
             get
             {
                 // Delay creation of the view model until necessary
                 if (viewModel == null)
-                    viewModel = new CategoriesModel();
+                    viewModel = new CategoriesViewModel();
 
                 return viewModel;
             }

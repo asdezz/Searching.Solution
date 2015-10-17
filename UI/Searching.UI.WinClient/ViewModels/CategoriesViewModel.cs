@@ -1,4 +1,4 @@
-﻿using Searching.UI.WinClient.Models;
+﻿
 using Searching.UI.WinPhoneClient.Logics.Client;
 using SearchingLibrary;
 using System;
@@ -13,7 +13,37 @@ using Telerik.Windows.Controls;
 namespace Searching.UI.WinClient.ViewModels
 {
    public class CategoriesViewModel:INotifyPropertyChanged
-    { 
+    {
+        private List<Categories> categories;
+        private Categories returnCategories;
+        public CategoriesViewModel()
+        {
+            categories = new List<Categories>();
+        }
+        public List<Categories> ListCategories
+        {
+            get
+            {
+                return categories;
+            }
+            set
+            {
+                categories = value;
+                NotifyPropertyChanged("Categories");
+            }
+        }
+        public Categories ReturnCategories
+        {
+            get
+            {
+                return returnCategories;
+            }
+            set
+            {
+                returnCategories = value;
+                NotifyPropertyChanged("returnCategories");
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)
         {

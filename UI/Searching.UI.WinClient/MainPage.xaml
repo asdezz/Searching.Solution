@@ -16,11 +16,11 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
-    
+
     <phone:PhoneApplicationPage.Resources>
         <local:MyListDataSelector x:Key="selector"/>
     </phone:PhoneApplicationPage.Resources>
-   
+
     <!--Sample code showing usage of ApplicationBar-->
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
@@ -38,7 +38,7 @@
             <Style x:Key="DataBoundListBoxCheckBoxStyle" TargetType="telerikPrimitives:ItemCheckBox">
                 <Setter Property="VerticalAlignment" Value="Center"/>
             </Style>
-            <DataTemplate x:Key="DataBoundListBoxItemTemplate">
+            <DataTemplate x:Key="DataBoundListBoxItemTemplate" x:Name="CategoriesTemplate">
                 <Grid Margin="0,0,0,12">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -46,61 +46,71 @@
                     </Grid.ColumnDefinitions>
                     <Image Width="99" Height="99" Source="{Binding ImageThumbnailSource}"/>
                     <StackPanel Margin="12,-14,0,0" Grid.Column="1">
-                        <TextBlock FontSize="{StaticResource PhoneFontSizeExtraLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Text="{Binding Name_Category}" TextWrapping="Wrap"/>
+                        <TextBlock x:Name="NameCategories" FontSize="{StaticResource PhoneFontSizeExtraLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Text="{Binding Name_Category}" TextWrapping="Wrap"/>
                         <!--<TextBlock FontSize="{StaticResource PhoneFontSizeNormal}" Text="{Binding Info_Category}" TextWrapping="Wrap"/>-->
                     </StackPanel>
                 </Grid>
             </DataTemplate>
+            
         </Grid.Resources>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
 
+        <Grid x:Name="Dadada" Margin="0,0,0,10" Grid.RowSpan="2">
+            <Grid.Resources>
+                <Style x:Key="DataBoundListBoxCheckBoxStyle" TargetType="telerikPrimitives:ItemCheckBox">
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                </Style>
+                <DataTemplate x:Key="tTemplate">
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Image Width="99" Height="99" Source="{Binding ImageThumbnailSource}"/>
+                        <StackPanel Margin="12,-14,0,0" Grid.Column="1">
+                            <TextBlock x:Name="NameCategories" FontSize="{StaticResource PhoneFontSizeExtraLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Text="{Binding Name_Category}" TextWrapping="Wrap"/>
+                            <!--<TextBlock FontSize="{StaticResource PhoneFontSizeNormal}" Text="{Binding Info_Category}" TextWrapping="Wrap"/>-->
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </Grid.Resources>
+        
+        
         <TextBlock x:Name="ApplicationTitle" Margin="24,17,0,0" Text="Searching" Style="{StaticResource PhoneTextNormalStyle}"/>
 
         <Grid Grid.Row="1">
-
+        
 
 
             <!--Pivot Control-->
-            <phone:Pivot>
+            <phone:Pivot Name="Pivot">
                 <!--Pivot item one-->
-                <phone:PivotItem Header="Категории">
-                    
+                <phone:PivotItem Header="Категории" Name="CategoryItem">
                     <!--Double line list with text wrapping-->
-                    <StackPanel x:Name="CategoriesPanel" Tag="1" Visibility="Visible">
-                        <Grid Height="97">
-                            <telerikPrimitives:RadTextBox x:Name="radTextBox1" HorizontalAlignment="Left" Margin="0,-4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="329" Height="72"/>
-                            <Button x:Name="button1" Content="Фильтр" HorizontalAlignment="Left" Margin="329,-4,0,29" VerticalAlignment="Bottom" Width="127" RenderTransformOrigin="0.421,0.5" BorderBrush="{StaticResource PhoneBackgroundBrush}">
-                                <Button.Background>
-                                    <SolidColorBrush Color="#FF0F89DE"/>
-                                </Button.Background>
-                            </Button>
+                    <StackPanel x:Name="CategoriesPanel" Tag="1" >
+                            <Grid Height="97" Visibility="Visible">
+                                <telerikPrimitives:RadTextBox x:Name="radTextBox1" HorizontalAlignment="Left" Margin="0,-4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="329" Height="72"/>
+                                <Button x:Name="button1" Content="Фильтр" HorizontalAlignment="Left" Margin="329,-4,0,29" Width="127" RenderTransformOrigin="0.421,0.5" BorderBrush="{StaticResource PhoneBackgroundBrush}" Click="button1_Click">
+                                    <Button.Background>
+                                        <SolidColorBrush Color="#FF0F89DE"/>
+                                    </Button.Background>
+                                </Button>
 
-                        </Grid>
-                        <Grid Height="424" x:Name="CategoriesGrid">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="131*"/>
-                                <ColumnDefinition Width="21*"/>
-                            </Grid.ColumnDefinitions>
-                            <telerikPrimitives:RadBusyIndicator x:Name="LoadIndicator" IsRunning='True' AnimationStyle="AnimationStyle8" Foreground="#FF2D87D3" RenderTransformOrigin="0.496,0.295" Grid.ColumnSpan="2" Margin="0,171,0,131" />
-                            <telerikPrimitives:RadDataBoundListBox x:Name="CategoriesListBox"
-                    			ItemsSource="{Binding listCategories}"
+
+
+                                <telerikPrimitives:RadBusyIndicator x:Name="LoadIndicator" IsRunning='True' AnimationStyle="AnimationStyle8" Foreground="#FF2D87D3" RenderTransformOrigin="0.496,0.295" Margin="0,171,0,-411" />
+                                <telerikPrimitives:RadDataBoundListBox x:Name="CategoriesListBox"
+                    			ItemsSource="{Binding }"
                     			IsCheckModeEnabled="True"	
                     			CheckBoxStyle="{StaticResource DataBoundListBoxCheckBoxStyle}"
-                    			ItemTemplate="{StaticResource DataBoundListBoxItemTemplate}" ItemTap="DataBoundListBox1_ItemTap" EmptyContent="" Margin="-63,0,10,10" Grid.ColumnSpan="2"/>
-                        </Grid>
-                        <Grid x:Name="AnnouncingGrid" Visibility="Collapsed">
-                            <telerikPrimitives:RadDataBoundListBox x:Name="AnnouncingListBox"
-                    			ItemsSource="{Binding listCategories}"
-                    			IsCheckModeEnabled="True"	
-                    			CheckBoxStyle="{StaticResource DataBoundListBoxCheckBoxStyle}"
-                    			ItemTemplate="{StaticResource DataBoundListBoxItemTemplate}" ItemTap="DataBoundListBox1_ItemTap" EmptyContent="" Margin="-63,0,10,10" Grid.ColumnSpan="2"/>
-                        </Grid>
-                    </StackPanel>
+                    			ItemTemplate="{StaticResource DataBoundListBoxItemTemplate}" ItemTap="DataBoundListBox1_ItemTap" EmptyContent="" Margin="10,102,7,-459"/>
+                            </Grid>
+                           
+                        </StackPanel>
 
                 </phone:PivotItem>
 
@@ -122,13 +132,14 @@
                 </phone:PivotItem>
                 <phone:PivotItem Header="Лента">
                     <StackPanel>
-                        
+
                         <Grid Height="531">
                             <telerikPrimitives:RadDataBoundListBox HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="531" Width="446"/>
 
                         </Grid>
                     </StackPanel>
                 </phone:PivotItem>
+                
             </phone:Pivot>
 
             <!--Uncomment to see an alignment grid to help ensure your controls are
@@ -138,7 +149,7 @@
 
             Before shipping remove this XAML and the image itself.-->
             <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0" Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False" />-->
-
+            </Grid>
         </Grid>
     </Grid>
 </phone:PhoneApplicationPage>
