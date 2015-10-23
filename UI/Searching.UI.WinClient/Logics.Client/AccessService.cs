@@ -35,7 +35,7 @@ namespace Searching.UI.WinPhoneClient.Logics.Client
         }
         private static string GetServiceHost()
         {
-            return "http://192.168.200.100/Searching.BE.Service//WCFRESTService.svc/";
+            return "http://192.168.200.100:1703/Searching.BE.Service//WCFRESTService.svc/";
         }
     }
 }

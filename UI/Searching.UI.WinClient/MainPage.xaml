@@ -26,7 +26,7 @@
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="Настройки"/>
-                <shell:ApplicationBarMenuItem Text="О приложени"/>
+                <shell:ApplicationBarMenuItem Text="О приложении"/>
             </shell:ApplicationBar.MenuItems>
 
         </shell:ApplicationBar>
@@ -59,7 +59,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid x:Name="Dadada" Margin="0,0,0,10" Grid.RowSpan="2">
+        <Grid x:Name="CateglistGrid" Margin="0,0,0,10" Grid.RowSpan="2">
             <Grid.Resources>
                 <Style x:Key="DataBoundListBoxCheckBoxStyle" TargetType="telerikPrimitives:ItemCheckBox">
                     <Setter Property="VerticalAlignment" Value="Center"/>
@@ -118,14 +118,14 @@
                 <phone:PivotItem Header="Профиль">
                     <!--Triple line list no text wrapping-->
                     <StackPanel>
-                        <Grid Height="386">
+                        <Grid Height="386" Visibility="Visible">
                             <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="E-mail:" VerticalAlignment="Top" RenderTransformOrigin="1.239,0.677"/>
                             <telerikPrimitives:RadTextBox x:Name="radTextBox" HorizontalAlignment="Left" Margin="0,25,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="446"/>
                             <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,110,0,0" TextWrapping="Wrap" Text="Пароль:" VerticalAlignment="Top" RenderTransformOrigin="0.486,0.646"/>
                             <telerikPrimitives:RadPasswordBox HorizontalAlignment="Left" Margin="0,125,0,0" VerticalAlignment="Top" Width="446"/>
                             <Button x:Name="button" Content="Войти" HorizontalAlignment="Left" Margin="0,210,0,0" VerticalAlignment="Top" Width="446" FontWeight="Bold" Background="#FF01B3E8" Foreground="White" BorderBrush="{StaticResource PhoneBackgroundBrush}" Height="80"/>
                             <HyperlinkButton Content="Забыли пароль?" HorizontalAlignment="Left" Margin="125,295,0,0" VerticalAlignment="Top" Foreground="#FF0476A0" FontStretch="UltraCondensed"/>
-                            <HyperlinkButton Content="Зарегистрируйтесь" HorizontalAlignment="Left" Margin="115,345,0,0" VerticalAlignment="Top" Foreground="#FF0476A0" FontStretch="UltraCondensed"/>
+                            <HyperlinkButton Content="Зарегистрируйтесь" HorizontalAlignment="Left" Margin="115,345,0,0" VerticalAlignment="Top" Foreground="#FF0476A0" FontStretch="UltraCondensed" Click="HyperlinkButton_Click_2"/>
 
                         </Grid>
                     </StackPanel>
@@ -139,6 +139,11 @@
                         </Grid>
                     </StackPanel>
                 </phone:PivotItem>
+                    <phone:PivotItem Header="Чат">
+                        <StackPanel>
+                            
+                        </StackPanel>
+                    </phone:PivotItem>
                 
             </phone:Pivot>
 

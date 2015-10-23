@@ -50,13 +50,19 @@ namespace Searching.UI.WinClient
         {
             _Categories.ReturnCategories = CategoriesListBox.SelectedItem as Categories;
             categories_id = JsonConvert.SerializeObject(_Categories.ReturnCategories.Categories_id);
-            var Announcing = await QueryList.GetAnnouncingFilter(categories_id);
+            var Announcing = await QueryList.GetAnnouncingForCategory(categories_id);
            
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/Forms/Filter.xaml", UriKind.Relative));
+        }
+
+        
+        private void HyperlinkButton_Click_2(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Forms/RegistrationForm.xaml", UriKind.Relative));
         }
     }
 }

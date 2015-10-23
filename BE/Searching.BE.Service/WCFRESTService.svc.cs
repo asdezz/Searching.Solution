@@ -136,9 +136,9 @@ namespace Searching.BE.Service
             
         }
 
-        public string TestFunction(string ids)
+        public string TestFunction()
         {
-            return "Test Functrion is Sucssed {ids}!"+ids;
+            return "Test Functrion is Sucssed {ids}!";
         }
        
        

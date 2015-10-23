@@ -59,8 +59,8 @@ namespace Searching.BE.Service
         [WebInvoke(Method="POST",ResponseFormat = WebMessageFormat.Json,RequestFormat =WebMessageFormat.Json)]
         List<Announcing> GetAnnouncingForCategory(string category_id);
         [OperationContract]
-        [WebInvoke(Method="GET",UriTemplate ="TestFunction/{ids}",ResponseFormat = WebMessageFormat.Json,RequestFormat =WebMessageFormat.Json)]
-        string TestFunction(string ids);
+        [WebInvoke(Method="GET",ResponseFormat = WebMessageFormat.Json,RequestFormat =WebMessageFormat.Json)]
+        string TestFunction();
 
         
         
