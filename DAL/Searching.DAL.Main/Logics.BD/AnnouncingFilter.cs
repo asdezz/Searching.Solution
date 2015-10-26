@@ -59,6 +59,8 @@ namespace Searching.DAL.Main
             SqlConnection connect = new SqlConnection(connectionString);
             string queryString = "SELECT * FROM Announcing WHERE City_id =@City_id";
             SqlCommand command = new SqlCommand(queryString, connect);
+            command.Parameters.Add("@City_id", SqlDbType.Int);
+            command.Parameters["@City_id"].Value=City_id;
             command.ExecuteNonQuery();
             DataTable table = SqlAccess.CreateQuery(command, "AnnouncingListFromCity");
             return table;
@@ -84,7 +86,9 @@ namespace Searching.DAL.Main
             string queryString = @"SELECT * FROM Announcing WHERE Categories_id = @Category_id";
             SqlConnection connect = new SqlConnection(connectString);
             SqlCommand command = new SqlCommand(queryString, connect);
-            
+            command.Parameters.Add("@Category_id", SqlDbType.Int);
+            command.Parameters["@Category_id"].Value = Category_id;
+
             try
             {
                 connect.Open();

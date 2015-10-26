@@ -22,6 +22,7 @@ namespace Searching.UI.WinClient
     {
         public string categories_id;
         CategoriesViewModel _Categories = new CategoriesViewModel();
+        AnnFilter filt= new AnnFilter();
         // Constructor
         public MainPage()
         {
@@ -41,7 +42,6 @@ namespace Searching.UI.WinClient
             
             _Categories.ListCategories = await QueryList.GetCategories();
             CategoriesListBox.ItemsSource = _Categories.ListCategories;
-            
             LoadIndicator.IsRunning = false;
             
         }
@@ -49,8 +49,10 @@ namespace Searching.UI.WinClient
         private async void DataBoundListBox1_ItemTap(object sender, Telerik.Windows.Controls.ListBoxItemTapEventArgs e)
         {
             _Categories.ReturnCategories = CategoriesListBox.SelectedItem as Categories;
-            categories_id = JsonConvert.SerializeObject(_Categories.ReturnCategories.Categories_id);
-            var Announcing = await QueryList.GetAnnouncingForCategory(categories_id);
+            //categories_id = JsonConvert.SerializeObject(_Categories.ReturnCategories.Categories_id);
+            filt.Categories_id = _Categories.ReturnCategories.Categories_id;
+            var json = JsonConvert.SerializeObject(filt);
+            var Announcing = await QueryList.GetAnnouncingFilter(json);
            
         }
 

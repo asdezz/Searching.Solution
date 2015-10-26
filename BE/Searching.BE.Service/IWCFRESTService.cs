@@ -16,18 +16,18 @@ namespace Searching.BE.Service
     public interface IWCFRESTService
     {
         [OperationContract]
-        [WebInvoke(Method ="GET",RequestFormat =WebMessageFormat.Json,ResponseFormat =WebMessageFormat.Json)]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         string GetCityForCountry(int Country_id);
 
         [OperationContract]
-        [WebGet(RequestFormat =WebMessageFormat.Json,ResponseFormat =WebMessageFormat.Json)]
+        [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         string GetCountryList();
         [OperationContract]
-        [WebGet(ResponseFormat =WebMessageFormat.Json,RequestFormat =WebMessageFormat.Json)]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
         List<Categories> GetCategories();
         [OperationContract]
-        [WebInvoke(Method="POST",RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        string GetAnnouncingFilter(string json);
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/{json}")]
+        List<Announcing> GetAnnouncingFilter(string json);
 
         [OperationContract]
         [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
@@ -52,15 +52,15 @@ namespace Searching.BE.Service
         //string UpdateUserInfo(int User_id,char? Mail = null, char? FIO = null, int? Phone = null, char? Gender_user = null, int? Date_Bearthday = null, char? pass = null, string info = null, int? Country_id = null, int? type_login = null, int? City_id = null);
 
         [OperationContract]
-        [WebInvoke(Method="POST",RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         string PostRegistration(string json);
 
         [OperationContract]
-        [WebInvoke(Method="POST",ResponseFormat = WebMessageFormat.Json,RequestFormat =WebMessageFormat.Json)]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
         List<Announcing> GetAnnouncingForCategory(string category_id);
         [OperationContract]
-        [WebInvoke(Method="GET",ResponseFormat = WebMessageFormat.Json,RequestFormat =WebMessageFormat.Json)]
-        string TestFunction();
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+        string TestFunction(string mof);
 
         
         

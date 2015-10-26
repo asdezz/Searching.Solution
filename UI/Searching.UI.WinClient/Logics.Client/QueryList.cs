@@ -16,11 +16,17 @@ namespace Searching.UI.WinPhoneClient.Logics.Client
             List<Categories> categories=JsonConvert.DeserializeObject<List<Categories>>(result);
             return categories;
         }
-        public static async Task<List<Announcing>> GetAnnouncingForCategory(string json)
+        public static async Task<List<Announcing>> GetAnnouncingFilter(string json)
         {
-            var result= await AccessService.ServiceCalled("POST", "GetAnnouncingForCategory", json);
+            var result= await AccessService.ServiceCalled("POST", "GetAnnouncingFilter", json);
             List<Announcing> announcingForCategory = JsonConvert.DeserializeObject<List<Announcing>>(result);
             return announcingForCategory;
+        }
+        public static async Task<string> TestFunction(string json)
+        {
+            var result = await AccessService.ServiceCalled("POST", "TestFunction", json);
+            List<Announcing> announcingForCategory = JsonConvert.DeserializeObject<List<Announcing>>(result);
+            return result;
         }
     }
 }

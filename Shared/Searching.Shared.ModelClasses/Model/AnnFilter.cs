@@ -6,6 +6,7 @@ namespace SearchingLibrary
     using System.Collections.Generic;
   public  class AnnFilter
     {
+        public int Categories_id { get; set; }
         public int Country_id { get; set; }
         public int City_id { get; set; }
         public int Areas_id { get; set; }

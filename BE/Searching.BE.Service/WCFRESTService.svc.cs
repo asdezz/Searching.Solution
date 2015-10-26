@@ -19,13 +19,25 @@ namespace Searching.BE.Service
     public class WCFRESTService : IWCFRESTService
     {
         
-        public string GetAnnouncingFilter(string json)
+        public List<Announcing> GetAnnouncingFilter(string json)
         {
-            
-            DataTable table = JsonConvert.DeserializeObject<DataTable>(json);
-            table = AnnouncingFilter.GetAnnouncingFilter(table);
-            json = JsonConvert.SerializeObject(table);
-            return json;
+            List < Announcing > annF = new List<Announcing>();
+            DataTable table = new DataTable();
+            AnnFilter annFilt= new AnnFilter();
+            try
+            {
+                annFilt = JsonConvert.DeserializeObject<AnnFilter>(json);
+                 
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteToFile_Json(json);
+                Logger.CreateLog(ex);
+                
+            }
+            //table = AnnouncingFilter.GetAnnouncingFilter(table);
+            //json = JsonConvert.SerializeObject(table);
+            return annF;
         }
 
         public string GetAnnouncing()
@@ -136,9 +148,9 @@ namespace Searching.BE.Service
             
         }
 
-        public string TestFunction()
+        public string TestFunction(string mof)
         {
-            return "Test Functrion is Sucssed {ids}!";
+            return mof;
         }
        
        
