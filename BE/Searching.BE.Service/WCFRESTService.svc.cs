@@ -19,25 +19,34 @@ namespace Searching.BE.Service
     public class WCFRESTService : IWCFRESTService
     {
         
-        public List<Announcing> GetAnnouncingFilter(string json)
+        public List<Announcing> GetAnnouncingFilter(AnnFilter filter)
         {
-            List < Announcing > annF = new List<Announcing>();
+            List < Announcing > listAnnonc = new List<Announcing>();
+            Announcing annonc = new Announcing();
             DataTable table = new DataTable();
-            AnnFilter annFilt= new AnnFilter();
-            try
+            table = AnnouncingFilter.GetAnnouncingFilter(filter);
+            foreach(DataRow row in table.Rows)
             {
-                annFilt = JsonConvert.DeserializeObject<AnnFilter>(json);
-                 
+                try
+                {
+                    annonc.Announcing_id = int.Parse(row["Announcing_id"].ToString());
+                    annonc.Name_Announcing = row["Name_Announcing"].ToString();
+                    annonc.Phone_Announcing = int.Parse(row["Phone_Announcing"].ToString());
+                    annonc.Date_Announcing = DateTime.Parse(row["Date_Announcing"].ToString());
+                    annonc.Info_Announcing = row["info_Announcing"].ToString();
+                    annonc.Categories_id = int.Parse(row["Categories_id"].ToString());
+                    annonc.User_id = int.Parse(row["User_id"].ToString());
+                    annonc.City_id = int.Parse(row["City_id"].ToString());
+                    annonc.Areas_id = int.Parse(row["Areas_id"].ToString());
+                    listAnnonc.Add(new Announcing() { Name_Announcing = annonc.Name_Announcing, Announcing_id = annonc.Announcing_id, Phone_Announcing = annonc.Phone_Announcing, Date_Announcing = annonc.Date_Announcing, Info_Announcing = annonc.Info_Announcing, Categories_id = annonc.Categories_id, User_id = annonc.User_id, City_id = annonc.City_id, Areas_id = annonc.Areas_id });
+                }
+                catch (Exception ex)
+                {
+                    Logger.CreateLog(ex);
+                    throw ex;
+                }
             }
-            catch (Exception ex)
-            {
-                Logger.WriteToFile_Json(json);
-                Logger.CreateLog(ex);
-                
-            }
-            //table = AnnouncingFilter.GetAnnouncingFilter(table);
-            //json = JsonConvert.SerializeObject(table);
-            return annF;
+            return listAnnonc;
         }
 
         public string GetAnnouncing()
@@ -148,19 +157,9 @@ namespace Searching.BE.Service
             
         }
 
-        public AnnFilter TestFunction(string json)
+        public AnnFilter TestFunction(AnnFilter filter)
         {
-            AnnFilter car = new AnnFilter();
-            try {
-                car = JsonConvert.DeserializeObject<AnnFilter>(json);
-            }
-            catch(Exception ex)
-            {
-                Logger.CreateLog(ex);
-                Logger.WriteToFile_Json(json);
-                
-            }
-            return car;
+            return filter;
         }
        
        

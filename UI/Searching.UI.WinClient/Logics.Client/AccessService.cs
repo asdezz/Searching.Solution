@@ -39,6 +39,16 @@ namespace Searching.UI.WinPhoneClient.Logics.Client
             //                             .ToObject<List<Categories>>();
             return returnValue;
         }
+        public static async Task<string> ServiceCalledWithJson( string MethodName, AnnFilter customObject)
+        {
+            string ServiceURI = GetServiceHost() + MethodName;                                 
+            var httpClient = new HttpClient();
+            var result = JsonConvert.SerializeObject(new { filter = customObject });
+            var request = new StringContent(result, Encoding.UTF8, "application/json");
+            var response = await httpClient.PostAsync(ServiceURI, request);
+            string content = await response.Content.ReadAsStringAsync();
+            return content;
+        }
         private static string GetServiceHost()
         {
             return "http://192.168.200.100:1703/Searching.BE.Service//WCFRESTService.svc/";

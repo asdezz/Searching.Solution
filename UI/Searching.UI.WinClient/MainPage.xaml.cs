@@ -52,7 +52,7 @@ namespace Searching.UI.WinClient
             categories_id = JsonConvert.SerializeObject(_Categories.ReturnCategories.Categories_id);
             filt.Category_id = _Categories.ReturnCategories.Categories_id;
             var json = JsonConvert.SerializeObject(filt);
-            var Announcing = await QueryList.GetAnnouncingFilter(json);
+            var Announcing = await QueryList.GetAnnouncingFilter(filt);
            
         }
 
