@@ -148,9 +148,19 @@ namespace Searching.BE.Service
             
         }
 
-        public string TestFunction(string mof)
+        public AnnFilter TestFunction(string json)
         {
-            return mof;
+            AnnFilter car = new AnnFilter();
+            try {
+                car = JsonConvert.DeserializeObject<AnnFilter>(json);
+            }
+            catch(Exception ex)
+            {
+                Logger.CreateLog(ex);
+                Logger.WriteToFile_Json(json);
+                
+            }
+            return car;
         }
        
        

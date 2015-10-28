@@ -17,14 +17,20 @@ namespace Searching.UI.WinPhoneClient.Logics.Client
         {
             string ServiceURI = GetServiceHost()+MethodName;
             HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+           // client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
             HttpRequestMessage request = new HttpRequestMessage(MethodRequestType == "GET" ? HttpMethod.Get : HttpMethod.Post, ServiceURI);
             if (!string.IsNullOrEmpty(BodyParam))
             {
                 request.Content = new StringContent(BodyParam, Encoding.UTF8, "application/json");
             }
-            
-            HttpResponseMessage response = await client.SendAsync(request);
+            HttpResponseMessage response = new HttpResponseMessage();
+            try { 
+             response = await client.SendAsync(request);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
             string returnValue = await response.Content.ReadAsStringAsync();
             //JObject jobj = JsonConvert.DeserializeObject<JObject>(returnValue);
 
