@@ -26,7 +26,7 @@ namespace Searching.BE.Service
         [WebGet(ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
         List<Categories> GetCategories();
         [OperationContract]
-        [WebInvoke(Method = "POST",BodyStyle =WebMessageBodyStyle.Wrapped,ResponseFormat =WebMessageFormat.Json)]
+        [WebInvoke(Method = "POST",ResponseFormat =WebMessageFormat.Json,BodyStyle =WebMessageBodyStyle.Wrapped)]
         List<Announcing> GetAnnouncingFilter(AnnFilter filter);
 
         [OperationContract]
@@ -59,7 +59,7 @@ namespace Searching.BE.Service
         [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
         List<Announcing> GetAnnouncingForCategory(string category_id);
         [OperationContract]
-        [WebInvoke(Method = "POST",BodyStyle = WebMessageBodyStyle.Wrapped,ResponseFormat =WebMessageFormat.Json)]
+        [WebInvoke(Method = "POST",ResponseFormat =WebMessageFormat.Json,RequestFormat =WebMessageFormat.Json)]
         AnnFilter TestFunction(AnnFilter filter);
 
         

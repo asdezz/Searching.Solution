@@ -9,11 +9,14 @@ namespace Searching.BE.Service
     {
         static public void WriteToFile_Json(string json)
         {
+            var jnon = "";
+            jnon = json;
+           var plor = "This Json: " + jnon;
             var path= "C:\\Mail.ru Cloud\\projects\\Searching\\Searching.Solution\\Searching.Solution\\Logg\\";
             string name = string.Format("Json at {0:t}", DateTime.Now.ToString().Replace(":", "."));
             string result = path + name;
             StreamWriter stream = new StreamWriter(result,true);
-            stream.WriteLine(json);
+            stream.WriteLine(plor);
             stream.Close();
         }
         static private void Read_and_writeToFile_Exception(Exception e, string logFile)

@@ -18,6 +18,7 @@ namespace Searching.UI.WinPhoneClient.Logics.Client
         }
         public static async Task<List<Announcing>> GetAnnouncingFilter(AnnFilter json)
         {
+            
             var result= await AccessService.ServiceCalledWithJson("GetAnnouncingFilter",json);
             List<Announcing> announcingForCategory = JsonConvert.DeserializeObject<List<Announcing>>(result);
             return announcingForCategory;

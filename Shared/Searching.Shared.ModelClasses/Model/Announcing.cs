@@ -20,7 +20,7 @@ namespace SearchingLibrary
             this.Favorite_Announcing = new HashSet<Favorite_Announcing>();
             this.Selected_Announcing = new HashSet<Selected_Announcing>();
         }
-    
+        public string Name_City { get; set;}
         public int Announcing_id { get; set; }
         public string Name_Announcing { get; set; }
         public Nullable<int> Phone_Announcing { get; set; }
