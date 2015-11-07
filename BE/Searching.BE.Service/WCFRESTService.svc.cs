@@ -14,6 +14,7 @@ using SearchingLibrary;
 using System.IO;
 using System.ServiceModel.Web;
 
+
 namespace Searching.BE.Service
 {
     public class WCFRESTService : IWCFRESTService
@@ -21,8 +22,6 @@ namespace Searching.BE.Service
         
         public List<Announcing> GetAnnouncingFilter(AnnFilter filter)
         {
-            var json = JsonConvert.SerializeObject(filter);
-            Logger.WriteToFile_Json(json);
             List < Announcing > listAnnonc = new List<Announcing>();
             Announcing annonc = new Announcing();
             DataTable table = new DataTable();
@@ -33,13 +32,6 @@ namespace Searching.BE.Service
                 {
                     annonc.Announcing_id = int.Parse(row["Announcing_id"].ToString());
                     annonc.Name_Announcing = row["Name_Announcing"].ToString();
-                    //annonc.Phone_Announcing = int.Parse(row["Phone_Announcing"].ToString());
-                    //annonc.Date_Announcing = DateTime.Parse(row["Date_Announcing"].ToString());
-                    //annonc.Info_Announcing = row["info_Announcing"].ToString();
-                    //annonc.Categories_id = int.Parse(row["Categories_id"].ToString());
-                    //annonc.User_id = int.Parse(row["User_id"].ToString());
-                    //annonc.City_id = int.Parse(row["City_id"].ToString());
-                    //annonc.Areas_id = int.Parse(row["Areas_id"].ToString());
                     annonc.Name_City = row["City_Name"].ToString();
                     listAnnonc.Add(new Announcing() {Announcing_id=annonc.Announcing_id,Name_Announcing=annonc.Name_Announcing,Name_City =annonc.Name_City });
                 }
@@ -49,9 +41,6 @@ namespace Searching.BE.Service
                     throw ex;
                 }
             }
-            var slem = "";
-            slem = JsonConvert.SerializeObject(listAnnonc);
-            Logger.WriteToFile_Json(slem);
             return listAnnonc;
         }
 
@@ -165,10 +154,9 @@ namespace Searching.BE.Service
 
         public AnnFilter TestFunction(AnnFilter filter)
         {
+            
             return filter;
-        }
-       
-       
+        }       
     }
     
 }

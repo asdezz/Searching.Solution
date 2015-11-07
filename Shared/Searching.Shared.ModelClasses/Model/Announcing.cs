@@ -24,7 +24,7 @@ namespace SearchingLibrary
         public int Announcing_id { get; set; }
         public string Name_Announcing { get; set; }
         public Nullable<int> Phone_Announcing { get; set; }
-        public System.DateTime Date_Announcing { get; set; }
+        public System.DateTime? Date_Announcing { get; set; }
         public string Info_Announcing { get; set; }
         public int Categories_id { get; set; }
         public int User_id { get; set; }
