@@ -33,7 +33,8 @@ namespace Searching.BE.Service
                     annonc.Announcing_id = int.Parse(row["Announcing_id"].ToString());
                     annonc.Name_Announcing = row["Name_Announcing"].ToString();
                     annonc.Name_City = row["City_Name"].ToString();
-                    listAnnonc.Add(new Announcing() {Announcing_id=annonc.Announcing_id,Name_Announcing=annonc.Name_Announcing,Name_City =annonc.Name_City });
+                    annonc.Info_Announcing = row["Info_Announcing"].ToString();
+                    listAnnonc.Add(new Announcing() {Announcing_id=annonc.Announcing_id,Name_Announcing=annonc.Name_Announcing,Name_City =annonc.Name_City,Info_Announcing=annonc.Info_Announcing });
                 }
                 catch (Exception ex)
                 {

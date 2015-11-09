@@ -93,7 +93,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\AuthFormFunct.cs" />
+    <Compile Include="Common\FilterFunction.cs" />
+    <Compile Include="Common\ListFormFunct.cs" />
     <Compile Include="Common\MyListDataSelector.cs" />
+    <Compile Include="Common\PageFunction.cs" />
+    <Compile Include="Common\PassingParam.cs" />
     <Compile Include="Forms\ChatForm.xaml.cs">
       <DependentUpon>ChatForm.xaml</DependentUpon>
     </Compile>
@@ -151,6 +156,7 @@
     </Content>
     <Content Include="Forms\Images\FrameThumbnail.png" />
     <Content Include="Forms\Images\SendIcon.png" />
+    <Content Include="Templates.xml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
