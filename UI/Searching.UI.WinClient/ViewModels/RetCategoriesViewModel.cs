@@ -1,43 +1,37 @@
-﻿
-using Searching.UI.WinPhoneClient.Logics.Client;
-using SearchingLibrary;
+﻿using SearchingLibrary;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Telerik.Windows.Controls;
 
 namespace Searching.UI.WinClient.ViewModels
 {
-   public class CategoriesViewModel:INotifyPropertyChanged
+    class RetCategoriesViewModel: INotifyPropertyChanged
     {
-        private List<Categories> _categories;
-        
-        public CategoriesViewModel()
+        private Categories _returnCategories;
+        public RetCategoriesViewModel()
         {
-            _categories = new List<Categories>();
+            _returnCategories = new Categories();
         }
-        public List<Categories> ListCategories
+        public Categories ReturnCategories
         {
             get
             {
-                return _categories;
+                return _returnCategories;
             }
             set
             {
-                _categories = value;
-                NotifyPropertyChanged("Categories");
+                _returnCategories = value;
+                NotifyPropertyChanged("returnCategories");
             }
         }
-       
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
-            if(null != handler)
+            if (null != handler)
             {
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
