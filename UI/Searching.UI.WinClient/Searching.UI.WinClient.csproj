@@ -126,7 +126,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\AnnouncingFilterViewModel.cs" />
     <Compile Include="ViewModels\CategoriesViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -14,6 +14,7 @@ using Searching.UI.WinClient.ViewModels;
 using Newtonsoft.Json;
 using Searching.UI.WinPhoneClient.Logics.Client;
 using SearchingLibrary;
+using Searching.UI.WinClient.ViewModels;
 
 namespace Searching.UI.WinClient
 {
@@ -21,17 +22,19 @@ namespace Searching.UI.WinClient
     {
         
        public  CategoriesViewModel _Categories = new CategoriesViewModel();
-        AnnFilter filt = new AnnFilter();
+        
         private async  void DataBoundListBox1_ItemTap(object sender, Telerik.Windows.Controls.ListBoxItemTapEventArgs e)
         {
+            ViewModels.CategoriesViewModel _filter = new ViewModels.CategoriesViewModel();
             LoadIndicator.IsRunning = true;
+            
             _Categories.ReturnCategories = CategoriesListBox.SelectedItem as Categories;
-            filt.Category_id = _Categories.ReturnCategories.Categories_id;
-            var json = JsonConvert.SerializeObject(filt);
-            var Announcing = await QueryList.GetAnnouncingFilter(filt);
+            _filter.Filter.Category_id = _Categories.ReturnCategories.Categories_id;
+            var json = JsonConvert.SerializeObject(_filter.Filter);
+            _filter.Ann = await QueryList.GetAnnouncingFilter(_filter.Filter);
             CategoriesGrid.Visibility = Visibility.Collapsed;
             AnnouncingGrid.Visibility = Visibility.Visible;
-            AnnouncingListBox.ItemsSource = Announcing;
+            AnnouncingListBox.ItemsSource = _filter.Ann;
             LoadIndicator.IsRunning = false;
 
         }

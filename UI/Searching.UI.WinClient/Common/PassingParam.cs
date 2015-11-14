@@ -1,4 +1,5 @@
-﻿using SearchingLibrary;
+﻿using Searching.UI.WinPhoneClient.Logics.Client;
+using SearchingLibrary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Searching.UI.WinClient
 {
    public static class  CallBackMy
     {
-            public delegate void callbackEvent(Announcing what);
-            public static callbackEvent callbackEventHandler;
+    //        public delegate void callbackEvent(Announcing what);
+    //    public static callbackEvent callbackEventHandler;
     }
 }

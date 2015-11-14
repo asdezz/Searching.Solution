@@ -52,11 +52,18 @@ namespace Searching.BE.Service
             return json;
         }
         
-        public string GetAreasOfCity(int City_id)
+        public List<AreasOfCity> GetAreasOfCity(int City_id)
         {
+            AreasOfCity _district = new AreasOfCity();
+            List<AreasOfCity> _areas = new List<AreasOfCity>();
             DataTable table = Location.GetAreasOfCity(City_id);
-            string json = JsonConvert.SerializeObject(table);
-            return json;
+            foreach(DataRow row in table.Rows)
+            {
+                _district.Areas_id = int.Parse(row["Areas_id"].ToString());
+                _district.Areas_name = row["Areas_name"].ToString();
+                _areas.Add(new AreasOfCity() { Areas_id = _district.Areas_id, Areas_name = _district.Areas_name });
+            }
+            return _areas;
         }
 
         public List<Categories> GetCategories()
@@ -83,39 +90,88 @@ namespace Searching.BE.Service
 
         //}
 
-        public string GetCityForCountry(int Country_id)
+        public List<Cities> GetCityForCountry(int Country_id)
         {
             DataTable table = Location.GetCityForCountry(Country_id);
-            string json = JsonConvert.SerializeObject(table);
-            return json;
+            Cities _city = new Cities();
+            List<Cities> _cities = new List<Cities>();
+            foreach(DataRow row in table.Rows)
+            {
+                _city.City_id = int.Parse(row["city_id"].ToString());
+                _city.City_name = row["City_name"].ToString();
+                _cities.Add(new Cities() {City_name=_city.City_name,City_id=_city.City_id });
+            }
+            return _cities;
         }
 
-        public string GetCountryList()
+        public List<Country> GetCountryList()
         {
             DataTable table = Location.GetCountryList();
-           string json = JsonConvert.SerializeObject(table);
-            return json;
+            Country _country = new  Country();
+            List<Country> _countrys = new List<Country>();
+            foreach(DataRow row in table.Rows)
+            {
+                _country.Country_id = int.Parse(row["Country_id"].ToString());
+                _country.Name_country = row["Name_country"].ToString();
+                _countrys.Add(new Country() { Name_country = _country.Name_country,Country_id=_country.Country_id });
+            }
+            return _countrys;
+            
         }
         
-        public string GetFavoriteAnnuncing(int User_id)
+        public List<Announcing> GetFavoriteAnnuncing(int User_id)
         {
             DataTable table = FavoriteAnnouncingFunction.GetFavoriteAnnouncing(User_id);
-            string json = JsonConvert.SerializeObject(table);
-            return json;
+            Announcing _favorite = new Announcing();
+            List<Announcing> _favorites = new List<Announcing>();
+            foreach(DataRow row in table.Rows)
+            {
+                _favorite.Announcing_id = int.Parse(row["Announcing_id"].ToString());
+                _favorite.Areas_id = int.Parse(row["Areas_id"].ToString());
+                _favorite.Phone_Announcing = int.Parse(row["Phone_Announcing"].ToString());
+                _favorite.Info_Announcing = row["Info_Announcing"].ToString();
+                _favorite.Name_Announcing = row["Name_Announcing"].ToString();
+                _favorites.Add(new Announcing() {Announcing_id = _favorite.Announcing_id, Areas_id=_favorite.Areas_id,
+                    Phone_Announcing =_favorite.Phone_Announcing,Info_Announcing=_favorite.Info_Announcing,Name_Announcing=_favorite.Name_Announcing });
+            }
+            return _favorites;
         }
         
-        public string GetSelectedAnnouncing(int User_id)
+        public List<Announcing> GetSelectedAnnouncing(int User_id)
         {
+            Announcing _select = new Announcing();
+            List<Announcing> _selected = new List<Announcing>();
             DataTable table = SelectedAnnouncingFunction.GetSelectedAnnouncing(User_id);
-            string json = JsonConvert.SerializeObject(table);
-            return json;
+            foreach(DataRow row in table.Rows)
+            {
+                _select.Announcing_id = int.Parse(row["Announcing_id"].ToString());
+                _select.Areas_id = int.Parse(row["Areas_id"].ToString());
+                _select.Phone_Announcing = int.Parse(row["Phone_Announcing"].ToString());
+                _select.Info_Announcing = row["Info_Announcing"].ToString();
+                _select.Name_Announcing = row["Name_Announcing"].ToString();
+            }
+            return _selected;
+            
         }
         
-        public string GetUser(int User_id)
+        public UserList GetUser(int User_id)
         {
+            UserList _user = new UserList();
+            List<UserList> _users = new List<UserList>(); 
             DataTable table = Profile.GetUser(User_id);
-            string json = JsonConvert.SerializeObject(table);
-            return json;
+            foreach(DataRow row in table.Rows)
+            {
+                _user.FIO = row["FIO"].ToString();
+                _user.Country_id = int.Parse(row["Country_id"].ToString());
+                _user.Phone = byte.Parse(row["Phone"].ToString());
+                _user.User_id = int.Parse(row["User_id"].ToString());
+                _user.Gender_user = row["Gender_user"].ToString();
+                _user.Date_Bearthday = DateTime.Parse(row["Date_Bearthday"].ToString());
+                _user.Info = row["Info"].ToString();
+                //_users.Add(new UserList() { FIO = _user.FIO, Country_id = _user.Country_id, Phone = _user.Phone,
+                //    User_id = _user.User_id, Gender_user = _user.Gender_user, Date_Bearthday = _user.Date_Bearthday,Info=_user.Info});
+            }
+            return _user;
         }
         
         public string PostRegistration(string json)

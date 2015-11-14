@@ -17,11 +17,11 @@ namespace Searching.BE.Service
     {
         [OperationContract]
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        string GetCityForCountry(int Country_id);
+        List<Cities> GetCityForCountry(int Country_id);
 
         [OperationContract]
         [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        string GetCountryList();
+        List<Country> GetCountryList();
         [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
         List<Categories> GetCategories();
@@ -35,17 +35,17 @@ namespace Searching.BE.Service
 
         [OperationContract]
         [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        string GetAreasOfCity(int City_id);
+        List<AreasOfCity> GetAreasOfCity(int City_id);
         [OperationContract]
         [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        string GetFavoriteAnnuncing(int User_id);
+        List<Announcing> GetFavoriteAnnuncing(int User_id);
 
         [OperationContract]
         [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        string GetSelectedAnnouncing(int User_id);
+        List<Announcing> GetSelectedAnnouncing(int User_id);
         [OperationContract]
         [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        string GetUser(int User_id);
+        UserList GetUser(int User_id);
 
         //[OperationContract]
         //[WebInvoke(Method="POST",RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]

@@ -23,7 +23,7 @@ namespace Searching.UI.WinClient
     {
         public MainPage()
         {
-            CallBackMy.callbackEventHandler = new CallBackMy.callbackEvent(this.Reload);
+            FilterFunction.callbackEventHandler = new FilterFunction.callbackEvent(this.Reload);
             InitializeComponent();
         }
         void Reload(Announcing param)

@@ -1,4 +1,5 @@
 ﻿using Searching.UI.WinClient.Forms;
+using SearchingLibrary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace Searching.UI.WinClient.Common
 {
     public  class FilterFunction:Filter
     {
-
+        public delegate void callbackEvent(Announcing what);
+        public static callbackEvent callbackEventHandler;
     }
 }

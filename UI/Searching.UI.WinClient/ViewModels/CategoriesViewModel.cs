@@ -14,21 +14,37 @@ namespace Searching.UI.WinClient.ViewModels
 {
    public class CategoriesViewModel:INotifyPropertyChanged
     {
-        private List<Categories> categories;
-        private Categories returnCategories;
+        private List<Categories> _categories;
+        private Categories _returnCategories;
+        private List<Announcing> _ann;
+        private AnnFilter _filter;
+        public List<Announcing> Ann
+        {
+            get
+            {
+                return _ann;
+            }
+            set
+            {
+                _ann = value;
+                NotifyPropertyChanged("Ann");
+            }
+        }
+        public AnnFilter Filter
+        { get { return _filter; } set { _filter = value; NotifyPropertyChanged("ilter"); } }
         public CategoriesViewModel()
         {
-            categories = new List<Categories>();
+            _categories = new List<Categories>();
         }
         public List<Categories> ListCategories
         {
             get
             {
-                return categories;
+                return _categories;
             }
             set
             {
-                categories = value;
+                _categories = value;
                 NotifyPropertyChanged("Categories");
             }
         }
@@ -36,11 +52,11 @@ namespace Searching.UI.WinClient.ViewModels
         {
             get
             {
-                return returnCategories;
+                return _returnCategories;
             }
             set
             {
-                returnCategories = value;
+                _returnCategories = value;
                 NotifyPropertyChanged("returnCategories");
             }
         }
