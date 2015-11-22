@@ -126,6 +126,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Storage\AppStorage.cs" />
     <Compile Include="ViewModels\AnnViewModel.cs" />
     <Compile Include="ViewModels\CategoriesViewModel.cs" />
     <Compile Include="ViewModels\FilterViewModel.cs" />

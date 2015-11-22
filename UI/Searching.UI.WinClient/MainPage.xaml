@@ -51,7 +51,7 @@
                     </StackPanel>
                 </Grid>
             </DataTemplate>
-            
+
         </Grid.Resources>
 
         <Grid.RowDefinitions>
@@ -78,20 +78,20 @@
                     </Grid>
                 </DataTemplate>
             </Grid.Resources>
-        
-        
-        <TextBlock x:Name="ApplicationTitle" Margin="24,17,0,0" Text="Searching" Style="{StaticResource PhoneTextNormalStyle}"/>
-
-        <Grid Grid.Row="1">
-        
 
 
-            <!--Pivot Control-->
-            <phone:Pivot Name="Pivot">
-                <!--Pivot item one-->
-                <phone:PivotItem Header="Категории" Name="CategoryItem">
-                    <!--Double line list with text wrapping-->
-                    <StackPanel x:Name="CategoriesPanel" Tag="1" >
+            <TextBlock x:Name="ApplicationTitle" Margin="24,17,0,0" Text="Searching" Style="{StaticResource PhoneTextNormalStyle}"/>
+
+            <Grid Grid.Row="1">
+
+
+
+                <!--Pivot Control-->
+                <phone:Pivot Name="Pivot">
+                    <!--Pivot item one-->
+                    <phone:PivotItem Header="Категории" Name="CategoryItem">
+                        <!--Double line list with text wrapping-->
+                        <StackPanel x:Name="CategoriesPanel" Tag="1" >
                             <Grid Height="97" Visibility="Visible" Name="CategoriesGrid">
                                 <telerikPrimitives:RadTextBox x:Name="radTextBox1" HorizontalAlignment="Left" Margin="0,-4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="329" Height="72"/>
                                 <Button x:Name="button1" Content="Фильтр" HorizontalAlignment="Left" Margin="329,-4,0,29" Width="127" RenderTransformOrigin="0.421,0.5" BorderBrush="{StaticResource PhoneBackgroundBrush}" Click="button1_Click">
@@ -116,52 +116,75 @@
                                                                        Margin="0,0,-6,-561"
                                                                        EmptyContent=""/>
                             </Grid>
-                            
+
 
                         </StackPanel>
 
-                </phone:PivotItem>
+                    </phone:PivotItem>
 
-                <!--Pivot item two-->
-                <phone:PivotItem Header="Профиль">
-                    <!--Triple line list no text wrapping-->
-                    <StackPanel>
-                        <Grid Height="386" Visibility="Visible">
-                            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="E-mail:" VerticalAlignment="Top" RenderTransformOrigin="1.239,0.677"/>
-                            <telerikPrimitives:RadTextBox x:Name="radTextBox" HorizontalAlignment="Left" Margin="0,25,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="446"/>
-                            <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,110,0,0" TextWrapping="Wrap" Text="Пароль:" VerticalAlignment="Top" RenderTransformOrigin="0.486,0.646"/>
-                            <telerikPrimitives:RadPasswordBox HorizontalAlignment="Left" Margin="0,125,0,0" VerticalAlignment="Top" Width="446"/>
-                            <Button x:Name="button" Content="Войти" HorizontalAlignment="Left" Margin="0,210,0,0" VerticalAlignment="Top" Width="446" FontWeight="Bold" Background="#FF01B3E8" Foreground="White" BorderBrush="{StaticResource PhoneBackgroundBrush}" Height="80"/>
-                            <HyperlinkButton Content="Забыли пароль?" HorizontalAlignment="Left" Margin="125,295,0,0" VerticalAlignment="Top" Foreground="#FF0476A0" FontStretch="UltraCondensed"/>
-                            <HyperlinkButton Content="Зарегистрируйтесь" HorizontalAlignment="Left" Margin="115,345,0,0" VerticalAlignment="Top" Foreground="#FF0476A0" FontStretch="UltraCondensed" Click="HyperlinkButton_Click_2"/>
-
-                        </Grid>
-                    </StackPanel>
-                </phone:PivotItem>
-                <phone:PivotItem Header="Лента">
-                    <StackPanel>
-
-                        <Grid Height="531">
-                            <telerikPrimitives:RadDataBoundListBox HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="531" Width="446"/>
-
-                        </Grid>
-                    </StackPanel>
-                </phone:PivotItem>
-                    <phone:PivotItem Header="Чат">
+                    <!--Pivot item two-->
+                    <phone:PivotItem Header="Профиль">
+                        <!--Triple line list no text wrapping-->
                         <StackPanel>
+                            <Grid Height="386" Visibility="Collapsed">
+                                <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="E-mail:" VerticalAlignment="Top" RenderTransformOrigin="1.239,0.677"/>
+                                <telerikPrimitives:RadTextBox x:Name="radTextBox" HorizontalAlignment="Left" Margin="0,25,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="446"/>
+                                <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,110,0,0" TextWrapping="Wrap" Text="Пароль:" VerticalAlignment="Top" RenderTransformOrigin="0.486,0.646"/>
+                                <telerikPrimitives:RadPasswordBox HorizontalAlignment="Left" Margin="0,125,0,0" VerticalAlignment="Top" Width="446"/>
+                                <Button x:Name="button" Content="Войти" HorizontalAlignment="Left" Margin="0,210,0,0" VerticalAlignment="Top" Width="446" FontWeight="Bold" Background="#FF01B3E8" Foreground="White" BorderBrush="{StaticResource PhoneBackgroundBrush}" Height="80"/>
+                                <HyperlinkButton Content="Забыли пароль?" HorizontalAlignment="Left" Margin="125,295,0,0" VerticalAlignment="Top" Foreground="#FF0476A0" FontStretch="UltraCondensed"/>
+                                <HyperlinkButton Content="Зарегистрируйтесь" HorizontalAlignment="Left" Margin="115,345,0,0" VerticalAlignment="Top" Foreground="#FF0476A0" FontStretch="UltraCondensed" Click="HyperlinkButton_Click_2"/>
+                            </Grid>
+                        
+                        <Grid Height="548">
                             
+                                <ScrollViewer Width="Auto" VerticalScrollBarVisibility="Visible"  Margin="0,-10,0,85">
+                                    <ScrollViewer.Content>
+                                        <StackPanel  Height="920" Background="Black" Width="auto">
+                                            <StackPanel Orientation="Horizontal" >
+                                            <telerikPrimitives:RadMultiResolutionImage HorizontalAlignment="Left" Height="132" VerticalAlignment="Top" Width="125" />
+                                            <TextBlock x:Name="textBlock2" HorizontalAlignment="Right"  TextWrapping="Wrap" Text="fghjh" VerticalAlignment="Top" Height="50" Width="100" />
+                                            <TextBlock x:Name="textBlock3" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="54" Width="246"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Vertical" Height="779">
+                                            <Button x:Name="button2" Content="Button" Margin="-5,223,-12,0" VerticalAlignment="Top"/>
+                                        <Button x:Name="button3" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                            <Button x:Name="button4" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-5,487,-10,-11" Width="471"/>
+                                            <Button x:Name="button5" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-5,434,-12,0" Width="473"/>
+                                        <Button x:Name="button6" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-5,383,-12,0" Width="473"/>
+                                        <Button x:Name="button7" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-4,328,-11,0" Width="471"/>
+                                        <Button x:Name="button8" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-4,276,-13,0" Width="473"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </ScrollViewer.Content>
+                                </ScrollViewer>
+                            </Grid>
                         </StackPanel>
                     </phone:PivotItem>
-                
-            </phone:Pivot>
+                    <phone:PivotItem Header="Лента">
+                        <StackPanel>
 
-            <!--Uncomment to see an alignment grid to help ensure your controls are
+                            <Grid Height="531">
+                                <telerikPrimitives:RadDataBoundListBox HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="531" Width="446"/>
+
+                            </Grid>
+                        </StackPanel>
+                    </phone:PivotItem>
+                    <phone:PivotItem Header="Чат">
+                        <StackPanel>
+
+                        </StackPanel>
+                    </phone:PivotItem>
+
+                </phone:Pivot>
+
+                <!--Uncomment to see an alignment grid to help ensure your controls are
             aligned on common boundaries.  The image has a top margin of -32px to
             account for the System Tray. Set this to 0 (or remove the margin altogether)
             if the System Tray is hidden.
 
             Before shipping remove this XAML and the image itself.-->
-            <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0" Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False" />-->
+                <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0" Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False" />-->
             </Grid>
         </Grid>
     </Grid>
