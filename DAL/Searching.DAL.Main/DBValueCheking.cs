@@ -17,5 +17,10 @@ namespace Searching.DAL.Main
             return command;
 
         }
+        public static SqlCommand AddValue(SqlCommand command,string name,object volume)
+        {
+            command.Parameters.AddWithValue(name, volume);
+            return command;
+        }
     }
 }

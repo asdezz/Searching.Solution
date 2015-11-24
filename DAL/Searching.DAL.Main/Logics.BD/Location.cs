@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Searching.DAL.Main
 {
     //Класс, описывающий функции связанные с месторасположением или локацией 
-   public class Location
+   public  static class Location
     {
         public static DataTable GetCountryList()
         {

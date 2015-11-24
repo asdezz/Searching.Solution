@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Searching.DAL.Main
 {
     // Класс, в котором функции фильтра Объявлений. 
-  public  class AnnouncingFilter
+  public  static  class AnnouncingFilter
     {
         public static DataTable GetCategories()
         {

@@ -21,7 +21,7 @@ namespace Searching.UI.WinClient
     {
         private async void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-
+            
             _categories.ListCategories = await QueryList.GetCategories();
             CategoriesListBox.ItemsSource = _categories.ListCategories;
             LoadIndicator.IsRunning = false;

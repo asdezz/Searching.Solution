@@ -16,7 +16,7 @@ namespace SearchingLibrary
     {
         public int id { get; set; }
         public int User_id { get; set; }
-        public int Selected_user1 { get; set; }
+        public int Selected_user { get; set; }
     
         public virtual UserList UserList { get; set; }
         public virtual UserList UserList1 { get; set; }

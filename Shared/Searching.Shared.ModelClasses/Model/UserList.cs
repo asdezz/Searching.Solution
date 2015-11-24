@@ -29,12 +29,12 @@ namespace SearchingLibrary
         public string FIO { get; set; }
         public byte Phone { get; set; }
         public string Gender_user { get; set; }
-        public System.DateTime Date_Bearthday { get; set; }
+        public DateTime? Date_Bearthday { get; set; }
         public string Password { get; set; }
         public string Info { get; set; }
-        public Nullable<int> Country_id { get; set; }
+        public int? Country_id { get; set; }
         public byte Type_login { get; set; }
-        public Nullable<int> City_id { get; set; }
+        public int? City_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Announcing> Announcing { get; set; }

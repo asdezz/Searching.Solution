@@ -32,11 +32,6 @@ namespace Searching.UI.WinPhoneClient.Logics.Client
                 throw ex;
             }
             string returnValue = await response.Content.ReadAsStringAsync();
-            //JObject jobj = JsonConvert.DeserializeObject<JObject>(returnValue);
-
-            //List<Categories> result = jobj.GetValue("GetCategoriesResult")
-            //                             .ToObject<JArray>()
-            //                             .ToObject<List<Categories>>();
             return returnValue;
         }
         public static async Task<string> ServiceCalledWithJson( string MethodName, AnnFilter customObject)

@@ -78,17 +78,8 @@ namespace Searching.BE.Service
                  c.Info_Category = row["Info_Category"].ToString();
                 ListCategories.Add(new Categories() { Name_Category = c.Name_Category, Categories_id = c.Categories_id, Info_Category = c.Info_Category });
             }
-                
             return ListCategories;
         }
-
-        //public string GetCityAll()
-        //{
-        //    DataTable table = SqlAccess.GetCityAll();
-        //    string json = JsonConvert.SerializeObject(table);
-        //    return json;
-
-        //}
 
         public List<Cities> GetCityForCountry(int Country_id)
         {
@@ -174,14 +165,7 @@ namespace Searching.BE.Service
             return _user;
         }
         
-        public string PostRegistration(string json)
-        {
-            DataTable table = new DataTable();
-            table = JsonConvert.DeserializeObject<DataTable>(json);
-            table = Profile.PostRegistration(table);
-            json = JsonConvert.SerializeObject(table);
-            return json;
-        }
+       
 
         public List<Announcing> GetAnnouncingForCategory(string category_id)
         {
@@ -209,11 +193,124 @@ namespace Searching.BE.Service
             
         }
 
-        public AnnFilter TestFunction(AnnFilter filter)
+
+        public string TestFunction()
         {
             
-            return filter;
-        }       
+            return "Successed!";
+        }
+
+        public UserList Registration(UserList user)
+        {
+            UserList _user = new UserList();
+            DataTable table = Profile.PostRegistration(user);
+            foreach (DataRow row in table.Rows)
+            {
+                _user.User_id = int.Parse(row["User_id"].ToString());
+                _user.City_id = int.Parse(row["City_id"].ToString());
+                _user.Date_Bearthday = DateTime.Parse(row["Date_Bearthday"].ToString());
+                _user.FIO = row["FIO"].ToString();
+                _user.Gender_user = row["Gender_user"].ToString();
+                _user.Info = row["Info"].ToString();
+                _user.Mail = row["Mail"].ToString();
+                _user.Password = row["Password"].ToString();
+                _user.Phone = byte.Parse(row["Phone"].ToString());
+            }
+            return user;
+        }
+
+        public UserList Auth(UserList user)
+        {
+            UserList _user = new UserList();
+            DataTable table = Profile.Auth(user);
+            foreach (DataRow row in table.Rows)
+            {
+                _user.User_id = int.Parse(row["User_id"].ToString());
+                _user.City_id = int.Parse(row["City_id"].ToString());
+                _user.Date_Bearthday = DateTime.Parse(row["Date_Bearthday"].ToString());
+                _user.FIO = row["FIO"].ToString();
+                _user.Gender_user = row["Gender_user"].ToString();
+                _user.Info = row["Info"].ToString();
+                _user.Mail = row["Mail"].ToString();
+                _user.Password = row["Password"].ToString();
+                _user.Phone = byte.Parse(row["Phone"].ToString());
+            }
+            return _user;
+        }
+
+        public UserList EditProfile(UserList user)
+        {
+            UserList _user = new UserList();
+            var table = Profile.EditProfile(user);
+            foreach (DataRow row in table.Rows)
+            {
+                _user.User_id = int.Parse(row["User_id"].ToString());
+                _user.City_id = int.Parse(row["City_id"].ToString());
+                _user.Date_Bearthday = DateTime.Parse(row["Date_Bearthday"].ToString());
+                _user.FIO = row["FIO"].ToString();
+                _user.Gender_user = row["Gender_user"].ToString();
+                _user.Info = row["Info"].ToString();
+                _user.Mail = row["Mail"].ToString();
+                _user.Password = row["Password"].ToString();
+                _user.Phone = byte.Parse(row["Phone"].ToString());
+            }
+            return _user;
+        }
+
+        public void AddAnnouncing(Announcing ann)
+        {
+            AnnouncingFunction.AddAnnoucing(ann);
+        }
+
+        public void EditAnnouncing(Announcing ann)
+        {
+            AnnouncingFunction.EditAnnouncing(ann);
+        }
+
+        public void DeleteAnnouncing(string Announcing_id)
+        {
+            var _id = int.Parse(Announcing_id);
+            AnnouncingFunction.DeleteAnnouncing(_id);
+        }
+
+        public void AddToSelected(Selected_Announcing ann)
+        {
+            SelectedAnnouncingFunction.AddToSelected(ann);
+        }
+
+        public void AddToFavorite(Favorite_Announcing ann)
+        {
+            FavoriteAnnouncingFunction.AddToFavorite(ann);
+        }
+
+        public void DeleteSelectedAnnouncing(Selected_Announcing ann)
+        {
+            SelectedAnnouncingFunction.DeleteSelected(ann);
+        }
+
+        public void DeleteFavoriteAnnouncing(Favorite_Announcing ann)
+        {
+            FavoriteAnnouncingFunction.DeleteFavorite(ann);
+        }
+
+        public void AddSelectedUser(Selected_User user)
+        {
+            FollowersFunction.AddSelectedUser(user);
+        }
+
+        public void DeleteSelectedUser(Selected_User user)
+        {
+            FollowersFunction.DeleteSelectedUser(user);
+        }
+
+        public List<UserList> FollowersList(string user_id)
+        {
+            var _id = int.Parse(user_id);
+            UserList _user = new UserList();
+            List<UserList> _users = new List<UserList>();
+            DataTable table = FollowersFunction.FollowersList(_id);
+            return _users;
+        }
     }
     
 }

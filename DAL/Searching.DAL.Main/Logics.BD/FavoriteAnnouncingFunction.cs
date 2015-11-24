@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SearchingLibrary;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 namespace Searching.DAL.Main
 {
     //Класс, в котором все функции над Выбранными Объявлениями
-  public  class FavoriteAnnouncingFunction
+  public static  class FavoriteAnnouncingFunction
     {
         public static DataTable GetFavoriteAnnouncing(int User_id)
         {
@@ -22,6 +23,52 @@ namespace Searching.DAL.Main
             command.ExecuteNonQuery();
             DataTable table = SqlAccess.CreateQuery(command, "Favorite_Announcing");
             return table;
+        }
+        public static void AddToFavorite(Favorite_Announcing ann)
+        {
+            string connectString = SqlAccess.GetConnectionString();
+            string queryString = "INSERT INTO Favorite_Announcing(Announcing_id,User_id) VALUES(@Announcing_id, @User_id);";
+            SqlConnection connect = new SqlConnection(connectString);
+            SqlCommand command = new SqlCommand(queryString, connect);
+            command = DBValueCheking.AddValue(command, "@Announcing_id", ann.Announcing_id);
+            command = DBValueCheking.AddValue(command, "@User_id", ann.User_id);
+            try
+            {
+                connect.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Logger.CreateLog(ex);
+                throw ex;
+            }
+            finally
+            {
+                connect.Close();
+            }
+        }
+        public static void DeleteFavorite(Favorite_Announcing ann)
+        {
+            string connectString = SqlAccess.GetConnectionString();
+            string queryString = "DELETE FROM Favorite_Announcing WHERE Announcing_id = @Announcing_id AND User_id = @User_id";
+            SqlConnection connect = new SqlConnection(connectString);
+            SqlCommand command = new SqlCommand(queryString, connect);
+            command = DBValueCheking.AddValue(command, "@Announcing_id", ann.Announcing_id);
+            command = DBValueCheking.AddValue(command, "@User_id", ann.User_id);
+            try
+            {
+                connect.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Logger.CreateLog(ex);
+                throw ex;
+            }
+            finally
+            {
+                connect.Close();
+            }
         }
     }
 }
