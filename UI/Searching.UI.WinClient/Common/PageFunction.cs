@@ -21,7 +21,8 @@ namespace Searching.UI.WinClient
     {
         private async void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            
+            //string id = "1";
+            //List<AreasOfCity> _areas = await QueryList.GetAreasOfCity(id);
             _categories.ListCategories = await QueryList.GetCategories();
             CategoriesListBox.ItemsSource = _categories.ListCategories;
             LoadIndicator.IsRunning = false;

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Searching.UI.WinPhoneClient.Logics.Client
 {
-   public class AccessService
+   public static class AccessService
     {
         public static async Task<string> ServiceCalled(string MethodRequestType, string MethodName, string BodyParam = "")
         {
@@ -34,11 +34,11 @@ namespace Searching.UI.WinPhoneClient.Logics.Client
             string returnValue = await response.Content.ReadAsStringAsync();
             return returnValue;
         }
-        public static async Task<string> ServiceCalledWithJson( string MethodName, AnnFilter customObject)
+        public static async Task<string> ServiceCalledWithJson( string MethodName, object customObject)
         {
             try
             { 
-            string ServiceURI = GetServiceHost() + MethodName+"/";                                 
+            string ServiceURI = GetServiceHost() + MethodName;                                 
             var httpClient = new HttpClient();
             var result = JsonConvert.SerializeObject(new { filter = customObject });
             var request = new StringContent(result, Encoding.UTF8, "application/json");

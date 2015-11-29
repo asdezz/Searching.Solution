@@ -16,11 +16,11 @@ namespace Searching.BE.Service
     public interface IWCFRESTService
     {
         [OperationContract]
-        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        List<Cities> GetCityForCountry(int Country_id);
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,UriTemplate ="GetCityForCountry")]
+        List<Cities> GetCityForCountry(int country_id);
 
         [OperationContract]
-        [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,UriTemplate ="GetCountryList")]
         List<Country> GetCountryList();
 
         [OperationContract]
@@ -28,7 +28,7 @@ namespace Searching.BE.Service
         List<Categories> GetCategories();
 
         [OperationContract]
-        [WebInvoke(UriTemplate = "/GetAnnouncingFilter/", Method = "POST",ResponseFormat =WebMessageFormat.Json,BodyStyle =WebMessageBodyStyle.WrappedRequest,RequestFormat =WebMessageFormat.Json)]
+        [WebInvoke(UriTemplate = "GetAnnouncingFilter", Method = "POST",ResponseFormat =WebMessageFormat.Json,BodyStyle =WebMessageBodyStyle.WrappedRequest,RequestFormat =WebMessageFormat.Json)]
         List<Announcing> GetAnnouncingFilter(AnnFilter filter);
 
         [OperationContract]
@@ -36,7 +36,7 @@ namespace Searching.BE.Service
         string GetAnnouncing();
 
         [OperationContract]
-        [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method="POST",RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,UriTemplate ="GetAreasOfCity")]
         List<AreasOfCity> GetAreasOfCity(int City_id);
 
         [OperationContract]

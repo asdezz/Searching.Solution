@@ -81,9 +81,9 @@ namespace Searching.BE.Service
             return ListCategories;
         }
 
-        public List<Cities> GetCityForCountry(int Country_id)
+        public List<Cities> GetCityForCountry(int country_id)
         {
-            DataTable table = Location.GetCityForCountry(Country_id);
+            DataTable table = Location.GetCityForCountry(country_id);
             Cities _city = new Cities();
             List<Cities> _cities = new List<Cities>();
             foreach(DataRow row in table.Rows)

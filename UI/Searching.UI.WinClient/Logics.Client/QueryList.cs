@@ -23,17 +23,26 @@ namespace Searching.UI.WinPhoneClient.Logics.Client
             List<Announcing> announcingForCategory = JsonConvert.DeserializeObject<List<Announcing>>(result);
             return announcingForCategory;
         }
+        public static async Task<List<Cities>> GetCityForCountry(string country_id)
+        {
+            var result = await AccessService.ServiceCalled("POST", "GetCityForCountry", country_id);
+            List<Cities> cities = JsonConvert.DeserializeObject<List<Cities>>(result);
+            return cities;
+        }
+
+        public static async Task<List<AreasOfCity>> GetAreasOfCity(string city_id)
+        {
+            var result = await AccessService.ServiceCalled("POST", "GetAreasOfCity", city_id);
+            List<AreasOfCity> areasList = JsonConvert.DeserializeObject<List<AreasOfCity>>(result);
+            return areasList;
+        }
+
         public static async Task<string> TestFunction()
         {
             var result = await AccessService.ServiceCalled("GET","TestFunction","");
             List<Announcing> announcingForCategory = JsonConvert.DeserializeObject<List<Announcing>>(result);
             return result;
         }
-        public static async Task<string> TestFunction1(AnnFilter json)
-        {
-            var result = await AccessService.ServiceCalledWithJson("TestFunction1", json);
-            List<Announcing> announcingForCategory = JsonConvert.DeserializeObject<List<Announcing>>(result);
-            return result;
-        }
+       
     }
 }
