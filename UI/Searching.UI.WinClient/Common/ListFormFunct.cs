@@ -27,10 +27,10 @@ namespace Searching.UI.WinClient
             _returnC.ReturnCategories = CategoriesListBox.SelectedItem as Categories;
             _filter.TakeFilter.Category_id = _returnC.ReturnCategories.Categories_id;
             var json = JsonConvert.SerializeObject(_filter.TakeFilter);
-            _ann.ListAnnouncing = await QueryList.GetAnnouncingFilter(_filter.TakeFilter);
-            CategoriesGrid.Visibility = Visibility.Collapsed;
-            AnnouncingGrid.Visibility = Visibility.Visible;
-            AnnouncingListBox.ItemsSource = _ann.ListAnnouncing;
+            //_ann.ListAnnouncing = await QueryList.GetAnnouncingFilter(_filter.TakeFilter);
+            //CategoriesGrid.Visibility = Visibility.Collapsed;
+            //AnnouncingGrid.Visibility = Visibility.Visible;
+            //AnnouncingListBox.ItemsSource = _ann.ListAnnouncing;
             LoadIndicator.IsRunning = false;
 
         }

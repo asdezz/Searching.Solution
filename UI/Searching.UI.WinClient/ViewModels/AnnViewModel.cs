@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Searching.UI.WinClient.ViewModels
 {
-   public class AnnViewModel: INotifyPropertyChanged
+   public class AnnouncingViewModel: INotifyPropertyChanged
     {
         private List<Announcing> _ann;
-        public AnnViewModel()
+        public AnnouncingViewModel()
         {
             _ann = new List<Announcing>();
         }

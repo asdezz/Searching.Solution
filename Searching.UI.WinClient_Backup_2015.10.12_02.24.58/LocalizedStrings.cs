@@ -1,6 +1,6 @@
-﻿using TelerikWindowsPhoneApp1.Resources;
+﻿using Searching.UI.WinClient.Resources;
 
-namespace TelerikWindowsPhoneApp1
+namespace Searching.UI.WinClient
 {
     /// <summary>
     /// Provides access to string resources.

@@ -34,7 +34,8 @@ namespace Searching.BE.Service
                     annonc.Name_Announcing = row["Name_Announcing"].ToString();
                     annonc.Name_City = row["City_Name"].ToString();
                     annonc.Info_Announcing = row["Info_Announcing"].ToString();
-                    listAnnonc.Add(new Announcing() {Announcing_id=annonc.Announcing_id,Name_Announcing=annonc.Name_Announcing,Name_City =annonc.Name_City,Info_Announcing=annonc.Info_Announcing });
+                    annonc.FIO = row["FIO"].ToString();
+                    listAnnonc.Add(new Announcing() {Announcing_id=annonc.Announcing_id,Name_Announcing=annonc.Name_Announcing,Name_City =annonc.Name_City,Info_Announcing=annonc.Info_Announcing,FIO=annonc.FIO });
                 }
                 catch (Exception ex)
                 {

@@ -1,4 +1,5 @@
 ﻿
+using Caliburn.Micro;
 using Searching.UI.WinPhoneClient.Logics.Client;
 using SearchingLibrary;
 using System;
@@ -12,7 +13,7 @@ using Telerik.Windows.Controls;
 
 namespace Searching.UI.WinClient.ViewModels
 {
-   public class CategoriesViewModel:INotifyPropertyChanged
+   public class CategoriesViewModel:Screen
     {
         private List<Categories> _categories;
         

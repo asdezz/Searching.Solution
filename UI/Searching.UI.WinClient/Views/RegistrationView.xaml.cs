@@ -14,15 +14,15 @@ using Microsoft.Phone.Controls;
 using Telerik.Windows.Controls;
 using Telerik.Windows.Controls.DataForm;
 
-namespace Searching.UI.WinClient.Forms
+namespace Searching.UI.WinClient.Views
 {
-    public partial class RegistrationForm : PhoneApplicationPage
+    public partial class RegistrationView : PhoneApplicationPage
     {
         const string PasswordFieldName = "Password";
         const string PasswordConfirmationFieldName = "PasswordConfirm";
         const string PasswordFieldsDifferMessage = "The Password and Confirmation Password must match.";
 
-        public RegistrationForm()
+        public RegistrationView()
         {
             InitializeComponent();
         }

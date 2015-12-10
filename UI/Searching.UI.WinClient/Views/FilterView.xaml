@@ -7,8 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:telerikInput="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input"
     xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
-    x:Class="Searching.UI.WinClient.Forms.Filter"
+    x:Class="Searching.UI.WinClient.Views.FilterView"
     mc:Ignorable="d"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -26,13 +27,21 @@
         <StackPanel Grid.ColumnSpan="2" Margin="6,98,12,0" >
 
             <Grid Height="777">
-                <ScrollViewer Width="Auto" VerticalScrollBarVisibility="Visible"  Margin="0,-10,0,99">
+                <ScrollViewer Width="Auto" VerticalScrollBarVisibility="Visible"  Margin="0,-10,-7,99">
                     <ScrollViewer.Content>
                         <StackPanel Height="789" Background="Black" Width="auto">
-                            <telerikInput:RadListPicker HorizontalAlignment="Left"  VerticalAlignment="Top" Width="432" Height="87"  Header="Страна"/>
-                            <telerikInput:RadListPicker HorizontalAlignment="Left"  VerticalAlignment="Top" Width="432" Header="Город" Height="87"/>
-                            <telerikInput:RadListPicker HorizontalAlignment="Left"  VerticalAlignment="Top" Width="432" Header="Район" Height="87"/>
-                            <telerikInput:RadListPicker HorizontalAlignment="Left"  VerticalAlignment="Top" Width="432" Header="Пол автора объявления"/>
+                            <telerikInput:RadListPicker HorizontalAlignment="Left"  VerticalAlignment="Top" Width="432" Height="87"  Header="Страна">
+                                <sys:String> Выберите Страну</sys:String>
+                            </telerikInput:RadListPicker>
+                            <telerikInput:RadListPicker HorizontalAlignment="Left"  VerticalAlignment="Top" Width="432" Header="Город" Height="87">
+                                <sys:String>Выберите город</sys:String>
+                            </telerikInput:RadListPicker>
+                            <telerikInput:RadListPicker HorizontalAlignment="Left"  VerticalAlignment="Top" Width="432" Header="Район" Height="87">
+                                <sys:String>Выберите район города</sys:String>
+                            </telerikInput:RadListPicker>
+                            <telerikInput:RadListPicker HorizontalAlignment="Left"  VerticalAlignment="Top" Width="432" Header="Пол автора объявления">
+                                <sys:String>Выберите пол автора объявления</sys:String>
+                            </telerikInput:RadListPicker>
                             <TextBlock x:Name="textBlock2" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Возвраст автора объявления" VerticalAlignment="Top"/>
                             <StackPanel HorizontalAlignment="Left" Height="123" Orientation="Horizontal" Width="449">
                                 <TextBlock x:Name="textBlock3" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="от:" VerticalAlignment="Center"/>
@@ -40,7 +49,9 @@
                                 <TextBlock x:Name="textBlock4" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="до:" VerticalAlignment="Center"/>
                                 <telerikPrimitives:RadTextBox x:Name="radTextBox1" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Center" Height="75" Width="110" Margin="0,13,0,7"/>
                             </StackPanel>
-                            <telerikInput:RadListPicker HorizontalAlignment="Left"  VerticalAlignment="Top" Width="432" Header="Дата объявления" Height="86"/>
+                            <telerikInput:RadListPicker HorizontalAlignment="Left"  VerticalAlignment="Top" Width="432" Header="Дата объявления" Height="86">
+                                <sys:String>Выберите дату объявления</sys:String>
+                            </telerikInput:RadListPicker>
                             <Button x:Name="button" Content="Применить" HorizontalAlignment="Right"  VerticalAlignment="Top" RenderTransformOrigin="0.244,1.863" Height="77" Width="191"/>
 
                         </StackPanel>

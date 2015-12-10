@@ -16,7 +16,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded" BackKeyPress="PhoneApplicationPage_BackKeyPress" >
-
+   
     <phone:PhoneApplicationPage.Resources>
         <local:MyListDataSelector x:Key="selector"/>
     </phone:PhoneApplicationPage.Resources>

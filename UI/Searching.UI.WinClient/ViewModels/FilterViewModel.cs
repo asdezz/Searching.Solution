@@ -1,4 +1,5 @@
-﻿using SearchingLibrary;
+﻿using Caliburn.Micro;
+using SearchingLibrary;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,32 +9,29 @@ using System.Threading.Tasks;
 
 namespace Searching.UI.WinClient.ViewModels
 {
-    public class FilterViewModel: INotifyPropertyChanged
+    public class FilterViewModel: PropertyChangedBase
     {
         private AnnFilter _filter;
+        private List<Country> _country;
+        private List<AreasOfCity> _areas;
+        private List<Cities> _cities;
        public FilterViewModel()
         {
             _filter = new AnnFilter();
         }
-        public AnnFilter TakeFilter
-        { get
+        public  AnnFilter TakeFilter
+        {
+            get
             {
                 return _filter;
             }
             set
             {
                 _filter = value;
-                NotifyPropertyChanged("Filter");
+                
             }
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged(String propertyName)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (null != handler)
-            {
-                handler(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
+
+       
     }
 }

@@ -23,7 +23,7 @@ namespace Searching.DAL.Main
         {
             string connectionString = SqlAccess.GetConnectionString();
             SqlConnection connect = new SqlConnection(connectionString);
-            string query = "SELECT a.Announcing_id, a.Name_Announcing, c.City_name, a.Info_Announcing FROM Announcing a JOIN Cities c ON c.City_id = a.City_id JOIN[UserList] u ON  u.[User_id] = a.[User_id] WHERE  a.City_id = ISNULL(@City_id, a.City_id) AND a.Areas_id = ISNULL(@Areas_id, a.Areas_id) AND a.Categories_id = ISNULL(@Category_id, a.Categories_id) AND u.Gender_user = ISNULL(@Gender_user, u.Gender_user) AND u.Date_Bearthday BETWEEN ISNULL(@MinDateBearthday, u.Date_Bearthday) AND ISNULL(@MaxDateBearthday, u.Date_Bearthday) AND a.Date_Announcing >= ISNULL(@Date_Announcing, a.Date_Announcing)";
+            string query = "SELECT a.Announcing_id, a.Name_Announcing, c.City_name, a.Info_Announcing, u.FIO FROM Announcing a JOIN Cities c ON c.City_id = a.City_id JOIN[UserList] u ON  u.[User_id] = a.[User_id] WHERE  a.City_id = ISNULL(@City_id, a.City_id) AND a.Areas_id = ISNULL(@Areas_id, a.Areas_id) AND a.Categories_id = ISNULL(@Category_id, a.Categories_id) AND u.Gender_user = ISNULL(@Gender_user, u.Gender_user) AND u.Date_Bearthday BETWEEN ISNULL(@MinDateBearthday, u.Date_Bearthday) AND ISNULL(@MaxDateBearthday, u.Date_Bearthday) AND a.Date_Announcing >= ISNULL(@Date_Announcing, a.Date_Announcing)";
             SqlCommand command = new SqlCommand(query, connect);
             command = DBValueCheking.CheckValue(command, "@Category_id", filter.Category_id);
             command = DBValueCheking.CheckValue(command, "@City_id", filter.City_id);
