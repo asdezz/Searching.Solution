@@ -110,6 +110,10 @@ namespace Searching.BE.Service
         [OperationContract]
         [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, UriTemplate = "/FallowersList/", BodyStyle = WebMessageBodyStyle.Wrapped)]
         List<UserList> FollowersList(string user_id);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, UriTemplate = "GetAnnouncingFull")]
+        Announcing GetAnnouncingFull(string announcing_id);
     }
 
 }

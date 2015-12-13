@@ -26,7 +26,8 @@ namespace SearchingLibrary
     
         public int User_id { get; set; }
         public string Mail { get; set; }
-        public string FIO { get; set; }
+        public string Name { get; set; }
+        public string LastName { get; set; }
         public byte Phone { get; set; }
         public string Gender_user { get; set; }
         public DateTime? Date_Bearthday { get; set; }

@@ -23,7 +23,7 @@ namespace Searching.DAL.Main
         {
             string connectionString = SqlAccess.GetConnectionString();
             SqlConnection connect = new SqlConnection(connectionString);
-            string query = "SELECT a.Announcing_id, a.Name_Announcing, c.City_name, a.Info_Announcing, u.FIO FROM Announcing a JOIN Cities c ON c.City_id = a.City_id JOIN[UserList] u ON  u.[User_id] = a.[User_id] WHERE  a.City_id = ISNULL(@City_id, a.City_id) AND a.Areas_id = ISNULL(@Areas_id, a.Areas_id) AND a.Categories_id = ISNULL(@Category_id, a.Categories_id) AND u.Gender_user = ISNULL(@Gender_user, u.Gender_user) AND u.Date_Bearthday BETWEEN ISNULL(@MinDateBearthday, u.Date_Bearthday) AND ISNULL(@MaxDateBearthday, u.Date_Bearthday) AND a.Date_Announcing >= ISNULL(@Date_Announcing, a.Date_Announcing)";
+            string query = "SELECT a.Announcing_id, a.Name_Announcing, u.Name,u.LastName FROM Announcing a JOIN Cities c ON c.City_id = a.City_id JOIN[UserList] u ON  u.[User_id] = a.[User_id] WHERE  a.City_id = ISNULL(@City_id, a.City_id) AND a.Areas_id = ISNULL(@Areas_id, a.Areas_id) AND a.Categories_id = ISNULL(@Category_id, a.Categories_id) AND u.Gender_user = ISNULL(@Gender_user, u.Gender_user) AND u.Date_Bearthday BETWEEN ISNULL(@MinDateBearthday, u.Date_Bearthday) AND ISNULL(@MaxDateBearthday, u.Date_Bearthday) AND a.Date_Announcing >= ISNULL(@Date_Announcing, a.Date_Announcing)";
             SqlCommand command = new SqlCommand(query, connect);
             command = DBValueCheking.CheckValue(command, "@Category_id", filter.Category_id);
             command = DBValueCheking.CheckValue(command, "@City_id", filter.City_id);
@@ -101,6 +101,31 @@ namespace Searching.DAL.Main
             }
             
             DataTable table = SqlAccess.CreateQuery(command, "AnnouncingForCategory");
+            return table;
+        }
+
+        public static DataTable GetAnnouncingFull(int announcing_id)
+        {
+            string connectString = SqlAccess.GetConnectionString();
+            string queryString = "SELECT a.Announcing_id, a.Name_Announcing, a.Phone_Announcing, a.Date_Announcing,ul.Name,ul.LastName,c.City_name, a.Info_Announcing FROM Announcing a JOIN UserList ul ON ul.[User_id] = a.[User_id] JOIN Cities c ON c.City_id = a.City_id WHERE a.Announcing_id= @Announcing_id";
+            SqlConnection connect = new SqlConnection(connectString);
+            SqlCommand command = new SqlCommand(queryString, connect);
+            command = DBValueCheking.AddValue(command, "@Announcing_id", announcing_id);
+            try
+            {
+                connect.Open();
+                command.ExecuteNonQuery();
+            }
+            catch(Exception ex)
+            {
+                Logger.CreateLog(ex);
+                throw ex;
+            }
+            finally
+            {
+                connect.Close();
+            }
+            DataTable table = SqlAccess.CreateQuery(command, "GetAnnouncingAll");
             return table;
         }
     }

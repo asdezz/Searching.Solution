@@ -27,19 +27,16 @@ namespace Searching.DAL.Main
         public static DataTable PostRegistration(UserList user)
         {
             string connectString = SqlAccess.GetConnectionString();
-            string queryString = "SELECT * FROM User WHERE Mail=@Mail, FIO=@FIO, Phone=@Phone,Gender_User=@Gender_user, Date_Bearthday=@Date_Bearthday,Password=@pass, Info=ISNULL(@info,Info),Country_id=ISNULL(@Country_id,Country_id),Type_login=@type_login,City_id=ISNULL(@City_id,City_id)";
+            string procedureName = "RegUser";
             SqlConnection connect = new SqlConnection(connectString);
-            SqlCommand command = new SqlCommand(queryString,connect);
-            command = DBValueCheking.AddValue(command, "@Mail", user.Mail);
-            command = DBValueCheking.AddValue(command, "@FIO", user.FIO);
-            command = DBValueCheking.AddValue(command, "Phone", user.Phone);
-            command = DBValueCheking.AddValue(command, "@Gender_user", user.Gender_user);
-            command = DBValueCheking.AddValue(command, "@Date_Bearthday", user.Date_Bearthday);
-            command = DBValueCheking.AddValue(command, "pass", user.Password);
-            command = DBValueCheking.CheckValue(command, "@info", user.Info);
-            command = DBValueCheking.CheckValue(command, "@Country_id", user.Country_id);
-            command = DBValueCheking.AddValue(command, "@type_login", user.Type_login);
-            command = DBValueCheking.CheckValue(command, "@City_id", user.City_id);           
+            SqlCommand command = new SqlCommand(procedureName,connect);
+            command.CommandType = CommandType.StoredProcedure;
+            SqlParameter param = DBValueCheking.AddSqlParamInput("@Mail", SqlDbType.Char, user.Mail);
+            command.Parameters.Add(param);
+            param = DBValueCheking.AddSqlParamInput("@PassNew", SqlDbType.Char, user.Password);
+            command.Parameters.Add(param);
+            param = DBValueCheking.AddSqlParamInput("@Name", SqlDbType.Char, user.Name);
+            command.Parameters.Add(param);
             try
             {
                 connect.Open();
@@ -91,7 +88,7 @@ namespace Searching.DAL.Main
             SqlConnection connect = new SqlConnection(queryString);
             SqlCommand command = new SqlCommand(queryString, connect);
             command = DBValueCheking.CheckValue(command,"@Mail",user.Mail);
-            command = DBValueCheking.CheckValue(command, "@FIO",user.FIO);
+            command = DBValueCheking.CheckValue(command, "@Name",user.Name);
             command = DBValueCheking.CheckValue(command, "@Phone",user.Phone);
             command = DBValueCheking.CheckValue(command, "@Gender_user", user.Gender_user);
             command = DBValueCheking.CheckValue(command, "@Date_Bearthday", user.Date_Bearthday);

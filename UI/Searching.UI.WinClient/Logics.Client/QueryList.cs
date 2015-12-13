@@ -43,6 +43,13 @@ namespace Searching.UI.WinPhoneClient.Logics.Client
             List<Announcing> announcingForCategory = JsonConvert.DeserializeObject<List<Announcing>>(result);
             return result;
         }
+
+        public static async Task<Announcing> GetAnnouncingFull(string announcing_id)
+        {
+            var result = await AccessService.ServiceCalled("POST", "GetAnnouncingFull", announcing_id);
+            Announcing ann = JsonConvert.DeserializeObject<Announcing>(result);
+            return ann;
+        }
        
     }
 }

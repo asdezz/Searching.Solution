@@ -93,6 +93,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Storage\DBAdd.cs" />
+    <Compile Include="Storage\UserDataContext.cs" />
+    <Compile Include="ViewModels\YourAnnViewModel.cs" />
     <Compile Include="Views\MyAnnView.xaml.cs">
       <DependentUpon>MyAnnView.xaml</DependentUpon>
     </Compile>

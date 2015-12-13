@@ -32,10 +32,9 @@ namespace Searching.BE.Service
                 {
                     annonc.Announcing_id = int.Parse(row["Announcing_id"].ToString());
                     annonc.Name_Announcing = row["Name_Announcing"].ToString();
-                    annonc.Name_City = row["City_Name"].ToString();
-                    annonc.Info_Announcing = row["Info_Announcing"].ToString();
-                    annonc.FIO = row["FIO"].ToString();
-                    listAnnonc.Add(new Announcing() {Announcing_id=annonc.Announcing_id,Name_Announcing=annonc.Name_Announcing,Name_City =annonc.Name_City,Info_Announcing=annonc.Info_Announcing,FIO=annonc.FIO });
+                    annonc.UserName = row["Name"].ToString();
+                    annonc.UserLastName = row["LastName"].ToString();
+                    listAnnonc.Add(new Announcing() {Announcing_id=annonc.Announcing_id,Name_Announcing=annonc.Name_Announcing,UserLastName=annonc.UserLastName,UserName=annonc.UserName });
                 }
                 catch (Exception ex)
                 {
@@ -153,7 +152,7 @@ namespace Searching.BE.Service
             DataTable table = Profile.GetUser(User_id);
             foreach(DataRow row in table.Rows)
             {
-                _user.FIO = row["FIO"].ToString();
+                _user.Name = row["Name"].ToString();
                 _user.Country_id = int.Parse(row["Country_id"].ToString());
                 _user.Phone = byte.Parse(row["Phone"].ToString());
                 _user.User_id = int.Parse(row["User_id"].ToString());
@@ -210,7 +209,7 @@ namespace Searching.BE.Service
                 _user.User_id = int.Parse(row["User_id"].ToString());
                 _user.City_id = int.Parse(row["City_id"].ToString());
                 _user.Date_Bearthday = DateTime.Parse(row["Date_Bearthday"].ToString());
-                _user.FIO = row["FIO"].ToString();
+                _user.Name = row["name"].ToString();
                 _user.Gender_user = row["Gender_user"].ToString();
                 _user.Info = row["Info"].ToString();
                 _user.Mail = row["Mail"].ToString();
@@ -229,7 +228,7 @@ namespace Searching.BE.Service
                 _user.User_id = int.Parse(row["User_id"].ToString());
                 _user.City_id = int.Parse(row["City_id"].ToString());
                 _user.Date_Bearthday = DateTime.Parse(row["Date_Bearthday"].ToString());
-                _user.FIO = row["FIO"].ToString();
+                _user.Name = row["Name"].ToString();
                 _user.Gender_user = row["Gender_user"].ToString();
                 _user.Info = row["Info"].ToString();
                 _user.Mail = row["Mail"].ToString();
@@ -248,7 +247,7 @@ namespace Searching.BE.Service
                 _user.User_id = int.Parse(row["User_id"].ToString());
                 _user.City_id = int.Parse(row["City_id"].ToString());
                 _user.Date_Bearthday = DateTime.Parse(row["Date_Bearthday"].ToString());
-                _user.FIO = row["FIO"].ToString();
+                _user.Name = row["Name"].ToString();
                 _user.Gender_user = row["Gender_user"].ToString();
                 _user.Info = row["Info"].ToString();
                 _user.Mail = row["Mail"].ToString();
@@ -311,6 +310,25 @@ namespace Searching.BE.Service
             List<UserList> _users = new List<UserList>();
             DataTable table = FollowersFunction.FollowersList(_id);
             return _users;
+        }
+
+        public Announcing GetAnnouncingFull(string announcing_id)
+        {
+            int ann_id = int.Parse(announcing_id);
+            Announcing ann = new Announcing();
+            DataTable table = DAL.Main.AnnouncingFilter.GetAnnouncingFull(ann_id);
+            foreach(DataRow row in table.Rows)
+            {
+                ann.Announcing_id = int.Parse(row["Announcing_id"].ToString());
+                ann.Name_Announcing = row["Name_Announcing"].ToString();
+                ann.Phone_Announcing = int.Parse(row["Phone_Announcing"].ToString());
+                ann.Date_Announcing = DateTime.Parse(row["Date_Announcing"].ToString());
+                ann.UserName = row["Name"].ToString();
+                ann.UserLastName = row["LastName"].ToString();
+                ann.Name_City = row["City_Name"].ToString();
+                ann.Info_Announcing = row["Info_Announcing"].ToString();
+            }
+             return ann;
         }
     }
     

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Searching.UI.WinClient.ViewModels
 {
-    public class FilterViewModel: PropertyChangedBase
+    public class FilterViewModel: Screen
     {
         private AnnFilter _filter;
         private List<Country> _country;

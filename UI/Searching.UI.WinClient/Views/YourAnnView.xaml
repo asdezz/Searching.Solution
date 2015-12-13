@@ -15,7 +15,9 @@
     shell:SystemTray.IsVisible="True"
     xmlns:cal="http://www.caliburnproject.org"
     xmlns:caliburn="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
-    xmlns:Command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform">
+    xmlns:Command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+    caliburn:Message.Attach="[Event BackKeyPress] = [Action OnBackKeyPress($eventArgs)]">
+
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent" Margin="0,0,0,-102">
@@ -29,20 +31,20 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Margin="0,0,0,717" Grid.ColumnSpan="3" Orientation="Vertical">
-            <TextBlock x:Name="PageTitle" Text="This ann motherFucketr" Style="{StaticResource PhoneTextTitle1Style}" Height="49" VerticalAlignment="Bottom" FontSize="30" HorizontalAlignment="Center" Width="441" Margin="-212,0"/>
+            <TextBlock Text="{Binding NameAnn}" Style="{StaticResource PhoneTextTitle1Style}" Height="49" VerticalAlignment="Bottom" FontSize="30" HorizontalAlignment="Center" Width="441" Margin="-212,0"/>
         </StackPanel>
         <StackPanel Grid.ColumnSpan="2" Margin="0,85,1,454" Orientation="Horizontal">
-            <TextBlock Height="201" Width="484" />
+            <TextBlock  Text="{Binding InfoAnn}" Height="201" Width="472" HorizontalAlignment="Center" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" Height="142" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"  Width="457">
             <telerikPrimitives:RadMultiResolutionImage  VerticalAlignment="Center" Width="110"  Height="84"/>
-            <TextBlock Text="Name" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,58,0,57" Width="101"/>
-            <TextBlock Text="LastName" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,58,0,57" Width="118"/>
+            <TextBlock Text="{Binding TakeName}" VerticalAlignment="Center" HorizontalAlignment="Left"  Width="124" Height="45" Margin="0,49,0,48"/>
+            <TextBlock Text="{Binding TakeLastName}" VerticalAlignment="Center" Height="39"  Width="124" />
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.ColumnSpan="1" Grid.Column="1" Margin="0,460,0,0">
-        <Button Content="Выбрать"/>
-        <Button Content="Добавить в избранное"/>    
-            
+            <Button Content="Выбрать"/>
+            <Button Content="Добавить в избранное"/>
+
         </StackPanel>
 
 

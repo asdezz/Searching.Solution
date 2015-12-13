@@ -73,7 +73,7 @@
                         </Grid.ColumnDefinitions>
                         <Image Width="99" Height="99" Source="{Binding ImageThumbnailSource}"/>
                         <StackPanel Margin="12,-14,0,0" Grid.Column="1">
-                            <TextBlock x:Name="NameCategories" FontSize="{StaticResource PhoneFontSizeExtraLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Text="{Binding FIO}" TextWrapping="Wrap"/>
+                            <TextBlock x:Name="NameCategories" FontSize="{StaticResource PhoneFontSizeExtraLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Text="{Binding UserName}" TextWrapping="Wrap"/>
                             <TextBlock FontSize="{StaticResource PhoneFontSizeNormal}" Text="{Binding Name_Announcing}" TextWrapping="Wrap"/>
                         </StackPanel>
                     </Grid>
