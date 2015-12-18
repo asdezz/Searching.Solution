@@ -94,7 +94,7 @@
                         <StackPanel x:Name="CategoriesPanel" Tag="1" >
                             <Grid Height="97" Visibility="Visible" Name="CategoriesGrid">
                                 <telerikPrimitives:RadTextBox x:Name="radTextBox1" HorizontalAlignment="Left" Margin="0,-4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="329" Height="72"/>
-                                <Button x:Name="button1" Content="Фильтр" HorizontalAlignment="Left" Margin="329,-4,0,29" Width="127" RenderTransformOrigin="0.421,0.5" BorderBrush="{StaticResource PhoneBackgroundBrush}" Click="button1_Click">
+                                <Button x:Name="button1" Content="Фильтр" HorizontalAlignment="Left" Margin="329,-4,0,29" Width="127" RenderTransformOrigin="0.421,0.5" BorderBrush="{StaticResource PhoneBackgroundBrush}">
                                     <Button.Background>
                                         <SolidColorBrush Color="#FF0F89DE"/>
                                     </Button.Background>
@@ -107,7 +107,7 @@
                     			ItemsSource="{Binding }"
                     			IsCheckModeEnabled="True"	
                     			CheckBoxStyle="{StaticResource DataBoundListBoxCheckBoxStyle}"
-                    			ItemTemplate="{StaticResource DataBoundListBoxItemTemplate}" ItemTap="DataBoundListBox1_ItemTap" EmptyContent="" Margin="10,102,7,-459"/>
+                    			ItemTemplate="{StaticResource DataBoundListBoxItemTemplate}" EmptyContent="" Margin="10,102,7,-459"/>
                             </Grid>
                             <Grid Visibility="Collapsed" Name="AnnouncingGrid">
                                 <telerikPrimitives:RadDataBoundListBox x:Name="AnnouncingListBox" 

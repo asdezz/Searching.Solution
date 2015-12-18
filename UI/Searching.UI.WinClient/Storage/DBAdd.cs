@@ -18,7 +18,8 @@ namespace Searching.UI.WinClient.Storage
                 _user.City_id = _user.City_id;
                 _user.Country_id = user.Country_id;
                 _user.Date_Bearthday = user.Date_Bearthday;
-                _user.FIO = user.Name;
+                _user.Name = user.Name;
+                _user.LastName = user.LastName;
                 _user.Gender_user = user.Gender_user;
                 _user.Info = user.Info;
                 _user.Mail = user.Mail;

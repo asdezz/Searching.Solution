@@ -24,7 +24,7 @@ namespace Searching.UI.WinClient
             //string id = "1";
             //List<AreasOfCity> _areas = await QueryList.GetAreasOfCity(id);
             //_categories.ListCategories = await QueryList.GetCategories();
-            CategoriesListBox.ItemsSource = _categories.ListCategories;
+            //CategoriesListBox.ItemsSource = _categories.ListCategories;
             LoadIndicator.IsRunning = false;
 
         }

@@ -17,16 +17,16 @@
     <Grid Margin="0,0,0,-104">
 
         <!--LayoutRoot is the root grid where all page content is placed-->
-        <StackPanel Visibility="Collapsed">
-            <telerikPrimitives:RadTextBox Header="Логин:"  x:Name="radTextBox" HorizontalAlignment="Left" Margin="0,25,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="446"/>
-            <telerikPrimitives:RadPasswordBox HorizontalAlignment="Left"  VerticalAlignment="Top" Width="446" Header="Пароль:"/>
-            <Button x:Name="button" Content="Войти" HorizontalAlignment="Left" VerticalAlignment="Top" Width="446" FontWeight="Bold" Background="#FF01B3E8" Foreground="White" BorderBrush="{StaticResource PhoneBackgroundBrush}" Height="80"/>
+        <StackPanel Visibility="Visible">
+            <telerikPrimitives:RadTextBox Header="E-Mail:"  x:Name="TakeLogin" HorizontalAlignment="Left" Margin="0,25,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="446"/>
+            <telerikPrimitives:RadPasswordBox x:Name="TakePassword" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="446" Header="Пароль:"/>
+            <Button x:Name="Auth" Content="Войти" HorizontalAlignment="Left" VerticalAlignment="Top" Width="446" FontWeight="Bold" Background="#FF01B3E8" Foreground="White" BorderBrush="{StaticResource PhoneBackgroundBrush}" Height="80"/>
             <HyperlinkButton Content="Забыли пароль?" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FF0476A0" FontStretch="UltraCondensed"/>
-            <HyperlinkButton Content="Зарегистрируйтесь" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FF0476A0" FontStretch="UltraCondensed"/>
+            <HyperlinkButton x:Name="GoToRegistration" Content="Зарегистрируйтесь" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FF0476A0" FontStretch="UltraCondensed"/>
 
         </StackPanel>
 
-        <StackPanel>
+        <StackPanel Visibility="Collapsed">
 
             <Grid Height="282">
                 <telerikPrimitives:RadMultiResolutionImage HorizontalAlignment="Left" Height="132" VerticalAlignment="Top" Width="125" Margin="37,44,0,0" />

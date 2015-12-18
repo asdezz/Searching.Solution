@@ -10,9 +10,9 @@ using Microsoft.Phone.Shell;
 
 namespace Searching.UI.WinClient.Views
 {
-    public partial class RegistrationView : PhoneApplicationPage
+    public partial class FavoritesAnnView : PhoneApplicationPage
     {
-        public RegistrationView()
+        public FavoritesAnnView()
         {
             InitializeComponent();
         }

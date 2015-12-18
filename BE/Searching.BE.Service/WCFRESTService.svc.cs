@@ -200,42 +200,34 @@ namespace Searching.BE.Service
             return "Successed!";
         }
 
-        public UserList Registration(UserList user)
+        public ReturnValue Registration(UserList user)
         {
             UserList _user = new UserList();
-            DataTable table = Profile.PostRegistration(user);
-            foreach (DataRow row in table.Rows)
-            {
-                _user.User_id = int.Parse(row["User_id"].ToString());
-                _user.City_id = int.Parse(row["City_id"].ToString());
-                _user.Date_Bearthday = DateTime.Parse(row["Date_Bearthday"].ToString());
-                _user.Name = row["name"].ToString();
-                _user.Gender_user = row["Gender_user"].ToString();
-                _user.Info = row["Info"].ToString();
-                _user.Mail = row["Mail"].ToString();
-                _user.Password = row["Password"].ToString();
-                _user.Phone = byte.Parse(row["Phone"].ToString());
-            }
-            return user;
+            _user.City_id = 1;
+            _user.Country_id = 1;
+            var data = "12-10-22";
+            _user.Date_Bearthday =DateTime.Parse(data);
+            _user.Gender_user = "м";
+            _user.Info = "Маньяк";
+            _user.LastName = "Гитлер";
+            _user.Mail = "Cp5@mail1er.ru";
+            _user.Name = "Адольфик";
+            _user.Password = "Adolf123";
+            _user.Phone = 2;
+            _user.Type_login = 1;
+            var result = Profile.PostRegistration(_user);
+            
+            return result;
         }
 
-        public UserList Auth(UserList user)
+        public ReturnValue Auth(UserList user)
         {
             UserList _user = new UserList();
-            DataTable table = Profile.Auth(user);
-            foreach (DataRow row in table.Rows)
-            {
-                _user.User_id = int.Parse(row["User_id"].ToString());
-                _user.City_id = int.Parse(row["City_id"].ToString());
-                _user.Date_Bearthday = DateTime.Parse(row["Date_Bearthday"].ToString());
-                _user.Name = row["Name"].ToString();
-                _user.Gender_user = row["Gender_user"].ToString();
-                _user.Info = row["Info"].ToString();
-                _user.Mail = row["Mail"].ToString();
-                _user.Password = row["Password"].ToString();
-                _user.Phone = byte.Parse(row["Phone"].ToString());
-            }
-            return _user;
+            _user.Mail = "Cp5@mail1erda.ru";
+            _user.Password = "Adolf123";
+            ReturnValue result = Profile.Auth(_user);
+            
+            return result;
         }
 
         public UserList EditProfile(UserList user)

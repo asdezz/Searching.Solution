@@ -10,8 +10,6 @@ namespace Searching.UI.WinClient
    partial class MainPage
     {
         
-        FilterViewModel _filter = new FilterViewModel();
-        RetCategoriesViewModel _returnC = new RetCategoriesViewModel();
-        CategoriesViewModel _categories = new CategoriesViewModel();
+        
     }
 }

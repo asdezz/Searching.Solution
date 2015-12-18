@@ -16,19 +16,20 @@
     xmlns:cal="http://www.caliburnproject.org"
     xmlns:caliburn="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
     xmlns:Command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
-    xmlns:Interactivity="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     caliburn:Message.Attach="[Event BackKeyPress] = [Action OnBackKeyPress($eventArgs)]"
     >
-    <Interactivity:Interaction.Triggers>
-        <Interactivity:EventTrigger EventName="BackKeyPress">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="BackKeyPress">
             <caliburn:ActionMessage />
-        </Interactivity:EventTrigger>
-    </Interactivity:Interaction.Triggers>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     
         
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="Настройки"/>
                 <shell:ApplicationBarMenuItem Text="О приложении"/>
@@ -93,20 +94,23 @@
 
                     <telerikPrimitives:RadBusyIndicator x:Name="LoadIndicator"  AnimationStyle="AnimationStyle8" Foreground="#FF2D87D3" RenderTransformOrigin="0.496,0.295" Margin="0,171,0,-411" Content="Загрузка..." />
                     <telerikPrimitives:RadDataBoundListBox
-                                ItemsSource="{Binding ListCategories}"                          
-                                SelectedItem="{Binding ReturnCategories,Mode=TwoWay}"
+                                ItemsSource="{Binding ListCategories,Mode=TwoWay}"      
+                                
                     			IsCheckModeEnabled="True"	
                     			CheckBoxStyle="{StaticResource DataBoundListBoxCheckBoxStyle}"
-                    			ItemTemplate="{StaticResource DataBoundListBoxItemTemplate}"  EmptyContent="" Margin="10,102,7,-459"/>
+                    			ItemTemplate="{StaticResource DataBoundListBoxItemTemplate}"  EmptyContent="" Margin="10,102,7,-459" 
+                                caliburn:Message.Attach="[Event ItemTap]=[Action SelectedCategories($this.SelectedItem)]"/>
                 </Grid>
 
                 <Grid Visibility="Collapsed" Name="AnnouncingGrid">
-                    <telerikPrimitives:RadDataBoundListBox 
-                                       ItemsSource="{Binding ListAnnouncing}"
-                                       SelectedItem="{Binding GoToYourAnnView,Mode=TwoWay}"
+                    <telerikPrimitives:RadDataBoundListBox
+                                       ItemsSource="{Binding ListAnnouncing,Mode=TwoWay}"
+                                       
                                        ItemTemplate="{StaticResource DataBoundListBoxItemTemplateAnn}"
                                        Margin="0,0,-6,-561"
-                                       EmptyContent=""/>
+                                       EmptyContent=""
+                                       caliburn:Message.Attach="[Event ItemTap]=[Action SelectedAnnouncing($this.SelectedItem)]"/>
+                        
                 </Grid>
 
             </StackPanel>

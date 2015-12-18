@@ -16,10 +16,10 @@ namespace Searching.UI.WinPhoneClient.Logics.Client
             List<Categories> categories=JsonConvert.DeserializeObject<List<Categories>>(result);
             return categories;
         }
-        public static async Task<List<Announcing>> GetAnnouncingFilter(AnnFilter json)
+        public static async Task<List<Announcing>> GetAnnouncingFilter(AnnFilter _filter)
         {
-            
-            var result= await AccessService.ServiceCalledWithJson("GetAnnouncingFilter",json);
+            var param = JsonConvert.SerializeObject(new { filter = _filter });
+            var result= await AccessService.ServiceCalled("POST", "GetAnnouncingFilter", param);
             List<Announcing> announcingForCategory = JsonConvert.DeserializeObject<List<Announcing>>(result);
             return announcingForCategory;
         }
@@ -50,6 +50,27 @@ namespace Searching.UI.WinPhoneClient.Logics.Client
             Announcing ann = JsonConvert.DeserializeObject<Announcing>(result);
             return ann;
         }
-       
+        public static async Task<ReturnValue> Registration(UserList _user)
+        {
+            var param = JsonConvert.SerializeObject(new { user = _user });
+            var result = await AccessService.ServiceCalled("POST", "Registration", param);
+            ReturnValue returnV = JsonConvert.DeserializeObject<ReturnValue>(result);
+            return returnV;
+        }
+        public static async Task<ReturnValue> Auth(UserList _user)
+        {
+            var param = JsonConvert.SerializeObject(new { user = _user });
+            var result = await AccessService.ServiceCalled("POST", "Auth", param);
+            ReturnValue returnV = JsonConvert.DeserializeObject<ReturnValue>(result);
+            return returnV;
+        }
+
+        public static async Task<UserList> GetUser(int _user)
+        {
+            var param = JsonConvert.SerializeObject(new { user_id = _user });
+            var result = await AccessService.ServiceCalled("POST", "GetUser", param);
+            UserList _rUser = JsonConvert.DeserializeObject<UserList>(result);
+            return _rUser;
+        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Searching.UI.WinClient.Forms;
-using Searching.UI.WinClient.Views;
+﻿using Searching.UI.WinClient.Views;
 using SearchingLibrary;
 using System;
 using System.Collections.Generic;

@@ -34,12 +34,12 @@ namespace Searching.DAL.Main
             return param;
         }
 
-        public static SqlParameter AddSqlParamOutput(string paramName,SqlDbType type,object value)
+        public static SqlParameter AddSqlParamOutput(string paramName,SqlDbType type,int size)
         {
             SqlParameter param = new SqlParameter();
             param.ParameterName = paramName;
             param.SqlDbType = type;
-            param.Value = value;
+            param.Size =size ;
             param.Direction = ParameterDirection.Output;
             return param;
         }

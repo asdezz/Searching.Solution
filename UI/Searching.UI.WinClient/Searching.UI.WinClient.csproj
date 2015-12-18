@@ -95,7 +95,12 @@
     </Compile>
     <Compile Include="Storage\DBAdd.cs" />
     <Compile Include="Storage\UserDataContext.cs" />
+    <Compile Include="ViewModels\FavoritesAnnViewModel.cs" />
+    <Compile Include="ViewModels\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\YourAnnViewModel.cs" />
+    <Compile Include="Views\FavoritesAnnView.xaml.cs">
+      <DependentUpon>FavoritesAnnView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MyAnnView.xaml.cs">
       <DependentUpon>MyAnnView.xaml</DependentUpon>
     </Compile>
@@ -105,28 +110,15 @@
     <Compile Include="Views\PostAnnView.xaml.cs">
       <DependentUpon>PostAnnView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\RegistrationView.xaml.cs">
-      <DependentUpon>RegistrationView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Helper\Bootstrapper.cs" />
     <Compile Include="Common\AuthFormFunct.cs" />
     <Compile Include="Common\FilterFunction.cs" />
-    <Compile Include="Common\ListFormFunct.cs" />
     <Compile Include="Common\MyListDataSelector.cs" />
     <Compile Include="Common\PageFunction.cs" />
     <Compile Include="Common\PassingParam.cs" />
-    <Compile Include="Forms\ChatForm.xaml.cs">
-      <DependentUpon>ChatForm.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Commands\DataFormCommitCommand.cs" />
     <Compile Include="Views\FilterView.xaml.cs">
       <DependentUpon>FilterView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Helpers\IdToPictureConverter.cs" />
-    <Compile Include="Forms\Helpers\MessageGroupTemplateSelector.cs" />
-    <Compile Include="Forms\Helpers\MessageItemTemplateSelector.cs" />
-    <Compile Include="Forms\Models\SignUpExtendedDataModel.cs" />
-    <Compile Include="Forms\ViewModels\MessagesViewModel.cs" />
     <Compile Include="Helper\SwapStatus.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Logics.Client\AccessService.cs" />
@@ -142,17 +134,18 @@
     </Compile>
     <Compile Include="Storage\AppStorage.cs" />
     <Compile Include="ViewModels\AnnouncingViewModel.cs" />
-    <Compile Include="ViewModels\CategoriesViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\SearchingViewModel.cs" />
     <Compile Include="ViewModels\FilterViewModel.cs" />
-    <Compile Include="ViewModels\RetCategoriesViewModel.cs" />
     <Compile Include="Helper\Mainpage_param.cs" />
     <Compile Include="Views\AnnouncingView.xaml.cs">
       <DependentUpon>AnnouncingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProfileView.xaml.cs">
       <DependentUpon>ProfileView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegistrationView.xaml.cs">
+      <DependentUpon>RegistrationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchingView.xaml.cs">
       <DependentUpon>SearchingView.xaml</DependentUpon>
@@ -189,8 +182,8 @@
     <Content Include="Assets\Tiles\IconicTileSmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Forms\Images\FrameThumbnail.png" />
-    <Content Include="Forms\Images\SendIcon.png" />
+    <Content Include="Images\DateTimePickerCancel.png" />
+    <Content Include="Images\DateTimePickerOk.png" />
     <Content Include="Templates.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -297,7 +290,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Forms\ChatForm.xaml">
+    <Page Include="Views\FavoritesAnnView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -310,10 +303,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PostAnnView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\RegistrationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -330,6 +319,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ProfileView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RegistrationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -354,7 +347,9 @@
       <Name>Searching.Shared.ModelClasses</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Forms\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

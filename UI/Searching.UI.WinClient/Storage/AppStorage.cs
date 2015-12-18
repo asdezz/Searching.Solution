@@ -18,7 +18,9 @@ namespace Searching.UI.WinClient.Storage
         [Column]
         public string Mail { get; set; }
         [Column]
-        public string FIO { get; set; }
+        public string Name { get; set; }
+        [Column]
+        public string LastName { get; set; }
         [Column]
         public byte Phone { get; set; }
         [Column]
