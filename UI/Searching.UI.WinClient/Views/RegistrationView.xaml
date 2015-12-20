@@ -14,16 +14,19 @@
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True"
     xmlns:cal="http://www.caliburnproject.org"
+    xmlns:bab="clr-namespace:Caliburn.Micro.BindableAppBar;assembly=Caliburn.Micro.BindableAppBar"
     xmlns:caliburn="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
     xmlns:Command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:Interactivity="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity">
 
-    <phone:PhoneApplicationPage.ApplicationBar>
+    <!--<phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton x:Name="Registration" IconUri="/Images/DateTimePickerOk.png" Text="Ok"/>
         </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>-->
+
+
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent" Margin="0,-64,0,-100">
         <Grid.ColumnDefinitions>
@@ -31,7 +34,17 @@
             <ColumnDefinition Width="461*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock x:Name="PageTitle" Text="Регистрация" Margin="0,0,0,759" Style="{StaticResource PhoneTextTitle1Style}" Grid.ColumnSpan="2" Height="53" VerticalAlignment="Bottom" FontSize="40" Grid.Column="1"/>
+        <bab:BindableAppBar Grid.ColumnSpan="2" Margin="0,668,8,0" x:Name="AppBar">
+            <bab:BindableAppBarButton x:Name="Registration" 
+                                  Text="Ok" 
+                                  IconUri="/Images/DateTimePickerOk.png"
+                                  Visibility="Visible" Height="168" RenderTransformOrigin="0.5,0.5">
+                <bab:BindableAppBarButton.RenderTransform>
+                    <CompositeTransform ScaleY="-1"/>
+                </bab:BindableAppBarButton.RenderTransform>
+            </bab:BindableAppBarButton>
+        </bab:BindableAppBar>
+        <TextBlock x:Name="PageTitle" Text="Регистрация" Margin="0,0,0,813" Style="{StaticResource PhoneTextTitle1Style}" Grid.ColumnSpan="2" Height="59" VerticalAlignment="Bottom" FontSize="40" Grid.Column="1"/>
         <StackPanel Grid.ColumnSpan="2" Margin="14,125,1,0">
             <telerikPrimitives:RadTextBox x:Name="TakeMail"  Header="E-Mail:"/>
             <telerikPrimitives:RadPasswordBox x:Name="TakePass"  Header="Пароль:" Margin="2,0,-2,0"/>

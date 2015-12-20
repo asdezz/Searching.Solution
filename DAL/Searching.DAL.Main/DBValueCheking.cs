@@ -43,5 +43,6 @@ namespace Searching.DAL.Main
             param.Direction = ParameterDirection.Output;
             return param;
         }
+        
     }
 }

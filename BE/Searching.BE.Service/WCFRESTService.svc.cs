@@ -145,16 +145,16 @@ namespace Searching.BE.Service
             
         }
         
-        public UserList GetUser(int User_id)
+        public UserList GetForeignUser(int User_id)
         {
             UserList _user = new UserList();
             List<UserList> _users = new List<UserList>(); 
-            DataTable table = Profile.GetUser(User_id);
+            DataTable table = Profile.GetForeignUser(User_id);
             foreach(DataRow row in table.Rows)
             {
                 _user.Name = row["Name"].ToString();
                 _user.Country_id = int.Parse(row["Country_id"].ToString());
-                _user.Phone = byte.Parse(row["Phone"].ToString());
+                _user.Phone = (row["Phone"].ToString());
                 _user.User_id = int.Parse(row["User_id"].ToString());
                 _user.Gender_user = row["Gender_user"].ToString();
                 _user.Date_Bearthday = DateTime.Parse(row["Date_Bearthday"].ToString());
@@ -213,9 +213,9 @@ namespace Searching.BE.Service
             _user.Mail = "Cp5@mail1er.ru";
             _user.Name = "Адольфик";
             _user.Password = "Adolf123";
-            _user.Phone = 2;
+            _user.Phone = "2";
             _user.Type_login = 1;
-            var result = Profile.PostRegistration(_user);
+            var result = Profile.PostRegistration(user);
             
             return result;
         }
@@ -225,7 +225,7 @@ namespace Searching.BE.Service
             UserList _user = new UserList();
             _user.Mail = "Cp5@mail1erda.ru";
             _user.Password = "Adolf123";
-            ReturnValue result = Profile.Auth(_user);
+            ReturnValue result = Profile.Auth(user);
             
             return result;
         }
@@ -244,7 +244,7 @@ namespace Searching.BE.Service
                 _user.Info = row["Info"].ToString();
                 _user.Mail = row["Mail"].ToString();
                 _user.Password = row["Password"].ToString();
-                _user.Phone = byte.Parse(row["Phone"].ToString());
+                _user.Phone = (row["Phone"].ToString());
             }
             return _user;
         }
@@ -321,6 +321,40 @@ namespace Searching.BE.Service
                 ann.Info_Announcing = row["Info_Announcing"].ToString();
             }
              return ann;
+        }
+
+        public UserList GetMyUser(string mail)
+        {
+            UserList _user = new UserList();
+            DataTable table = DAL.Main.Profile.GetMyUser(mail);
+            foreach(DataRow row in table.Rows)
+            {
+                _user.User_id = int.Parse(row["User_id"].ToString());
+                _user.Name = row["Name"].ToString();
+                _user.LastName = row["LastName"].ToString();
+                if (row["City_id"] !=DBNull.Value)
+                {
+                    _user.City_id = int.Parse(row["City_id"].ToString());
+                }
+                if (row["Date_Bearthday"] != DBNull.Value)
+                {
+                    _user.Date_Bearthday = DateTime.Parse(row["Date_Bearthday"].ToString());
+                }
+                if (row["Gender_user"] != DBNull.Value)
+                {
+                    _user.Gender_user = row["Gender_user"].ToString();
+                }
+                if (row["Info"] != DBNull.Value)
+                {
+                    _user.Info = row["Info"].ToString();
+                }
+                _user.Mail = row["Mail"].ToString();
+                if (row["Phone"] != DBNull.Value)
+                {
+                    _user.Phone = (row["Phone"].ToString());
+                }
+            }
+            return _user;
         }
     }
     

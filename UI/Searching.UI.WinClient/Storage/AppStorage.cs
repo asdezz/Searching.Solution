@@ -13,7 +13,9 @@ namespace Searching.UI.WinClient.Storage
     [Table]
     public class LUsers
     {
-        [Column(IsDbGenerated =true,IsPrimaryKey =true)]
+        [Column(IsDbGenerated = true, IsPrimaryKey =true)]
+        public int ID { get; set; }
+        [Column]
         public int User_id { get; set; }
         [Column]
         public string Mail { get; set; }
@@ -22,7 +24,7 @@ namespace Searching.UI.WinClient.Storage
         [Column]
         public string LastName { get; set; }
         [Column]
-        public byte Phone { get; set; }
+        public string Phone { get; set; }
         [Column]
         public string Gender_user { get; set; }
         [Column]

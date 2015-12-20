@@ -93,7 +93,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Storage\DBAdd.cs" />
+    <Compile Include="Storage\DBUser.cs" />
     <Compile Include="Storage\UserDataContext.cs" />
     <Compile Include="ViewModels\FavoritesAnnViewModel.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />

@@ -48,8 +48,12 @@ namespace Searching.BE.Service
         List<Announcing> GetSelectedAnnouncing(int User_id);
 
         [OperationContract]
-        [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        UserList GetUser(int User_id);
+        [WebInvoke(Method ="POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,UriTemplate ="GetForeignUser",BodyStyle =WebMessageBodyStyle.WrappedRequest)]
+        UserList GetForeignUser(int User_id);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetMyUser",BodyStyle =WebMessageBodyStyle.WrappedRequest)]
+        UserList GetMyUser(string mail);
 
         [OperationContract]
         [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
@@ -60,11 +64,11 @@ namespace Searching.BE.Service
         string TestFunction();
 
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/Registration/")]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest, UriTemplate = "Registration")]
         ReturnValue Registration(UserList user);
 
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/Auth/")]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest, UriTemplate = "Auth")]
         ReturnValue Auth(UserList user);
 
         [OperationContract]

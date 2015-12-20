@@ -13,7 +13,7 @@ namespace Searching.DAL.Main
    public  static class Profile
     {
         //Класс, в котором функции связанны с пользователем
-        public static DataTable GetUser(int User_id)
+        public static DataTable GetForeignUser(int User_id)
         {
             string connectString = SqlAccess.GetConnectionString();
             string queryString = "SELECT * FROM User WHERE User_id = @User_id";
@@ -23,6 +23,31 @@ namespace Searching.DAL.Main
             command.Parameters["@User_id"].Value = User_id;
             command.ExecuteNonQuery();
             DataTable table = SqlAccess.CreateQuery(command, "GetUserList");
+            return table;
+        }
+
+        public static DataTable GetMyUser(string Mail)
+        {
+            string connectString = SqlAccess.GetConnectionString();
+            string queryString = "SELECT * FROM UserList u WHERE u.Mail=@Mail";
+            SqlConnection connect = new SqlConnection(connectString);
+            SqlCommand command = new SqlCommand(queryString, connect);
+            command = DBValueCheking.AddValue(command, "@Mail", Mail);
+            try
+            {
+                connect.Open();
+                command.ExecuteNonQuery();
+            }
+            catch(Exception ex)
+            {
+                command.Cancel();
+                Logger.CreateLog(ex);
+            }
+            finally
+            {
+                connect.Close();
+            }
+            DataTable table = SqlAccess.CreateQuery(command, "MyUser");
             return table;
         }
         public static ReturnValue PostRegistration(UserList user)

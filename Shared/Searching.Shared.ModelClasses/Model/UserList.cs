@@ -28,7 +28,7 @@ namespace SearchingLibrary
         public string Mail { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
-        public byte Phone { get; set; }
+        public string Phone { get; set; }
         public string Gender_user { get; set; }
         public DateTime? Date_Bearthday { get; set; }
         public string Password { get; set; }

@@ -67,10 +67,14 @@ namespace Searching.UI.WinClient.ViewModels
         }
         public async void Auth()
         {
+            var list = Storage.DBUser.GetAllUsers();
             value = await QueryList.Auth(User);
             if (value.Code == true)
-                User = await QueryList.GetUser(User.User_id);
-
+            {
+                Storage.DBUser.AddUser(User); 
+                User = await QueryList.GetMyUser(User.Mail);
+                Storage.DBUser.UpdateUser(User);
+            }
         }
     }
 }
