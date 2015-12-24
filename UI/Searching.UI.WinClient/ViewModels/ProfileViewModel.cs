@@ -1,5 +1,5 @@
 ﻿using Caliburn.Micro;
-using Searching.UI.WinPhoneClient.Logics.Client;
+using Searching.AL.Transport;
 using SearchingLibrary;
 using System;
 using System.Collections.Generic;
@@ -11,6 +11,7 @@ namespace Searching.UI.WinClient.ViewModels
 {
    public class ProfileViewModel:Screen
     {
+        ITransport transport = new Transport();
         INavigationService navigationService;
        private UserList _user = new UserList();
        private ReturnValue value = new ReturnValue();
@@ -65,16 +66,12 @@ namespace Searching.UI.WinClient.ViewModels
                 NotifyOfPropertyChange(() => User);
             }
         }
-        public async void Auth()
-        {
-            var list = Storage.DBUser.GetAllUsers();
-            value = await QueryList.Auth(User);
-            if (value.Code == true)
+            public async void Auth()
             {
-                Storage.DBUser.AddUser(User); 
-                User = await QueryList.GetMyUser(User.Mail);
-                Storage.DBUser.UpdateUser(User);
+                value = await transport.Auth(User);
+                if(value.Code==true)
+                User = await transport.GetMyUser(User.Mail);
             }
         }
     }
-}
+

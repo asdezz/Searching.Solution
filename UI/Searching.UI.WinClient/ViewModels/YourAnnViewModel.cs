@@ -1,5 +1,5 @@
 ﻿using Caliburn.Micro;
-using Searching.UI.WinPhoneClient.Logics.Client;
+using Searching.AL.Transport;
 using SearchingLibrary;
 using System;
 using System.Collections.Generic;
@@ -12,6 +12,7 @@ namespace Searching.UI.WinClient.ViewModels
 {
    public class YourAnnViewModel:Screen
     {
+        ITransport transport = new Transport();
         private readonly INavigationService navigationService;
         public Announcing _ann;
         public YourAnnViewModel(INavigationService navigationService)
@@ -100,7 +101,7 @@ namespace Searching.UI.WinClient.ViewModels
         
         protected override async void OnActivate()
         {
-            TakeAnn = await QueryList.GetAnnouncingFull(_ann.Announcing_id.ToString());
+            TakeAnn = await transport.GetAnnouncingFull(_ann.Announcing_id.ToString());
             
         }
         protected override void OnDeactivate(bool close)
