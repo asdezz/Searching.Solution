@@ -47,6 +47,7 @@
         <TextBlock x:Name="PageTitle" Text="Регистрация" Margin="0,0,0,813" Style="{StaticResource PhoneTextTitle1Style}" Grid.ColumnSpan="2" Height="59" VerticalAlignment="Bottom" FontSize="40" Grid.Column="1"/>
         <StackPanel Grid.ColumnSpan="2" Margin="14,125,1,0">
             <telerikPrimitives:RadTextBox x:Name="TakeMail"  Header="E-Mail:"/>
+            <TextBlock x:Name="Eror" Text="Error!!" Visibility="Collapsed"/>
             <telerikPrimitives:RadPasswordBox x:Name="TakePass"  Header="Пароль:" Margin="2,0,-2,0"/>
             <telerikPrimitives:RadPasswordBox x:Name="CheckPass"  Header="Введите повторно пароль:"/>
             <telerikPrimitives:RadTextBox x:Name="TakeName"  Header="Имя:"/>

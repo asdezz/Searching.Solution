@@ -11,6 +11,9 @@ namespace Searching.UI.WinClient.ViewModels
 {
    public class ProfileViewModel:Screen
     {
+        bool _authPanel = true;
+        bool _profilePanel = false;
+        int user_age=0;
         ITransport transport = new Transport();
         INavigationService navigationService;
        private UserList _user = new UserList();
@@ -38,6 +41,8 @@ namespace Searching.UI.WinClient.ViewModels
                 _user = value;
                 NotifyOfPropertyChange(() => TakeLogin);
                 NotifyOfPropertyChange(() => TakePassword);
+                NotifyOfPropertyChange(() => MyLastName);
+                NotifyOfPropertyChange(() => MyName);
             }
         }
         public string TakeLogin
@@ -66,12 +71,91 @@ namespace Searching.UI.WinClient.ViewModels
                 NotifyOfPropertyChange(() => User);
             }
         }
-            public async void Auth()
+
+        public string MyName
+        {
+            get
             {
+                return _user.Name;
+            }
+            set
+            {
+                _user.Name = value;
+                NotifyOfPropertyChange(() => MyName);
+            }
+        }
+        public string MyLastName
+        {
+            get
+            {
+                return _user.LastName;
+            }
+            set
+            {
+                _user.LastName = value;
+                NotifyOfPropertyChange(() => MyLastName);
+            }
+        }
+        public int MyAge
+        {
+            get
+            {
+                return user_age;
+            }
+            set
+            {
+                user_age = value;
+                NotifyOfPropertyChange(() => MyAge);
+            }
+        }
+        int GetAgeByBirthdate(DateTime DateOfBirth)
+        {
+            return (int)(DateTime.Now - DateOfBirth).TotalDays / 365;
+        }
+
+        public bool AuthPanel
+        {
+            get
+            {
+                return _authPanel;
+            }
+            set
+            {
+                _authPanel = value;
+                NotifyOfPropertyChange(() => AuthPanel);
+            }
+        }
+        public bool ProfilePanel
+        {
+            get
+            {
+                return _profilePanel;
+            }
+            set
+            {
+                _profilePanel = value;
+                NotifyOfPropertyChange(() => ProfilePanel);
+            }
+        }
+
+        public async void Auth()
+      {
                 value = await transport.Auth(User);
                 if(value.Code==true)
+            { 
                 User = await transport.GetMyUser(User.Mail);
-            }
+            if (User.Date_Bearthday.HasValue)
+                 { 
+                DateTime date =DateTime.Parse((User.Date_Bearthday).ToString());
+               MyAge= GetAgeByBirthdate(date);
+                NotifyOfPropertyChange(() => MyAge);
+                 }
+                AuthPanel = Helper.SwapStatus.swapVisible(AuthPanel);
+                ProfilePanel = Helper.SwapStatus.swapVisible(ProfilePanel);
+                
+            }    
+                
+        }
         }
     }
 

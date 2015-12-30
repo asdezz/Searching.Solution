@@ -17,7 +17,7 @@
     <Grid Margin="0,0,0,-104">
 
         <!--LayoutRoot is the root grid where all page content is placed-->
-        <StackPanel Visibility="Visible">
+        <StackPanel x:Name="AuthPanel" Visibility="Collapsed">
             <telerikPrimitives:RadTextBox Header="E-Mail:"  x:Name="TakeLogin" HorizontalAlignment="Left" Margin="0,25,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="446"/>
             <telerikPrimitives:RadPasswordBox x:Name="TakePassword" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="446" Header="Пароль:"/>
             <Button x:Name="Auth" Content="Войти" HorizontalAlignment="Left" VerticalAlignment="Top" Width="446" FontWeight="Bold" Background="#FF01B3E8" Foreground="White" BorderBrush="{StaticResource PhoneBackgroundBrush}" Height="80"/>
@@ -26,25 +26,25 @@
 
         </StackPanel>
 
-        <StackPanel Visibility="Collapsed">
+        <StackPanel x:Name="ProfilePanel" Visibility="Visible">
 
             <Grid Height="282">
                 <telerikPrimitives:RadMultiResolutionImage HorizontalAlignment="Left" Height="132" VerticalAlignment="Top" Width="125" Margin="37,44,0,0" />
-                <TextBlock x:Name="textBlock2" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Имя" VerticalAlignment="Center" Height="50" Width="100" Margin="224,94,156,138" />
-                <TextBlock x:Name="textBlock3" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Фамилия" VerticalAlignment="Center" Height="50" Width="100" Margin="224,39,156,193" RenderTransformOrigin="0.468,1.368"/>
-                <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="224,149,0,106" TextWrapping="Wrap" Text="Возвраст" VerticalAlignment="Center" RenderTransformOrigin="0.581,-0.085"/>
+                <TextBlock Text="{Binding MyName}" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Height="50" Width="237" Margin="224,94,0,138" />
+                <TextBlock Text="{Binding MyLastName}" HorizontalAlignment="Left"  TextWrapping="Wrap" VerticalAlignment="Center" Height="50" Width="226" Margin="224,39,0,193" RenderTransformOrigin="0.468,1.368"/>
+                <TextBlock Text="{Binding MyAge}" Width="218" Height="40" HorizontalAlignment="Left" Margin="224,143,0,99" TextWrapping="Wrap" VerticalAlignment="Center" RenderTransformOrigin="0.581,-0.085"/>
 
             </Grid>
             <ScrollViewer Width="Auto" VerticalScrollBarVisibility="Visible"  Margin="0,-10,0,-220" Height="683" RenderTransformOrigin="0.5,0.5">
                 <ScrollViewer.Content>
-                <StackPanel Orientation="Vertical" Height="779">
-                    <Button x:Name="button2" Content="Мои Объявления"  VerticalAlignment="Top"/>
-                    <Button x:Name="button3" Content="Подать объявления"  VerticalAlignment="Top"/>
-                    <Button x:Name="button4" Content="Редактирования профиля"  VerticalAlignment="Top"/>
-                    <Button x:Name="button5" Content="Выбранные объявления"  VerticalAlignment="Top"/>
-                    <Button x:Name="button6" Content="Мои подписчики"  VerticalAlignment="Top"/>
-                    <Button x:Name="button7" Content="Выход из аккаунта"  VerticalAlignment="Top"/>
-                </StackPanel>
+                    <StackPanel Orientation="Vertical" Height="779">
+                        <Button x:Name="button2" Content="Мои Объявления"  VerticalAlignment="Top"/>
+                        <Button x:Name="button3" Content="Подать объявления"  VerticalAlignment="Top"/>
+                        <Button x:Name="button4" Content="Редактирования профиля"  VerticalAlignment="Top"/>
+                        <Button x:Name="button5" Content="Выбранные объявления"  VerticalAlignment="Top"/>
+                        <Button x:Name="button6" Content="Мои подписчики"  VerticalAlignment="Top"/>
+                        <Button x:Name="button7" Content="Выход из аккаунта"  VerticalAlignment="Top"/>
+                    </StackPanel>
                 </ScrollViewer.Content>
             </ScrollViewer>
 

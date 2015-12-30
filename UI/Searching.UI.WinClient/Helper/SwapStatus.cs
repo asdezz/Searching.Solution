@@ -9,7 +9,7 @@ namespace Searching.UI.WinClient.Helper
 {
    public  class SwapStatus: PropertyChangedBase
     {
-        public static bool swapRun(bool status)
+        public static bool swapVisible(bool status)
         {
             if (status == true) status = false;
             else status = true;
