@@ -6,7 +6,7 @@ namespace SearchingLibrary
     using System.Collections.Generic;
   public  class AnnFilter
     {
-        public int Category_id { get; set; }
+        public int? Category_id { get; set; }
         public int? Country_id { get; set; }
         public int? City_id { get; set; }
         public int? Areas_id { get; set; }
@@ -16,5 +16,7 @@ namespace SearchingLibrary
         public DateTime? MaxDateBirthday { get; set; }
         public bool? Popular { get; set; }
         public bool? DateSort { get; set; }
+        public int nPage { get; set; }
+        public int sizePage { get; set; }
     }
 }

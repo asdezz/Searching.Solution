@@ -12,88 +12,95 @@ using System.Text;
 namespace Searching.BE.Service
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IWCFRESTService" in both code and config file together.
-    [ServiceContract]
+    [ServiceContract(Namespace = "Searching.BE.Service")]
     public interface IWCFRESTService
     {
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,UriTemplate ="GetCityForCountry")]
+        //Возвращает список городов по заданной стране
         List<Cities> GetCityForCountry(int country_id);
 
         [OperationContract]
         [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,UriTemplate ="GetCountryList")]
+        //Возвращает список Стран
         List<Country> GetCountryList();
 
         [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json,UriTemplate ="GetCategories")]
+        //Возвращает список категорий для объявлений
         List<Categories> GetCategories();
 
         [OperationContract]
-        [WebInvoke(UriTemplate = "GetAnnouncingFilter", Method = "POST",ResponseFormat =WebMessageFormat.Json,BodyStyle =WebMessageBodyStyle.WrappedRequest,RequestFormat =WebMessageFormat.Json)]
+        [WebInvoke(UriTemplate = "GetAnnouncingFilter", Method = "POST", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json)]
+        //Возвращает список объявлений по заданным фильтрам
         List<Announcing> GetAnnouncingFilter(AnnFilter filter);
 
         [OperationContract]
-        [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        string GetAnnouncing();
-
-        [OperationContract]
         [WebInvoke(Method="POST",RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,UriTemplate ="GetAreasOfCity")]
+        //Возвращает список районов по заданому городу 
         List<AreasOfCity> GetAreasOfCity(int City_id);
 
         [OperationContract]
         [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        //Возвращает список подписанных объявлений пользователя
         List<Announcing> GetFavoriteAnnuncing(int User_id);
 
         [OperationContract]
         [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        //Возвращает список выбранных объявлений пользователя
         List<Announcing> GetSelectedAnnouncing(int User_id);
 
         [OperationContract]
         [WebInvoke(Method ="POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,UriTemplate ="GetForeignUser",BodyStyle =WebMessageBodyStyle.WrappedRequest)]
+        //Возвращает иформацию по выбранному пользователю
         UserList GetForeignUser(int User_id);
 
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetMyUser",BodyStyle =WebMessageBodyStyle.WrappedRequest)]
+        //Возвращает информацию о собственном аккаунте
         UserList GetMyUser(string mail);
 
         [OperationContract]
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-        List<Announcing> GetAnnouncingForCategory(string category_id);
-
-        [OperationContract]
-        [WebInvoke(UriTemplate ="TestFunction", Method = "GET",ResponseFormat =WebMessageFormat.Json,RequestFormat =WebMessageFormat.Json,BodyStyle =WebMessageBodyStyle.WrappedRequest)]
-        string TestFunction();
+        [WebInvoke(UriTemplate ="TestFunction", Method = "POST",ResponseFormat =WebMessageFormat.Json,RequestFormat =WebMessageFormat.Json,BodyStyle =WebMessageBodyStyle.WrappedRequest)]
+        string TestFunction(AnnFilter filter);
 
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest, UriTemplate = "Registration")]
+        //Регистрирует пользователя (возвращает true or false)
         ReturnValue Registration(UserList user);
 
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest, UriTemplate = "Auth")]
+        //Аутентификация пользователя (возвращает true or false)
         ReturnValue Auth(UserList user);
 
         [OperationContract]
         [WebInvoke(Method = "PUT", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/EditProfile/")]
+        //Изменяет профиль выбранного пользователя 
         UserList EditProfile(UserList user);
 
         [OperationContract]
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAnnoncing/", BodyStyle = WebMessageBodyStyle.Wrapped)]
-        void AddAnnouncing(Announcing ann);
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, UriTemplate = "AddAnnouncing", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        //Добавляет объявление 
+        ReturnValue AddAnnouncing(Announcing ann);
 
         [OperationContract]
         [WebInvoke(Method = "PUT", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/EditAnnouncing/", BodyStyle = WebMessageBodyStyle.Wrapped)]
+        //изменение объявления
         void EditAnnouncing(Announcing ann);
 
         [OperationContract]
         [WebInvoke(Method = "DELETE", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/DeleteAnnouncing/", BodyStyle = WebMessageBodyStyle.Wrapped)]
+        //Удаляеет объявления
         void DeleteAnnouncing(string Announcing_id);
 
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/AddToSelected/")]
-        void AddToSelected(Selected_Announcing ann);
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest, UriTemplate = "AddToSelected")]
+        ReturnValue AddToSelected(Selected_Announcing ann);
 
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/AddToFavorite/")]
-        void AddToFavorite(Favorite_Announcing ann);
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest, UriTemplate = "AddToFavorite")]
+        ReturnValue AddToFavorite(Favorite_Announcing ann);
 
         [OperationContract]
         [WebInvoke(Method = "DELETE", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/DeleteSelectedAnnouncing")]
@@ -118,6 +125,16 @@ namespace Searching.BE.Service
         [OperationContract]
         [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, UriTemplate = "GetAnnouncingFull")]
         Announcing GetAnnouncingFull(string announcing_id);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        ReturnValue AddMessage(Messages message);
+
+        //[OperationContract(AsyncPattern = true)]
+        //[WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        //IAsyncResult BeginMessage(TestClass asyncBegin);
+
+        //WCFRESTService EndMessage(IAsyncResult result);
     }
 
 }

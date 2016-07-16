@@ -13,15 +13,23 @@ using System.Web.Script.Serialization;
 using SearchingLibrary;
 using System.IO;
 using System.ServiceModel.Web;
-
+using System.ServiceModel.Activation;
+using System.ServiceModel.Description;
+using System.Net;
 
 namespace Searching.BE.Service
 {
+    [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
+    [ServiceBehavior(
+    InstanceContextMode = InstanceContextMode.PerCall,
+    ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class WCFRESTService : IWCFRESTService
     {
         
         public List<Announcing> GetAnnouncingFilter(AnnFilter filter)
         {
+            var jsn = JsonConvert.SerializeObject(filter);
+            Logger.WriteToFile_Json(jsn);
             List < Announcing > listAnnonc = new List<Announcing>();
             Announcing annonc = new Announcing();
             DataTable table = new DataTable();
@@ -30,11 +38,14 @@ namespace Searching.BE.Service
             {
                 try
                 {
+                    annonc.Info_Announcing = row["Info_Announcing"].ToString();
+                    annonc.Date_Announcing=DateTime.Parse(row["Date_Announcing"].ToString());
                     annonc.Announcing_id = int.Parse(row["Announcing_id"].ToString());
+                    annonc.User_id = int.Parse(row["User_id"].ToString());
                     annonc.Name_Announcing = row["Name_Announcing"].ToString();
                     annonc.UserName = row["Name"].ToString();
                     annonc.UserLastName = row["LastName"].ToString();
-                    listAnnonc.Add(new Announcing() {Announcing_id=annonc.Announcing_id,Name_Announcing=annonc.Name_Announcing,UserLastName=annonc.UserLastName,UserName=annonc.UserName });
+                    listAnnonc.Add(new Announcing() {Info_Announcing=annonc.Info_Announcing,Date_Announcing=annonc.Date_Announcing,User_id=annonc.User_id, Announcing_id=annonc.Announcing_id,Name_Announcing=annonc.Name_Announcing,UserLastName=annonc.UserLastName,UserName=annonc.UserName });
                 }
                 catch (Exception ex)
                 {
@@ -43,13 +54,6 @@ namespace Searching.BE.Service
                 }
             }
             return listAnnonc;
-        }
-
-        public string GetAnnouncing()
-        {
-            DataTable table = AnnouncingFunction.GetAnnouncing();
-            string json = JsonConvert.SerializeObject(table);
-            return json;
         }
         
         public List<AreasOfCity> GetAreasOfCity(int City_id)
@@ -164,40 +168,11 @@ namespace Searching.BE.Service
             }
             return _user;
         }
-        
-       
 
-        public List<Announcing> GetAnnouncingForCategory(string category_id)
+        public string TestFunction(AnnFilter filter)
         {
-            List<Announcing> listAnnonc =new List<Announcing>();
-            Announcing annonc = new Announcing();
-            int cat_id = int.Parse(category_id);
-            DataTable table = AnnouncingFilter.GetAnnouncingForCategory(cat_id);
-            foreach(DataRow row in table.Rows)
-                {
-                annonc.Announcing_id = int.Parse(row["Announcing_id"].ToString());
-                annonc.Name_Announcing = row["Name_Announcing"].ToString();
-                annonc.Phone_Announcing = int.Parse(row["Phone_Announcing"].ToString());
-                annonc.Date_Announcing =DateTime.Parse( row["Date_Announcing"].ToString());
-                annonc.Info_Announcing = row["info_Announcing"].ToString();
-                annonc.Categories_id =  int.Parse(row["Categories_id"].ToString());
-                annonc.User_id =int.Parse(row["User_id"].ToString());
-                annonc.City_id = int.Parse(row["City_id"].ToString());
-                annonc.Areas_id = int.Parse(row["Areas_id"].ToString());
-                listAnnonc.Add(new Announcing() { Name_Announcing = annonc.Name_Announcing, Announcing_id = annonc.Announcing_id, Phone_Announcing = annonc.Phone_Announcing, Date_Announcing = annonc.Date_Announcing, Info_Announcing = annonc.Info_Announcing, Categories_id = annonc.Categories_id, User_id = annonc.User_id, City_id = annonc.City_id, Areas_id = annonc.Areas_id });
-                }
-               
-                
-            return listAnnonc;
-                
-            
-        }
-
-
-        public string TestFunction()
-        {
-            
-            return "Successed!";
+            string json = JsonConvert.SerializeObject(filter);
+            return  json;
         }
 
         public ReturnValue Registration(UserList user)
@@ -206,25 +181,25 @@ namespace Searching.BE.Service
             _user.City_id = 1;
             _user.Country_id = 1;
             var data = "12-10-22";
-            _user.Date_Bearthday =DateTime.Parse(data);
+            _user.Date_Bearthday = DateTime.Parse(data);
             _user.Gender_user = "м";
             _user.Info = "Маньяк";
             _user.LastName = "Гитлер";
-            _user.Mail = "Cp5@mail1er.ru";
+            _user.Mail = "Cp5dsa@mail1er.ru";
             _user.Name = "Адольфик";
             _user.Password = "Adolf123";
             _user.Phone = "2";
             _user.Type_login = 1;
-            var result = Profile.PostRegistration(user);
+            var result = Profile.PostRegistration(_user);
             
             return result;
         }
 
         public ReturnValue Auth(UserList user)
         {
-            UserList _user = new UserList();
-            _user.Mail = "Cp5@mail1erda.ru";
-            _user.Password = "Adolf123";
+          //  UserList _user = new UserList();
+            //_user.Mail = "Cp5@mail1erda.ru";
+            //_user.Password = "Adolf123";
             ReturnValue result = Profile.Auth(user);
             
             return result;
@@ -249,9 +224,25 @@ namespace Searching.BE.Service
             return _user;
         }
 
-        public void AddAnnouncing(Announcing ann)
+        public ReturnValue AddAnnouncing(Announcing ann)
         {
-            AnnouncingFunction.AddAnnoucing(ann);
+            //var data = "12-10-22";
+            //Announcing TestAnn = new Announcing();
+            //TestAnn.Announcing_id = 1;
+            //TestAnn.Areas_id = 1;
+            //TestAnn.Categories_id = ann.Categories_id;
+            //TestAnn.City_id = 1;
+            //TestAnn.Date_Announcing = DateTime.Parse(data);
+            //TestAnn.Info_Announcing = ann.Info_Announcing;
+            //TestAnn.Name_Announcing=ann.Name_Announcing;
+            //TestAnn.Name_City = "Kiev";
+            //TestAnn.Phone_Announcing = 12;
+            //TestAnn.UserLastName = TestAnn.UserLastName;
+            //TestAnn.UserName = ann.UserName;
+            //TestAnn.User_id = ann.User_id;
+            ReturnValue result = new ReturnValue();
+            result= AnnouncingFunction.AddAnnoucing(ann);
+            return result;
         }
 
         public void EditAnnouncing(Announcing ann)
@@ -265,14 +256,65 @@ namespace Searching.BE.Service
             AnnouncingFunction.DeleteAnnouncing(_id);
         }
 
-        public void AddToSelected(Selected_Announcing ann)
+        public ReturnValue AddToSelected(Selected_Announcing ann)
         {
-            SelectedAnnouncingFunction.AddToSelected(ann);
+            ReturnValue result = new ReturnValue();
+           // var row_string = "";
+            var cheker =SelectedAnnouncingFunction.CheckRecording(ann);
+            var count = cheker.Rows.Count;
+            if (count != 0)
+            {
+                result.Code = false;
+                result.Message = "Запись уже добавлена!";
+            }
+            else
+            {
+                result = SelectedAnnouncingFunction.AddToSelected(ann);
+            }
+            //foreach(DataRow row in cheker.Rows)
+            //{
+            //    row_string = row["id"].ToString();
+            //}
+            //if (!String.IsNullOrEmpty(row_string))
+            //{
+            //    result.Code = false;
+            //    result.Message = "Запись уже добавлена!";
+            //}else
+            //{
+            //    result= SelectedAnnouncingFunction.AddToSelected(ann);
+            //}
+            return result;
         }
 
-        public void AddToFavorite(Favorite_Announcing ann)
+        public ReturnValue AddToFavorite(Favorite_Announcing ann)
         {
-            FavoriteAnnouncingFunction.AddToFavorite(ann);
+            ReturnValue result = new ReturnValue();
+            var checker = FavoriteAnnouncingFunction.CheckRecording(ann);
+            var count = checker.Rows.Count;
+            if(count != 0)
+            {
+                result.Code = false;
+                result.Message = "Запись уже добавлена!";
+            }
+            else
+            {
+                 result= FavoriteAnnouncingFunction.AddToFavorite(ann);
+            }
+            //Если Произошла ошибка при запросе
+            //foreach (DataRow row in checker.Rows)
+            //{
+            //    row_string = row["id"].ToString();
+            //}//Есть ли запись в таблице
+            //if (!String.IsNullOrEmpty(row_string))
+            //{
+            //    result.Code = false;
+            //    result.Message = "Запись уже добавлена!";
+            //}//Если нету, то добавляем 
+            //else
+            //{ 
+            //    result= FavoriteAnnouncingFunction.AddToFavorite(ann);
+            //}
+            return result;
         }
 
         public void DeleteSelectedAnnouncing(Selected_Announcing ann)
@@ -356,6 +398,29 @@ namespace Searching.BE.Service
             }
             return _user;
         }
+
+        public ReturnValue AddMessage(Messages message)
+        {
+            message.Recipient_id = 1;
+            message.Sender_id = 30;
+            message.Type_id = 2;
+            message.Status_id = 1;
+            message.Message = "Попытка";
+            message.Date_Message = DateTime.Now;
+            ReturnValue result = new ReturnValue();
+            result = DAL.Main.Logics.BD.MessagesFunction.AddMessages(message);
+            return result;
+        }
+
+        //public IAsyncResult BeginMessage(TestClass asyncBegin)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public WCFRESTService EndMessage(IAsyncResult result)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
     
 }

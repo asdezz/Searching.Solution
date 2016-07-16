@@ -9,10 +9,13 @@ namespace Searching.BE.Service
     {
         static public void WriteToFile_Json(string json)
         {
-            var jnon = "";
-            jnon = json;
-           var plor = "This Json: " + jnon;
-            var path= "C:\\Mail.ru Cloud\\projects\\Searching\\Searching.Solution\\Searching.Solution\\Logg\\";
+            
+            var plor = "This Json: " + json;
+            var path= "C:\\Mail.ru\\projects\\Searching\\Sourse Code\\Searching.Solution\\Logg\\";
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
             string name = string.Format("Json at {0:t}", DateTime.Now.ToString().Replace(":", "."));
             string result = path + name;
             StreamWriter stream = new StreamWriter(result,true);
@@ -38,7 +41,7 @@ namespace Searching.BE.Service
 
         static public void CreateLog(Exception e)
         {
-            string path = @"C:\Mail.ru Cloud\projects\Searching\Searching.Solution\Searching.Solution\Logg";
+            string path = @"C:\Mail.ru\projects\Searching\Sourse Code\Searching.Solution\Logg";
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);

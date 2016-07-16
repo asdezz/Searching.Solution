@@ -38,12 +38,12 @@
             <ScrollViewer Width="Auto" VerticalScrollBarVisibility="Visible"  Margin="0,-10,0,-220" Height="683" RenderTransformOrigin="0.5,0.5">
                 <ScrollViewer.Content>
                     <StackPanel Orientation="Vertical" Height="779">
-                        <Button x:Name="button2" Content="Мои Объявления"  VerticalAlignment="Top"/>
-                        <Button x:Name="button3" Content="Подать объявления"  VerticalAlignment="Top"/>
-                        <Button x:Name="button4" Content="Редактирования профиля"  VerticalAlignment="Top"/>
+                        <Button x:Name="button2"  Content="Мои Объявления"  VerticalAlignment="Top"/>
+                        <Button x:Name="GoToPostAnn" Content="Подать объявления"  VerticalAlignment="Top"/>
+                        <!--<Button x:Name="button4" Content="Редактирования профиля"  VerticalAlignment="Top"/>
                         <Button x:Name="button5" Content="Выбранные объявления"  VerticalAlignment="Top"/>
-                        <Button x:Name="button6" Content="Мои подписчики"  VerticalAlignment="Top"/>
-                        <Button x:Name="button7" Content="Выход из аккаунта"  VerticalAlignment="Top"/>
+                        <Button x:Name="button6" Content="Мои подписчики"  VerticalAlignment="Top"/>-->
+                        <Button x:Name="Exit" Content="Выход из аккаунта"  VerticalAlignment="Top"/>
                     </StackPanel>
                 </ScrollViewer.Content>
             </ScrollViewer>

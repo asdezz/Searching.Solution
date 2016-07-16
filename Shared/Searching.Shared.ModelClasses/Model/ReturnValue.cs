@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace SearchingLibrary
 {
-   public  class ReturnValue
+   public  class ReturnValue:Messages
     {
+        public ReturnValue()
+        {
+            Code = false;
+        }
         public bool Code { get; set; }
-        public string Message { get; set; }
     }
 }

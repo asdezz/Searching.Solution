@@ -23,6 +23,7 @@ namespace SearchingLibrary
         public int Categories_id { get; set; }
         public string Name_Category { get; set; }
         public string Info_Category { get; set; }
+        
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Announcing> Announcing { get; set; }

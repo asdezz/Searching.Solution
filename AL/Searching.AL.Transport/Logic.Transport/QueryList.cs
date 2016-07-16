@@ -79,5 +79,14 @@ namespace Searching.AL.Transport.Logic.Transport
             return _countries;
         }
 
+        public static async Task<ReturnValue> PostAnn(Announcing _ann)
+        {
+            var res = new ReturnValue();
+            var param =JsonConvert.SerializeObject(new { ann=_ann });
+            var result = await AccessService.ServiceCalled("POST", "AddAnnouncing", param);
+            res = JsonConvert.DeserializeObject<ReturnValue>(result);
+            return res;
+        }
+
     }
 }

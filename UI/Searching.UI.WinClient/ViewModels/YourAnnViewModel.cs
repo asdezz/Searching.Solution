@@ -86,7 +86,7 @@ namespace Searching.UI.WinClient.ViewModels
                 NotifyOfPropertyChange(() => TakeLastName);
             }
         }
-        public int Ann_id
+        public int? Ann_id
         {
             get
             {

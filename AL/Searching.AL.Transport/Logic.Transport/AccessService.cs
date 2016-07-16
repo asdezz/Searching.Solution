@@ -53,7 +53,7 @@ namespace Searching.AL.Transport.Logic.Transport
         }
         private static string GetServiceHost()
         {
-            return "http://192.168.200.100:1703/Searching.BE.Service//WCFRESTService.svc/";
+            return "http://192.168.100.101:1703/api/WCFRESTService.svc/";
         }
     }
 }

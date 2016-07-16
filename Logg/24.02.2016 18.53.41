@@ -1,0 +1,7 @@
+Ошибка: Столбец "Name" не принадлежит таблице AnnouncingList.
+Объект: System.Data
+Метод, вызвавший исключение: System.Data.DataColumn GetDataColumn(System.String)
+Стэк:    в System.Data.DataRow.GetDataColumn(String columnName)
+   в System.Data.DataRow.get_Item(String columnName)
+   в Searching.BE.Service.WCFRESTService.GetAnnouncing() в C:\Mail.ru\projects\Searching\Sourse Code\Searching.Solution\BE\Searching.BE.Service\WCFRESTService.svc.cs:строка 64
+====================================

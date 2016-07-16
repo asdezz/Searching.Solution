@@ -12,13 +12,13 @@ namespace SearchingLibrary
     using System;
     using System.Collections.Generic;
     
-    public partial class Selected_Announcing
+    public partial class Selected_Announcing:UserList
     {
         public int id { get; set; }
         public int Announcing_id { get; set; }
-        public int User_id { get; set; }
+       // public int User_id { get; set; }
     
-        public virtual Announcing Announcing { get; set; }
-        public virtual UserList UserList { get; set; }
+       // public virtual Announcing Announcing { get; set; }
+       // public virtual UserList UserList { get; set; }
     }
 }

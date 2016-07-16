@@ -73,14 +73,19 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Image Width="99" Height="99" Source="{Binding ImageThumbnailSource}"/>
+                        <ScrollViewer Width="Auto" VerticalScrollBarVisibility="Visible">
+                            <ScrollViewer.Content>
                         <StackPanel Margin="12,-14,0,0" Grid.Column="1">
                             <TextBlock x:Name="NameCategories" FontSize="{StaticResource PhoneFontSizeExtraLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Text="{Binding UserName}" TextWrapping="Wrap"/>
                             <TextBlock FontSize="{StaticResource PhoneFontSizeNormal}" Text="{Binding Name_Announcing}" TextWrapping="Wrap"/>
                         </StackPanel>
+                            </ScrollViewer.Content>
+                        </ScrollViewer>
                     </Grid>
                 </DataTemplate>
             </Grid.Resources>
-
+            <ScrollViewer Width="Auto" VerticalScrollBarVisibility="Visible" >
+                <ScrollViewer.Content>
             <StackPanel x:Name="CategoriesPanel" Tag="1" >
                 <Grid Height="97" Visibility="Visible" x:Name="CategoriesGrid">
                     <telerikPrimitives:RadTextBox x:Name="radTextBox1" HorizontalAlignment="Left" Margin="0,-4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="329" Height="72"/>
@@ -114,7 +119,8 @@
                 </Grid>
 
             </StackPanel>
-
+                </ScrollViewer.Content>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </phone:PhoneApplicationPage>

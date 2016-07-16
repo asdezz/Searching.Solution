@@ -12,6 +12,34 @@ namespace Searching.DAL.Main
     //Класс, в котором функции связанные с Подписанными Объявлениями 
    public  static class SelectedAnnouncingFunction
     {
+        public static DataTable CheckRecording(Selected_Announcing ann)
+        {
+            string connectString = SqlAccess.GetConnectionString();
+            string queryString = "SELECT* from Selected_Announcing s where s.Announcing_id = @ann_id AND s.User_id = @user_id";
+            SqlConnection connect = new SqlConnection(connectString);
+            SqlCommand command = new SqlCommand(queryString, connect);
+            DBValueCheking.AddValue(command, "@ann_id", ann.Announcing_id);
+            DBValueCheking.AddValue(command, "@user_id", ann.User_id);
+            try
+            {
+                connect.Open();
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+
+                Logger.CreateLog(ex);
+                throw ex;
+            }
+            finally
+            {
+                connect.Close();
+            }
+            var table = SqlAccess.CreateQuery(command, "CheckRecording");
+            return table;
+        }
+
         public static DataTable GetSelectedAnnouncing(int User_id)
         {
             string connectString = SqlAccess.GetConnectionString();
@@ -24,8 +52,9 @@ namespace Searching.DAL.Main
             DataTable table = SqlAccess.CreateQuery(command, "Selected_Announcing");
             return table;
         }
-        public static void AddToSelected(Selected_Announcing ann)
+        public static ReturnValue AddToSelected(Selected_Announcing ann)
         {
+            ReturnValue result = new ReturnValue();
             string connectString = SqlAccess.GetConnectionString();
             string queryString = "INSERT INTO Selected_Announcing(Announcing_id,User_id) VALUES(@Announcing_id, @User_id);";
             SqlConnection connect = new SqlConnection(connectString);
@@ -36,16 +65,21 @@ namespace Searching.DAL.Main
             {
                 connect.Open();
                 command.ExecuteNonQuery();
+                result.Code = true;
+                result.Message = "Операция прошла успешно!";
             }
             catch(Exception ex)
             {
                 Logger.CreateLog(ex);
-                throw ex;
+                result.Code = false;
+                result.Message = ex.Message;
+                //throw ex;
             }
             finally
             {
                 connect.Close();
             }
+            return result;
         }
         public static void DeleteSelected(Selected_Announcing ann)
         {

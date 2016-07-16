@@ -94,6 +94,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\FavoritesAnnViewModel.cs" />
+    <Compile Include="ViewModels\PostAnnViewModel.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\YourAnnViewModel.cs" />
     <Compile Include="Views\FavoritesAnnView.xaml.cs">

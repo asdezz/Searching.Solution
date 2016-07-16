@@ -90,9 +90,12 @@
     <Compile Include="Model\Cities.cs" />
     <Compile Include="Model\Country.cs" />
     <Compile Include="Model\Favorite_Announcing.cs" />
+    <Compile Include="Model\MessageAsyncResult.cs" />
+    <Compile Include="Model\Messages.cs" />
     <Compile Include="Model\ReturnValue.cs" />
     <Compile Include="Model\Selected_Announcing.cs" />
     <Compile Include="Model\Selected_User.cs" />
+    <Compile Include="Model\TestClass.cs" />
     <Compile Include="Model\UserList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

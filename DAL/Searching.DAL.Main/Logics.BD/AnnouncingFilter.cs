@@ -1,4 +1,5 @@
-﻿using SearchingLibrary;
+﻿using Searching.DAL.Main.Helper;
+using SearchingLibrary;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -23,87 +24,38 @@ namespace Searching.DAL.Main
         {
             string connectionString = SqlAccess.GetConnectionString();
             SqlConnection connect = new SqlConnection(connectionString);
-            string query = "SELECT a.Announcing_id, a.Name_Announcing, u.Name,u.LastName FROM Announcing a JOIN Cities c ON c.City_id = a.City_id JOIN[UserList] u ON  u.[User_id] = a.[User_id] WHERE  a.City_id = ISNULL(@City_id, a.City_id) AND a.Areas_id = ISNULL(@Areas_id, a.Areas_id) AND a.Categories_id = ISNULL(@Category_id, a.Categories_id) AND u.Gender_user = ISNULL(@Gender_user, u.Gender_user) AND u.Date_Bearthday BETWEEN ISNULL(@MinDateBearthday, u.Date_Bearthday) AND ISNULL(@MaxDateBearthday, u.Date_Bearthday) AND a.Date_Announcing >= ISNULL(@Date_Announcing, a.Date_Announcing)";
+            string query = "SELECT a.Info_Announcing, a.Date_Announcing, a.User_id, a.Announcing_id, a.Name_Announcing, u.Name,u.LastName ,ROW_NUMBER() OVER(ORDER BY  a.Announcing_id) AS Row_id FROM Announcing a JOIN Cities c ON c.City_id = a.City_id JOIN[UserList] u ON  u.[User_id] = a.[User_id] WHERE  a.City_id = ISNULL(@City_id, a.City_id) AND (@Areas_id is NULL or a.Areas_id = @Areas_id) AND a.Categories_id = ISNULL(@Category_id, a.Categories_id) AND u.Gender_user = ISNULL(@Gender_user, u.Gender_user) AND u.Date_Bearthday BETWEEN ISNULL(@MinDateBearthday, u.Date_Bearthday) AND ISNULL(@MaxDateBearthday, u.Date_Bearthday) AND a.Date_Announcing >= ISNULL(@Date_Announcing, a.Date_Announcing)";
+            query = QueryPaging.CreareObjectList(query);
+            query = QueryPaging.CreatePaging(query);
             SqlCommand command = new SqlCommand(query, connect);
-            command = DBValueCheking.CheckValue(command, "@Category_id", filter.Category_id);
-            command = DBValueCheking.CheckValue(command, "@City_id", filter.City_id);
-            command = DBValueCheking.CheckValue(command, "@Areas_id", filter.Areas_id);
-            command = DBValueCheking.CheckValue(command, "@Gender_user", filter.Gender_user);
-            command = DBValueCheking.CheckValue(command, "@MinDateBearthday", filter.MinDateBirthday);
-            command = DBValueCheking.CheckValue(command, "@MaxDateBearthday", filter.MaxDateBirthday);
-            command = DBValueCheking.CheckValue(command,"@Date_Announcing",filter.DateAnnouncing);
-            try
-            {
-                connect.Open();
-                command.ExecuteNonQuery();
-            }
-            catch(Exception ex)
-            {
-                Logger.CreateLog(ex);
-                throw ex;
-            }
-            finally
-            {
-                connect.Close();
-            }
+            command = DBValueCheking.AddWithCheckValue(command, "@Category_id", filter.Category_id);
+            command = DBValueCheking.AddWithCheckValue(command, "@City_id", filter.City_id);
+            command = DBValueCheking.AddWithCheckValue(command, "@Areas_id", filter.Areas_id);
+            command = DBValueCheking.AddWithCheckValue(command, "@Gender_user", filter.Gender_user);
+            command = DBValueCheking.AddWithCheckValue(command, "@MinDateBearthday", filter.MinDateBirthday);
+            command = DBValueCheking.AddWithCheckValue(command, "@MaxDateBearthday", filter.MaxDateBirthday);
+            command = DBValueCheking.AddWithCheckValue(command,"@Date_Announcing",filter.DateAnnouncing);
+            command = DBValueCheking.AddValue(command, "@nPage", filter.nPage);
+            command = DBValueCheking.AddValue(command, "@sizePage", filter.sizePage);
+            //try
+            //{
+            //    connect.Open();
+            //    command.ExecuteNonQuery();
+            //}
+            //catch (Exception ex)
+            //{
+            //    Logger.CreateLog(ex);
+            //    throw ex;
+            //}
+            //finally
+            //{
+            //    connect.Close();
+            //}
             var table = SqlAccess.CreateQuery(command,"GetAnnouncingWithFilter");
             return table;
         }
 
-        public static DataTable GetAnnouncingFromCity(int City_id)
-        {
-            string connectionString = SqlAccess.GetConnectionString();
-            SqlConnection connect = new SqlConnection(connectionString);
-            string queryString = "SELECT * FROM Announcing WHERE City_id =@City_id";
-            SqlCommand command = new SqlCommand(queryString, connect);
-            command.Parameters.Add("@City_id", SqlDbType.Int);
-            command.Parameters["@City_id"].Value=City_id;
-            command.ExecuteNonQuery();
-            DataTable table = SqlAccess.CreateQuery(command, "AnnouncingListFromCity");
-            return table;
-        }
-
-        public static DataTable GetAnnouncingForAreasOfCity(int AreasOfCity_id)
-        {
-            string connectString = SqlAccess.GetConnectionString();
-            string queryString = "SELECT * FROM Announcing WHERE Areas_id = @AreasOfCity_id";
-            SqlConnection connect = new SqlConnection(connectString);
-            SqlCommand command = new SqlCommand(queryString, connect);
-            command.Parameters.Add("@AreasOfCity_id", SqlDbType.Int);
-            command.Parameters["@AreasOfCity_id"].Value = AreasOfCity_id;
-            command.ExecuteNonQuery();
-            DataTable table = SqlAccess.CreateQuery(command, "AnnouncingforAreasOfCity");
-            return table;
-        }
-
-        public static DataTable GetAnnouncingForCategory(int Category_id)
-        {
-            
-            string connectString = SqlAccess.GetConnectionString();
-            string queryString = @"SELECT * FROM Announcing WHERE Categories_id = @Category_id";
-            SqlConnection connect = new SqlConnection(connectString);
-            SqlCommand command = new SqlCommand(queryString, connect);
-            command.Parameters.Add("@Category_id", SqlDbType.Int);
-            command.Parameters["@Category_id"].Value = Category_id;
-
-            try
-            {
-                connect.Open();
-                command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
-            finally
-            {
-                connect.Close();
-            }
-            
-            DataTable table = SqlAccess.CreateQuery(command, "AnnouncingForCategory");
-            return table;
-        }
-
+        
         public static DataTable GetAnnouncingFull(int announcing_id)
         {
             string connectString = SqlAccess.GetConnectionString();

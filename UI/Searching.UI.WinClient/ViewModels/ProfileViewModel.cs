@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Searching.UI.WinClient.ViewModels
 {
@@ -29,7 +30,14 @@ namespace Searching.UI.WinClient.ViewModels
             navigationService.UriFor<RegistrationViewModel>()
                 .Navigate();
         }
-            
+
+        public void GoToPostAnn()
+        {
+            navigationService.UriFor<PostAnnViewModel>()
+                .Navigate();
+        }
+
+
         public UserList User
         {
             get
@@ -140,9 +148,14 @@ namespace Searching.UI.WinClient.ViewModels
 
         public async void Auth()
       {
+            if(User.Mail==null && User.Password == null)
+            {
+                MessageBox.Show("Введите пожалуйста данные");
+            }
                 value = await transport.Auth(User);
                 if(value.Code==true)
-            { 
+            {
+                MessageBox.Show("Вы удачно авторизировались!");
                 User = await transport.GetMyUser(User.Mail);
             if (User.Date_Bearthday.HasValue)
                  { 
@@ -152,10 +165,16 @@ namespace Searching.UI.WinClient.ViewModels
                  }
                 AuthPanel = Helper.SwapStatus.swapVisible(AuthPanel);
                 ProfilePanel = Helper.SwapStatus.swapVisible(ProfilePanel);
-                
-            }    
+
+            }else { MessageBox.Show("Неправильно введенны данные!"); }    
                 
         }
+        public void Exit()
+        {
+            AuthPanel = Helper.SwapStatus.swapVisible(AuthPanel);
+            ProfilePanel = Helper.SwapStatus.swapVisible(ProfilePanel);
+        }
+
         }
     }
 

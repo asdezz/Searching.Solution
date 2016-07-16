@@ -27,20 +27,20 @@ namespace Searching.DAL.Main
             SqlCommand command = new SqlCommand(queryString, connect);
             command.Parameters.Add("@Country_id", SqlDbType.Int);
             command.Parameters["@Country_id"].Value = Country_id;
-            try
-            {
-                connect.Open();
-                command.ExecuteNonQuery();
-            }
-            catch(Exception ex)
-            {
-                Logger.CreateLog(ex);
-                throw ex;
-            }
-            finally
-            {
-                connect.Close();
-            }
+            //try
+            //{
+            //    connect.Open();
+            //    command.ExecuteNonQuery();
+            //}
+            //catch(Exception ex)
+            //{
+            //    Logger.CreateLog(ex);
+            //    throw ex;
+            //}
+            //finally
+            //{
+            //    connect.Close();
+            //}
             DataTable table = SqlAccess.CreateQuery(command, "GetCityFromCoubtry");
             return table;
         }
@@ -53,19 +53,19 @@ namespace Searching.DAL.Main
             SqlCommand command = new SqlCommand(queryString, connect);
             command.Parameters.Add("@City_id", SqlDbType.Int);
             command.Parameters["@City_id"].Value = City_id;
-            try
-            {
-                connect.Open();
-                command.ExecuteNonQuery();
-            }catch(Exception ex)
-            {
-                Logger.CreateLog(ex);
-                throw ex;
-            }
-            finally
-            {
-                connect.Close();
-            }
+            //try
+            //{
+            //    connect.Open();
+            //    command.ExecuteNonQuery();
+            //}catch(Exception ex)
+            //{
+            //    Logger.CreateLog(ex);
+            //    throw ex;
+            //}
+            //finally
+            //{
+            //    connect.Close();
+            //}
             DataTable table = SqlAccess.CreateQuery(command, "GetAreasOfCity");
             return table;
         }

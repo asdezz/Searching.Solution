@@ -13,17 +13,20 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True"
+    xmlns:bab="clr-namespace:Caliburn.Micro.BindableAppBar;assembly=Caliburn.Micro.BindableAppBar"
     xmlns:cal="http://www.caliburnproject.org"
     xmlns:caliburn="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
     xmlns:Command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:Interactivity="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity">
 
-    <phone:PhoneApplicationPage.ApplicationBar>
+    <!--<phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton IconUri="/Images/DateTimePickerOk.png" Text="Ok"/>
         </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>-->
+    
+    
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent" Margin="0,-64,0,-100">
         <Grid.ColumnDefinitions>
@@ -31,13 +34,24 @@
             <ColumnDefinition Width="461*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
+         <bab:BindableAppBar Grid.ColumnSpan="2" Margin="0,668,8,0" x:Name="AppBar">
+            <bab:BindableAppBarButton x:Name="PostAnn" 
+                                  Text="Опубликовать Объявление" 
+                                  IconUri="/Images/DateTimePickerOk.png"
+                                  Visibility="Visible" Height="168" RenderTransformOrigin="0.5,0.5">
+                <bab:BindableAppBarButton.RenderTransform>
+                    <CompositeTransform ScaleY="-1"/>
+                </bab:BindableAppBarButton.RenderTransform>
+            </bab:BindableAppBarButton>
+        </bab:BindableAppBar>
         <TextBlock x:Name="PageTitle" Text="Добавить Объявления" Margin="0,0,0,759" Style="{StaticResource PhoneTextTitle1Style}" Grid.ColumnSpan="2" Height="53" VerticalAlignment="Bottom" FontSize="40" Grid.Column="1"/>
         <StackPanel Orientation="Vertical" Margin="12,99,0,104" Grid.ColumnSpan="2">
-            <telerikPrimitives:RadTextBox Header="Название" x:Name="radTextBox" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="468" Height="101"/>
+            <telerikPrimitives:RadTextBox Header="Название" x:Name="TakeNameAnn" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="468" Height="101"/>
             <telerikInput:RadListPicker Header="Список категорий">
                 <sys:String>Выберите категорию</sys:String>
+                <sys:String>Отдых</sys:String>
             </telerikInput:RadListPicker>
-            <telerikPrimitives:RadTextBox Height="139" Header="Подробно"/>
+            <telerikPrimitives:RadTextBox x:Name="TakeInfoAnn" Height="139" Header="Подробно"/>
             <telerikInput:RadListPicker Header="Дата События">
                 <sys:String>Выберите дату события объявления</sys:String>
             </telerikInput:RadListPicker>

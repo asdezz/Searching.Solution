@@ -21,7 +21,7 @@ namespace Searching.DAL.Main
             SqlCommand command = new SqlCommand(queryString, connect);
             command.Parameters.Add("@User_id", SqlDbType.Int);
             command.Parameters["@User_id"].Value = User_id;
-            command.ExecuteNonQuery();
+          //  command.ExecuteNonQuery();
             DataTable table = SqlAccess.CreateQuery(command, "GetUserList");
             return table;
         }
@@ -33,20 +33,20 @@ namespace Searching.DAL.Main
             SqlConnection connect = new SqlConnection(connectString);
             SqlCommand command = new SqlCommand(queryString, connect);
             command = DBValueCheking.AddValue(command, "@Mail", Mail);
-            try
-            {
-                connect.Open();
-                command.ExecuteNonQuery();
-            }
-            catch(Exception ex)
-            {
-                command.Cancel();
-                Logger.CreateLog(ex);
-            }
-            finally
-            {
-                connect.Close();
-            }
+            //try
+            //{
+            //    connect.Open();
+            //    command.ExecuteNonQuery();
+            //}
+            //catch(Exception ex)
+            //{
+            //    command.Cancel();
+            //    Logger.CreateLog(ex);
+            //}
+            //finally
+            //{
+            //    connect.Close();
+            //}
             DataTable table = SqlAccess.CreateQuery(command, "MyUser");
             return table;
         }
@@ -184,15 +184,15 @@ namespace Searching.DAL.Main
             string queryString = "UPDATE UserList SET Mail = ISNULL(@Mail, Mail), FIO = ISNULL(@FIO, FIO), Phone = ISNULL(@Phone, Phone), Gender_user = ISNULL(@Gender_user, Gender_user), Date_Bearthday = ISNULL(@Date_Bearthday, Date_Bearthday), Info = ISNULL(@Info, Info), Country_id = ISNULL(@Country_id, Country_id), Type_login = ISNULL(@Type_login, Type_login), City_id = ISNULL(@City_id, City_id) WHERE User_id = @User_id";
             SqlConnection connect = new SqlConnection(queryString);
             SqlCommand command = new SqlCommand(queryString, connect);
-            command = DBValueCheking.CheckValue(command,"@Mail",user.Mail);
-            command = DBValueCheking.CheckValue(command, "@Name",user.Name);
-            command = DBValueCheking.CheckValue(command, "@Phone",user.Phone);
-            command = DBValueCheking.CheckValue(command, "@Gender_user", user.Gender_user);
-            command = DBValueCheking.CheckValue(command, "@Date_Bearthday", user.Date_Bearthday);
-            command = DBValueCheking.CheckValue(command, "@Info", user.Info);
-            command = DBValueCheking.CheckValue(command, "@Country_id", user.Country_id);
-            command = DBValueCheking.CheckValue(command, "@Type_login", user.Type_login);
-            command = DBValueCheking.CheckValue(command, "@City_id", user.City_id);
+            command = DBValueCheking.AddWithCheckValue(command,"@Mail",user.Mail);
+            command = DBValueCheking.AddWithCheckValue(command, "@Name",user.Name);
+            command = DBValueCheking.AddWithCheckValue(command, "@Phone",user.Phone);
+            command = DBValueCheking.AddWithCheckValue(command, "@Gender_user", user.Gender_user);
+            command = DBValueCheking.AddWithCheckValue(command, "@Date_Bearthday", user.Date_Bearthday);
+            command = DBValueCheking.AddWithCheckValue(command, "@Info", user.Info);
+            command = DBValueCheking.AddWithCheckValue(command, "@Country_id", user.Country_id);
+            command = DBValueCheking.AddWithCheckValue(command, "@Type_login", user.Type_login);
+            command = DBValueCheking.AddWithCheckValue(command, "@City_id", user.City_id);
             command = DBValueCheking.AddValue(command, "@User_id", user.User_id);
             try
             {
