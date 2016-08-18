@@ -130,11 +130,19 @@ namespace Searching.BE.Service
         [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         ReturnValue AddMessage(Messages message);
 
-        //[OperationContract(AsyncPattern = true)]
-        //[WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
-        //IAsyncResult BeginMessage(TestClass asyncBegin);
+        [OperationContract]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        ReturnValue CallCallBack(MessageAsyncResult messageCallback);
 
-        //WCFRESTService EndMessage(IAsyncResult result);
+        [OperationContract(AsyncPattern = true)]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        IAsyncResult BeginMessage(int recipient_id,AsyncCallback callback,object state);
+
+        List<Messages> EndMessage(IAsyncResult asyncResult);
+
+        [OperationContract]
+        [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetSubscribers")]
+        List<MessageAsyncResult> GetSubscribers();
     }
 
 }

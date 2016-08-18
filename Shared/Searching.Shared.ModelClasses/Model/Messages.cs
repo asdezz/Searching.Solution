@@ -13,7 +13,7 @@ namespace SearchingLibrary
             Status_id = 0;
         }
 
-       public int Session_id { get; set; }
+       public int? Session_id { get; set; }
        public int Sender_id { get; set; }
        public int? Recipient_id { get; set; }
        public int Status_id { get; set; }

@@ -67,10 +67,38 @@ namespace Searching.DAL.Main
             }
             return table;
         }
+        public static DataTable CreateQueryWithTran(SqlCommand command, string TableName)
+        {
+            string connectionString = GetConnectionString();
+            DataSet dataSet = new DataSet("Searching");
+            DataTable table = new DataTable(TableName);
+            using (SqlConnection connect = new SqlConnection(connectionString))
+            {
+                connect.Open();
+                SqlTransaction tran = connect.BeginTransaction();
+                try
+                {
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    adapter.Fill(table);
+                    dataSet.Tables.Add(table);
+                    tran.Commit();
+                }
+                catch (Exception ex)
+                {
+                    Logger.CreateLog(ex);
+                    tran.Rollback();
+                }
+                finally
+                {
+                    connect.Close();
+                }
+            }
+            return table;
+        }
 
         static public string GetConnectionString()
         {
-            return "Persist Security Info = False; Integrated Security = false; Initial Catalog = Searching; server = 192.168.100.101 ;User ID = sa; Password = 111111";
+            return "Persist Security Info = False; Integrated Security = false; Initial Catalog = Searching; server = 192.168.100.101 ;User ID = sa; Password = Lfvfu432";
             //return "Data Source=190.190.100.101; Network Library=DBMSSOCN; Initial Catalog = Searching; User ID = sa; Password = 111111;";
         }
     }

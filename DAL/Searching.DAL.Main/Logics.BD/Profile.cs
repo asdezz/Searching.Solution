@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Searching.DAL.Main
+namespace Searching.DAL.Main.Logics.BD
 {
    public  static class Profile
     {

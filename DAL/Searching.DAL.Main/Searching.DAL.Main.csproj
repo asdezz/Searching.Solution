@@ -43,16 +43,18 @@
     <Compile Include="Helper\DBValueCheking.cs" />
     <Compile Include="Helper\Logger.cs" />
     <Compile Include="Helper\QueryPaging.cs" />
+    <Compile Include="Helper\UpdateQuerySession.cs" />
     <Compile Include="Logics.BD\AnnouncingFilter.cs" />
     <Compile Include="Logics.BD\AnnouncingFunction.cs" />
     <Compile Include="Logics.BD\FavoriteAnnouncingFunction.cs" />
     <Compile Include="Logics.BD\FollowersFunction.cs" />
     <Compile Include="Logics.BD\Location.cs" />
     <Compile Include="Logics.BD\MessagesFunction.cs" />
+    <Compile Include="Logics.BD\Notification.cs" />
     <Compile Include="Logics.BD\Profile.cs" />
     <Compile Include="Logics.BD\SelectedAnnouncingFunction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SqlFunction\Session.cs" />
+    <Compile Include="Logics.BD\Session.cs" />
     <Compile Include="SqlFunction\SqlAccess.cs" />
   </ItemGroup>
   <ItemGroup>

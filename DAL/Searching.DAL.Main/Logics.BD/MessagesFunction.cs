@@ -1,4 +1,4 @@
-﻿using Searching.DAL.Main.SqlFunction;
+﻿
 using SearchingLibrary;
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,6 @@ namespace Searching.DAL.Main.Logics.BD
         public static ReturnValue AddMessages(Messages msg)
         {
             ReturnValue result = new ReturnValue();
-            msg.Session_id = Session.GetSession(msg);
             string query = "insert into MessageList(Date_message,Message,Sender_id,Status_id,Session_id) values(@DateMessage, @Message, @Sender_id, @Status_id, @Session_id)";
             string connectionString = SqlAccess.GetConnectionString();
             SqlConnection connect = new SqlConnection(connectionString);
@@ -24,26 +23,29 @@ namespace Searching.DAL.Main.Logics.BD
             command = DBValueCheking.AddValue(command, "@Sender_id", msg.Sender_id);
             command = DBValueCheking.AddValue(command, "@Status_id", msg.Status_id);
             command = DBValueCheking.AddValue(command, "@Session_id", msg.Session_id);
-            //try
-            //{
-            //    connect.Open();
-            //    command.ExecuteNonQuery();
-            //    result.Code = true;
-            //    result.Message = "Операция прошла успешно";
-            //}
-            //catch(Exception ex)
-            //{
-            //    Logger.CreateLog(ex);
-            //    result.Code = false;
-            //    result.Message = "Ошибка операции";
-            //    //throw ex;
-            //}
-            //finally
-            //{
-            //    connect.Close();
-            //}
-            var table = SqlAccess.CreateQuery(command, "MessageList");
-            return result;
+            try
+            {
+                connect.Open();
+                command.ExecuteNonQuery();
+                result.Code = true;
+                result.Message = "Операция прошла успешно";
+            }
+            catch (Exception ex)
+            {
+                Logger.CreateLog(ex);
+                result.Code = false;
+                result.Message = "Ошибка операции добавления сообщения";
+                //throw ex;
+            }
+            finally
+            {
+                connect.Close();
+            }
+
+            //    var table = SqlAccess.CreateQuery(command, "MessageList");
+               // }
+                return result;
+            
         }
     }
 }

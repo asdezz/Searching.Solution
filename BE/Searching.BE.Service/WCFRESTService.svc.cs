@@ -16,6 +16,7 @@ using System.ServiceModel.Web;
 using System.ServiceModel.Activation;
 using System.ServiceModel.Description;
 using System.Net;
+using Searching.DAL.Main.Logics.BD;
 
 namespace Searching.BE.Service
 {
@@ -25,6 +26,7 @@ namespace Searching.BE.Service
     ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class WCFRESTService : IWCFRESTService
     {
+        private static List<MessageAsyncResult> subscribers = new List<MessageAsyncResult>();
         
         public List<Announcing> GetAnnouncingFilter(AnnFilter filter)
         {
@@ -350,7 +352,7 @@ namespace Searching.BE.Service
         {
             int ann_id = int.Parse(announcing_id);
             Announcing ann = new Announcing();
-            DataTable table = DAL.Main.AnnouncingFilter.GetAnnouncingFull(ann_id);
+            DataTable table = AnnouncingFilter.GetAnnouncingFull(ann_id);
             foreach(DataRow row in table.Rows)
             {
                 ann.Announcing_id = int.Parse(row["Announcing_id"].ToString());
@@ -368,7 +370,7 @@ namespace Searching.BE.Service
         public UserList GetMyUser(string mail)
         {
             UserList _user = new UserList();
-            DataTable table = DAL.Main.Profile.GetMyUser(mail);
+            DataTable table = Profile.GetMyUser(mail);
             foreach(DataRow row in table.Rows)
             {
                 _user.User_id = int.Parse(row["User_id"].ToString());
@@ -401,26 +403,67 @@ namespace Searching.BE.Service
 
         public ReturnValue AddMessage(Messages message)
         {
-            message.Recipient_id = 1;
-            message.Sender_id = 30;
-            message.Type_id = 2;
+            message.Sender_id = 1;
+            message.Type_id = 1;
+            message.Announcing_id = 11;
             message.Status_id = 1;
-            message.Message = "Попытка";
+            message.Message = "Сообщение в объявление";
             message.Date_Message = DateTime.Now;
             ReturnValue result = new ReturnValue();
+            if(message.Recipient_id !=null)
+            {
+                message.Session_id = Session.GetSession(message);
+                if(message.Session_id==null)
+                {
+                    result.Code = false;
+                    result.Message = "Не удалось создать сессию";
+                    return result;
+                }
+            }
+            else
+            {
+                if(message.Announcing_id != null)
+                {
+                    result = Session.Check(message);
+                    if (result.Session_id == null)
+                    {
+                        result.Code = false;
+                        result.Message = "Вы не подписаны на это объявление";
+                        return result;
+                    }
+                    else
+                    {
+                        message.Session_id = result.Session_id;
+                    }
+                }
+            }
             result = DAL.Main.Logics.BD.MessagesFunction.AddMessages(message);
             return result;
         }
 
-        //public IAsyncResult BeginMessage(TestClass asyncBegin)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public ReturnValue CallCallBack(MessageAsyncResult messageCallback)
+        {
+            
+            ReturnValue result = new ReturnValue();
+            return result;
+        }
 
-        //public WCFRESTService EndMessage(IAsyncResult result)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public IAsyncResult BeginMessage(int recipient_id,AsyncCallback callback,object state)
+        {
+            MessageAsyncResult asyncResult = new MessageAsyncResult(state,callback);
+            asyncResult.Recipient_id = recipient_id;
+            subscribers.Add(asyncResult);
+            return asyncResult;
+        }
+
+        public List<Messages> EndMessage(IAsyncResult asyncResult)
+        {
+            return (asyncResult as MessageAsyncResult).Result;
+        }
+        public List<MessageAsyncResult> GetSubscribers()
+        {
+            return subscribers;
+        }
     }
     
 }

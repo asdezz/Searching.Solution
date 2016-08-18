@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Searching.DAL.Main
+namespace Searching.DAL.Main.Logics.BD
 {
     //Класс, описывающий функции связанные с месторасположением или локацией 
    public  static class Location

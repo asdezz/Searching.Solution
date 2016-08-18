@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Searching.DAL.Main
+namespace Searching.DAL.Main.Logics.BD
 {
     //Класс, в котором функции связанные с Подписанными Объявлениями 
    public  static class SelectedAnnouncingFunction
