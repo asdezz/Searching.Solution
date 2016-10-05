@@ -17,6 +17,7 @@ using System.ServiceModel.Activation;
 using System.ServiceModel.Description;
 using System.Net;
 using Searching.DAL.Main.Logics.BD;
+using System.Threading;
 
 namespace Searching.BE.Service
 {
@@ -27,6 +28,7 @@ namespace Searching.BE.Service
     public class WCFRESTService : IWCFRESTService
     {
         private static List<MessageAsyncResult> subscribers = new List<MessageAsyncResult>();
+        private static List<int> sub_list = new List<int>();
         
         public List<Announcing> GetAnnouncingFilter(AnnFilter filter)
         {
@@ -179,31 +181,29 @@ namespace Searching.BE.Service
 
         public ReturnValue Registration(UserList user)
         {
-            UserList _user = new UserList();
-            _user.City_id = 1;
-            _user.Country_id = 1;
-            var data = "12-10-22";
-            _user.Date_Bearthday = DateTime.Parse(data);
-            _user.Gender_user = "м";
-            _user.Info = "Маньяк";
-            _user.LastName = "Гитлер";
-            _user.Mail = "Cp5dsa@mail1er.ru";
-            _user.Name = "Адольфик";
-            _user.Password = "Adolf123";
-            _user.Phone = "2";
-            _user.Type_login = 1;
-            var result = Profile.PostRegistration(_user);
-            
+            //UserList _user = new UserList();
+            //_user.City_id = 1;
+            //_user.Country_id = 1;
+            //var data = "12-10-22";
+            //_user.Date_Bearthday = DateTime.Parse(data);
+            //_user.Gender_user = "м";
+            //_user.Info = "Маньяк";
+            //_user.LastName = "Гитлер";
+            //_user.Mail = "Cp5dsa@mail1er.ru";
+            //_user.Name = "Адольфик";
+            //_user.Password = "Adolf123";
+            //_user.Phone = "2";
+            //_user.Type_login = 1;
+            var result = Profile.PostRegistration(user);
             return result;
         }
 
         public ReturnValue Auth(UserList user)
         {
-          //  UserList _user = new UserList();
+            //  UserList _user = new UserList();
             //_user.Mail = "Cp5@mail1erda.ru";
             //_user.Password = "Adolf123";
             ReturnValue result = Profile.Auth(user);
-            
             return result;
         }
 
@@ -441,28 +441,60 @@ namespace Searching.BE.Service
             return result;
         }
 
-        public ReturnValue CallCallBack(MessageAsyncResult messageCallback)
+        public ReturnValue CallCallBack(List<Messages> msgs)
         {
-            
+            Notification nt = new Notification();
+            var param = nt.msg;
+            nt.msg = msgs;
             ReturnValue result = new ReturnValue();
+            result.Code = true;
+            result.Message = "Counts:" + msgs.Count.ToString();
             return result;
         }
 
-        public IAsyncResult BeginMessage(int recipient_id,AsyncCallback callback,object state)
+        //public IAsyncResult BeginMessage(int recipient_id,AsyncCallback callback,object state)
+        //{
+        //    sub_list.Add(recipient_id);
+        //    MessageAsyncResult asyncResult = new MessageAsyncResult(state,callback);
+
+        //    asyncResult.Recipient_id = recipient_id;
+        //    subscribers.Add(asyncResult);
+        //    return asyncResult;
+        //}
+
+        //public List<Messages> EndMessage(IAsyncResult asyncResult)
+        //{
+        //    return (asyncResult as MessageAsyncResult).Result;
+        //}
+
+        public List<int> GetSubscribers()
         {
-            MessageAsyncResult asyncResult = new MessageAsyncResult(state,callback);
-            asyncResult.Recipient_id = recipient_id;
-            subscribers.Add(asyncResult);
-            return asyncResult;
+            return sub_list;
         }
 
-        public List<Messages> EndMessage(IAsyncResult asyncResult)
+       public List<Messages> GetMessages(int recipient_id)
         {
-            return (asyncResult as MessageAsyncResult).Result;
-        }
-        public List<MessageAsyncResult> GetSubscribers()
-        {
-            return subscribers;
+            Messages ass = new Messages();
+            sub_list.Add(recipient_id);
+            Notification res = new Notification();
+            List<Messages> message_list = new List<Messages>();
+            message_list = res.Check(recipient_id);
+            if (message_list.Count == 0)
+            {
+                var end = DateTime.Now.AddMinutes(2);
+                while((message_list = res.Check(recipient_id)).Count==0  && DateTime.Now<end)
+                {
+                    System.Threading.Thread.Sleep(1);
+                }
+                
+            }
+            sub_list.Remove(recipient_id);
+            //var wait = new EventWaitHandle(false, EventResetMode.ManualReset);
+            //var timeOut = new TimeSpan(0, 0, 15);
+            //EventHandler waiter = (s, e) => wait.Set();
+            //res.Changed += waiter;
+            //wait.WaitOne(timeOut);
+            return message_list;
         }
     }
     

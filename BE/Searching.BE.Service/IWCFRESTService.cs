@@ -132,17 +132,23 @@ namespace Searching.BE.Service
 
         [OperationContract]
         [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
-        ReturnValue CallCallBack(MessageAsyncResult messageCallback);
+        ReturnValue CallCallBack(List<Messages> messageCallback);
 
-        [OperationContract(AsyncPattern = true)]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
-        IAsyncResult BeginMessage(int recipient_id,AsyncCallback callback,object state);
+        //[OperationContract(AsyncPattern = true)]
+        //[WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        //IAsyncResult BeginMessage(int recipient_id, AsyncCallback callback, object state);
 
-        List<Messages> EndMessage(IAsyncResult asyncResult);
+        //List<Messages> EndMessage(IAsyncResult asyncResult);
 
         [OperationContract]
         [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetSubscribers")]
-        List<MessageAsyncResult> GetSubscribers();
+        List<int> GetSubscribers();
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        List<Messages> GetMessages(int recipient_id);
+
+
     }
 
 }

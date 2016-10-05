@@ -11,7 +11,7 @@ namespace SearchingLibrary
     [DataContract]
     public class MessageAsyncResult:IAsyncResult
     {
-        [DataMember]
+        //[DataMember]
         public AsyncCallback Callback { get; set; }
         private readonly object accessLock = new object();
         private bool isCompleted = false;

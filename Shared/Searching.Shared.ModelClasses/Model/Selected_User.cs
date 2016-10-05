@@ -11,12 +11,16 @@ namespace SearchingLibrary
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Selected_User:UserList
+    using System.Runtime.Serialization;
+    [DataContract]
+    public partial class Selected_User
     {
+        [DataMember]
         public int id { get; set; }
+        [DataMember]
         //public int User_id { get; set; }
         public int Selected_user { get; set; }
+        public int User_id { get; set; }
     
         //public virtual UserList UserList { get; set; }
        // public virtual UserList UserList1 { get; set; }

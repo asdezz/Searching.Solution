@@ -11,24 +11,33 @@ namespace SearchingLibrary
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Announcing:UserList
+    using System.Runtime.Serialization;
+    [DataContract]
+    public partial class Announcing
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Announcing()
-        {
-            this.Favorite_Announcing = new HashSet<Favorite_Announcing>();
-            this.Selected_Announcing = new HashSet<Selected_Announcing>();
-        }
+       
+        [DataMember]
         public string UserName { get; set; }
+        [DataMember]
         public string UserLastName { get; set; }
+        [DataMember]
         public string Name_City { get; set;}
+        [DataMember]
         public int? Announcing_id { get; set; }
+        [DataMember]
         public string Name_Announcing { get; set; }
+        [DataMember]
         public Nullable<int> Phone_Announcing { get; set; }
+        [DataMember]
         public System.DateTime? Date_Announcing { get; set; }
+        [DataMember]
         public string Info_Announcing { get; set; }
+        [DataMember]
         public int Categories_id { get; set; }
+        [DataMember]
+        public int City_id { get; set; }
+        [DataMember]
+        public int User_id { get; set; }
       //  public int User_id { get; set; }
       //  public int City_id { get; set; }
         public Nullable<int> Areas_id { get; set; }

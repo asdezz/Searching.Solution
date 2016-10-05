@@ -1,15 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SearchingLibrary
 {
-   public class TestClass
+    [DataContract]
+   public class TestClass:Messages
     {
-        public int id { get; set; }
-        public AsyncCallback callback { get; set; }
-        public object asyncState { get; set; }
+        [DataMember]
+        public bool Code { get; set; }
+
+      public TestClass()
+        {
+            Code = false;
+        }
     }
 }
