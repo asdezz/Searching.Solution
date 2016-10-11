@@ -53,6 +53,26 @@ namespace Searching.DAL.Main.Logics.BD
             }
             return result;
         }
+
+        public static DataTable GetMyAnnouncing(int id)
+        {
+            DataTable table = new DataTable();
+            string connectingString = SqlAccess.GetConnectionString();
+            SqlConnection connect = new SqlConnection(connectingString);
+            string query = "SELECT a.Announcing_id, a.Name_Announcing, a.Phone_Announcing, a.Date_Announcing, a.Info_Announcing, a.Categories_id, a.[User_id], a.City_id, a.Areas_id,ul.[User_id], ul.[Name], ul.LastName FROM   Announcing a JOIN UserList ul  ON a.[User_id]= ul.User_id WHERE a.[User_id]=@User_id";
+            SqlCommand command = new SqlCommand(query, connect);
+            command = DBValueCheking.AddValue(command, "@User_id", id);
+            try
+            {
+                table = SqlAccess.CreateQuery(command, "MyAnnList");
+            }
+            catch (Exception ex)
+            {
+                Logger.CreateLog(ex);
+            }
+            return table;
+        }
+
         public static void EditAnnouncing(Announcing ann)
         {
             string connectionString = SqlAccess.GetConnectionString();

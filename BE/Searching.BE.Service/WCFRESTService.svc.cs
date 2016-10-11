@@ -27,6 +27,7 @@ namespace Searching.BE.Service
     ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class WCFRESTService : IWCFRESTService
     {
+        private static List<int> testWorkflow = new List<int>();
         private static List<MessageAsyncResult> subscribers = new List<MessageAsyncResult>();
         private static List<int> sub_list = new List<int>();
         
@@ -495,6 +496,44 @@ namespace Searching.BE.Service
             //res.Changed += waiter;
             //wait.WaitOne(timeOut);
             return message_list;
+        }
+
+        public List<Announcing> GetMyAnnouncing(int id)
+        {
+            List<Announcing> annList = new List<Announcing>();
+            Announcing ann = new Announcing();
+            DataTable table = AnnouncingFunction.GetMyAnnouncing(id);
+            foreach (DataRow row in table.Rows)
+            {
+                ann = new Announcing();
+                ann.Announcing_id = int.Parse(row["Announcing_id"].ToString());
+                ann.Name_Announcing = row["Name_Announcing"].ToString();
+                ann.Date_Announcing = DateTime.Parse(row["Date_Announcing"].ToString());
+                ann.Info_Announcing = row["Info_Announcing"].ToString();
+                ann.Categories_id = int.Parse(row["Categories_id"].ToString());
+                ann.User_id = int.Parse(row["User_id"].ToString());
+                ann.City_id = int.Parse(row["City_id"].ToString());
+                if (row["Areas_id"] != DBNull.Value)
+                    ann.Areas_id = int.Parse(row["Areas_id"].ToString());
+                ann.UserName = row["Name"].ToString();
+                ann.UserLastName = row["LastName"].ToString();
+                annList.Add(ann);
+            }
+            return annList;
+        }
+
+        public ReturnValue TestWF(int id)
+        {
+            ReturnValue result = new ReturnValue();
+            testWorkflow.Add(id);
+            result.Code = true;
+            result.Message = "Count:" + testWorkflow.Count;
+            return result;
+        }
+
+        public List<int> GetTestWF()
+        {
+            return testWorkflow;
         }
     }
     
