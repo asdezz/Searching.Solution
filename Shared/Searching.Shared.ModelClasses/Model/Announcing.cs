@@ -15,7 +15,8 @@ namespace SearchingLibrary
     [DataContract]
     public partial class Announcing
     {
-       
+        
+
         [DataMember]
         public string UserName { get; set; }
         [DataMember]
@@ -28,8 +29,16 @@ namespace SearchingLibrary
         public string Name_Announcing { get; set; }
         [DataMember]
         public Nullable<int> Phone_Announcing { get; set; }
-        [DataMember]
+        [IgnoreDataMember]
         public System.DateTime? Date_Announcing { get; set; }
+        [DataMember]
+        public string JsonDate_Announcing { get; set; }
+        public DateTime DateParse()
+        {
+            if(JsonDate_Announcing.Length>0)
+            return DateTime.Parse(JsonDate_Announcing);
+            return new DateTime();
+        }
         [DataMember]
         public string Info_Announcing { get; set; }
         [DataMember]
