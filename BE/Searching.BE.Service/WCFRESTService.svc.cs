@@ -36,21 +36,22 @@ namespace Searching.BE.Service
             var jsn = JsonConvert.SerializeObject(filter);
             Logger.WriteToFile_Json(jsn);
             List < Announcing > listAnnonc = new List<Announcing>();
-            Announcing annonc = new Announcing();
+            
             DataTable table = new DataTable();
             table = AnnouncingFilter.GetAnnouncingFilter(filter);
             foreach(DataRow row in table.Rows)
             {
+                Announcing annonc = new Announcing();
                 try
                 {
                     annonc.Info_Announcing = row["Info_Announcing"].ToString();
-                    annonc.Date_Announcing=DateTime.Parse(row["Date_Announcing"].ToString());
+                    annonc.JsonDate_Announcing=row["Date_Announcing"].ToString();
                     annonc.Announcing_id = int.Parse(row["Announcing_id"].ToString());
                     annonc.User_id = int.Parse(row["User_id"].ToString());
                     annonc.Name_Announcing = row["Name_Announcing"].ToString();
                     annonc.UserName = row["Name"].ToString();
                     annonc.UserLastName = row["LastName"].ToString();
-                    listAnnonc.Add(new Announcing() {Info_Announcing=annonc.Info_Announcing,Date_Announcing=annonc.Date_Announcing,User_id=annonc.User_id, Announcing_id=annonc.Announcing_id,Name_Announcing=annonc.Name_Announcing,UserLastName=annonc.UserLastName,UserName=annonc.UserName });
+                    listAnnonc.Add(annonc);
                 }
                 catch (Exception ex)
                 {
@@ -174,10 +175,11 @@ namespace Searching.BE.Service
             return _user;
         }
 
-        public string TestFunction(AnnFilter filter)
+        public ReturnValue TestFunction(TestClass announcing)
         {
-            string json = JsonConvert.SerializeObject(filter);
-            return  json;
+            ReturnValue result = new ReturnValue();
+            result.Message = announcing.MyDateTimeTicks.ToString();
+            return  result;
         }
 
         public ReturnValue Registration(UserList user)
@@ -229,34 +231,35 @@ namespace Searching.BE.Service
 
         public ReturnValue AddAnnouncing(Announcing ann)
         {
+            ann.Date_Announcing = ann.DateParse();
             //var data = "12-10-22";
             //Announcing TestAnn = new Announcing();
-            //TestAnn.Announcing_id = 1;
             //TestAnn.Areas_id = 1;
-            //TestAnn.Categories_id = ann.Categories_id;
+            //TestAnn.Categories_id = 3;
             //TestAnn.City_id = 1;
             //TestAnn.Date_Announcing = DateTime.Parse(data);
-            //TestAnn.Info_Announcing = ann.Info_Announcing;
-            //TestAnn.Name_Announcing=ann.Name_Announcing;
+            //TestAnn.Info_Announcing = "ClientTest";
+            //TestAnn.Name_Announcing = "ClientTest11";
             //TestAnn.Name_City = "Kiev";
             //TestAnn.Phone_Announcing = 12;
-            //TestAnn.UserLastName = TestAnn.UserLastName;
-            //TestAnn.UserName = ann.UserName;
-            //TestAnn.User_id = ann.User_id;
+            //TestAnn.User_id = 20;
             ReturnValue result = new ReturnValue();
             result= AnnouncingFunction.AddAnnoucing(ann);
             return result;
         }
 
-        public void EditAnnouncing(Announcing ann)
+        public ReturnValue EditAnnouncing(Announcing ann)
         {
+            ReturnValue result = new ReturnValue();
             AnnouncingFunction.EditAnnouncing(ann);
+            return result;
         }
 
-        public void DeleteAnnouncing(string Announcing_id)
+        public ReturnValue DeleteAnnouncing(int Announcing_id)
         {
-            var _id = int.Parse(Announcing_id);
-            AnnouncingFunction.DeleteAnnouncing(_id);
+            ReturnValue result = new ReturnValue();
+            AnnouncingFunction.DeleteAnnouncing(Announcing_id);
+            return result;
         }
 
         public ReturnValue AddToSelected(Selected_Announcing ann)
@@ -320,46 +323,52 @@ namespace Searching.BE.Service
             return result;
         }
 
-        public void DeleteSelectedAnnouncing(Selected_Announcing ann)
+        public ReturnValue DeleteSelectedAnnouncing(Selected_Announcing ann)
         {
+            ReturnValue result = new ReturnValue();
             SelectedAnnouncingFunction.DeleteSelected(ann);
+            return result;
         }
 
-        public void DeleteFavoriteAnnouncing(Favorite_Announcing ann)
+        public ReturnValue DeleteFavoriteAnnouncing(Favorite_Announcing ann)
         {
+            ReturnValue result = new ReturnValue();
             FavoriteAnnouncingFunction.DeleteFavorite(ann);
+            return result;
         }
 
-        public void AddSelectedUser(Selected_User user)
+        public ReturnValue AddSelectedUser(Selected_User user)
         {
+            ReturnValue result = new ReturnValue();
             FollowersFunction.AddSelectedUser(user);
+            return result;
         }
 
-        public void DeleteSelectedUser(Selected_User user)
+        public ReturnValue DeleteSelectedUser(Selected_User user)
         {
+            ReturnValue result = new ReturnValue();
             FollowersFunction.DeleteSelectedUser(user);
+            return result;
         }
 
-        public List<UserList> FollowersList(string user_id)
+        public List<UserList> FollowersList(int user_id)
         {
-            var _id = int.Parse(user_id);
             UserList _user = new UserList();
             List<UserList> _users = new List<UserList>();
-            DataTable table = FollowersFunction.FollowersList(_id);
+            DataTable table = FollowersFunction.FollowersList(user_id);
             return _users;
         }
 
-        public Announcing GetAnnouncingFull(string announcing_id)
+        public Announcing GetAnnouncingFull(int announcing_id)
         {
-            int ann_id = int.Parse(announcing_id);
             Announcing ann = new Announcing();
-            DataTable table = AnnouncingFilter.GetAnnouncingFull(ann_id);
+            DataTable table = AnnouncingFilter.GetAnnouncingFull(announcing_id);
             foreach(DataRow row in table.Rows)
             {
                 ann.Announcing_id = int.Parse(row["Announcing_id"].ToString());
                 ann.Name_Announcing = row["Name_Announcing"].ToString();
                 ann.Phone_Announcing = int.Parse(row["Phone_Announcing"].ToString());
-                ann.Date_Announcing = DateTime.Parse(row["Date_Announcing"].ToString());
+                ann.JsonDate_Announcing = row["Date_Announcing"].ToString();
                 ann.UserName = row["Name"].ToString();
                 ann.UserLastName = row["LastName"].ToString();
                 ann.Name_City = row["City_Name"].ToString();
@@ -508,7 +517,7 @@ namespace Searching.BE.Service
                 ann = new Announcing();
                 ann.Announcing_id = int.Parse(row["Announcing_id"].ToString());
                 ann.Name_Announcing = row["Name_Announcing"].ToString();
-                ann.Date_Announcing = DateTime.Parse(row["Date_Announcing"].ToString());
+                ann.JsonDate_Announcing = row["Date_Announcing"].ToString();
                 ann.Info_Announcing = row["Info_Announcing"].ToString();
                 ann.Categories_id = int.Parse(row["Categories_id"].ToString());
                 ann.User_id = int.Parse(row["User_id"].ToString());

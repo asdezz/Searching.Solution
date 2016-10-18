@@ -26,7 +26,7 @@ namespace Searching.DAL.Main.Logics.BD
             string query = "INSERT INTO Announcing (Name_Announcing, Phone_Announcing,Date_Announcing, Info_Announcing, Categories_id, User_id,City_id, Areas_id) VALUES(@Name_Announcing, @Phone_Announcing, @Date_Announcing, @Info_Announcing, @Categories_id, @User_id, @City_id,@Areas_id);";
             SqlCommand command = new SqlCommand(query, connect);
             command = DBValueCheking.AddValue(command, "@Name_Announcing", ann.Name_Announcing);
-            command = DBValueCheking.AddValue(command, "@Phone_Announcing", ann.Phone_Announcing);
+            command = DBValueCheking.AddWithCheckValue(command, "@Phone_Announcing", ann.Phone_Announcing);
             command = DBValueCheking.AddValue(command, "@Date_Announcing", ann.Date_Announcing);
             command = DBValueCheking.AddValue(command, "@Info_Announcing", ann.Info_Announcing);
             command = DBValueCheking.AddValue(command, "@Categories_id", ann.Categories_id);
@@ -45,7 +45,6 @@ namespace Searching.DAL.Main.Logics.BD
                 result.Code = false;
                 result.Message = ex.Message;
                 Logger.CreateLog(ex);
-                throw ex;
             }
             finally
             {
