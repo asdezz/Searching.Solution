@@ -45,7 +45,7 @@ namespace SearchingLibrary
         [DataMember]
         public int? Country_id { get; set; }
         [DataMember]
-        public byte Type_login { get; set; }
+        public byte? Type_login { get; set; }
         [DataMember]
         public int? City_id { get; set; }
     

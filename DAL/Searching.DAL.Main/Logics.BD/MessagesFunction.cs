@@ -47,5 +47,32 @@ namespace Searching.DAL.Main.Logics.BD
                 return result;
             
         }
+
+        public static ReturnValue DeleteMessage(int id)
+        {
+            ReturnValue result = new ReturnValue();
+            string query = "DELETE FROM MessageList WHERE Message_id=@id";
+            var connectionString = SqlAccess.GetConnectionString();
+            SqlConnection connect = new SqlConnection(connectionString);
+            SqlCommand command = new SqlCommand(query, connect);
+            command = DBValueCheking.AddValue(command, "@id", id);
+            try
+            {
+                connect.Open();
+                command.ExecuteNonQuery();
+                result.Code = true;
+                result.Message = "Операция прошла успешно!";
+            }catch(Exception ex)
+            {
+                Logger.CreateLog(ex);
+                result.Code = false;
+                result.Message = ex.Message;
+            }
+            finally
+            {
+                connect.Close();
+            }
+            return result;
+        }
     }
 }

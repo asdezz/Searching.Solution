@@ -135,6 +135,10 @@ namespace Searching.BE.Service
         List<Announcing> GetMyAnnouncing(int id);
 
         [OperationContract]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest, UriTemplate = "DeleteMessage")]
+        ReturnValue DeleteMessage(int id);
+
+        [OperationContract]
         [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         ReturnValue CallCallBack(List<Messages> messageCallback);
 

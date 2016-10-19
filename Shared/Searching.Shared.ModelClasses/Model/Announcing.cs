@@ -28,7 +28,7 @@ namespace SearchingLibrary
         [DataMember]
         public string Name_Announcing { get; set; }
         [DataMember]
-        public Nullable<int> Phone_Announcing { get; set; }
+        public int? Phone_Announcing { get; set; }
         [IgnoreDataMember]
         public System.DateTime? Date_Announcing { get; set; }
         [DataMember]
@@ -42,14 +42,14 @@ namespace SearchingLibrary
         [DataMember]
         public string Info_Announcing { get; set; }
         [DataMember]
-        public int Categories_id { get; set; }
+        public int? Categories_id { get; set; }
         [DataMember]
-        public int City_id { get; set; }
+        public int? City_id { get; set; }
         [DataMember]
-        public int User_id { get; set; }
+        public int? User_id { get; set; }
       //  public int User_id { get; set; }
       //  public int City_id { get; set; }
-        public Nullable<int> Areas_id { get; set; }
+        public int? Areas_id { get; set; }
     
         public virtual AreasOfCity AreasOfCity { get; set; }
         public virtual Categories Categories { get; set; }

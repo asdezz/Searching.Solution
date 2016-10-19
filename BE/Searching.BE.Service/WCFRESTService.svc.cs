@@ -258,7 +258,7 @@ namespace Searching.BE.Service
         public ReturnValue DeleteAnnouncing(int Announcing_id)
         {
             ReturnValue result = new ReturnValue();
-            AnnouncingFunction.DeleteAnnouncing(Announcing_id);
+            result= AnnouncingFunction.DeleteAnnouncing(Announcing_id);
             return result;
         }
 
@@ -543,6 +543,13 @@ namespace Searching.BE.Service
         public List<int> GetTestWF()
         {
             return testWorkflow;
+        }
+
+        public ReturnValue DeleteMessage(int id)
+        {
+            ReturnValue result = new ReturnValue();
+            result = MessagesFunction.DeleteMessage(id);
+            return result;
         }
     }
     

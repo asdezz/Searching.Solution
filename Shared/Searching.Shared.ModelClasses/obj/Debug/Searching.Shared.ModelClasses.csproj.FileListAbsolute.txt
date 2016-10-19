@@ -22,4 +22,3 @@ C:\Repository\projects\Searching\Sourse Code\Searching.Solution\Shared\Searching
 C:\Repository\projects\Searching\Sourse Code\Searching.Solution\Shared\Searching.Shared.ModelClasses\bin\Debug\Searching.Shared.ModelClasses.pdb
 C:\Repository\projects\Searching\Sourse Code\Searching.Solution\Shared\Searching.Shared.ModelClasses\obj\Debug\Searching.Shared.ModelClasses.dll
 C:\Repository\projects\Searching\Sourse Code\Searching.Solution\Shared\Searching.Shared.ModelClasses\obj\Debug\Searching.Shared.ModelClasses.pdb
-C:\Repository\projects\Searching\Sourse Code\Searching.Solution\Shared\Searching.Shared.ModelClasses\obj\Debug\Searching.Shared.ModelClasses.csprojResolveAssemblyReference.cache
